@@ -59,6 +59,7 @@ class Panel(ScreenPanel):
             self.x_offset = 0.0
             self.y_offset = 0.0
             self.z_offset = 0.0
+        self.bmc_points = None
         logging.info(f"Offset X:{self.x_offset} Y:{self.y_offset} Z:{self.z_offset}")
 
     def setup_ui(self):
@@ -278,6 +279,11 @@ class Panel(ScreenPanel):
         except KeyError:
             logging.error("Couldn't get max position from stepper_x and stepper_y")
             return None, None
+
+        if self.bmc_points[0][0] is not None and self.bmc_points[0][1] is not None:
+            x_position = self.bmc_points[0][0] - x_offset
+            y_position = self.bmc_points[0][1] - y_offset
+
         logging.debug(f"Probe in the center X:{mid_x} Y:{mid_y}")
         return mid_x - self.x_offset, mid_y - self.y_offset
 
@@ -289,7 +295,7 @@ class Panel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_status_update":
-            if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
+            if 0: #self._printer.get_stat("toolhead", "homed_axes") != "xyz":
                 self.widgets["zposition"].set_text("Z: ?")
             elif "gcode_move" in data and "gcode_position" in data["gcode_move"]:
                 self.update_position(data["gcode_move"]["gcode_position"])

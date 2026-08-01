@@ -417,6 +417,10 @@ class Panel(ScreenPanel):
             self._screen._ws.api.print_start(filename)
         elif response_id == Gtk.ResponseType.REJECT:
             self.confirm_delete_file(None, f"gcodes/{filename}")
+        self._screen.filament_none = False
+        # self._screen.check_filament_time = None
+        self._screen.check_filament = [True,True]
+        self._screen.check_filament_cnt = 0
 
     def get_info_str(self, item, path):
         info = ""

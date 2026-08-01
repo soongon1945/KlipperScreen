@@ -25,6 +25,9 @@ class Panel(ScreenPanel):
         self.extrusion = 100
         self.speed_factor = 1.0
         self.speed = 100
+        self.x_offset = self.x_offsetbak = float(self._printer.data["gcode_move"]["offset_position"][0])
+        self.y_offset = self.y_offsetbak = float(self._printer.data["gcode_move"]["offset_position"][1])
+        self.z_offset = self.z_offsetbak = float(self._printer.data["gcode_move"]["offset_position"][2])
         self.req_speed = 0
         self.oheight = 0.0
         self.current_extruder = None
@@ -35,6 +38,7 @@ class Panel(ScreenPanel):
         self.prev_gpos = None
         self.can_close = False
         self.flow_timeout = None
+        self.check_timeout = None
         self.animation_timeout = None
         self.file_metadata = self.fans = {}
         self.state = "standby"
@@ -399,6 +403,8 @@ class Panel(ScreenPanel):
             "pause": self._gtk.Button("pause", _("Pause"), "color1"),
             "restart": self._gtk.Button("refresh", _("Restart"), "color3"),
             "resume": self._gtk.Button("resume", _("Resume"), "color1"),
+            "adjusting_offset": self._gtk.Button("bed-level", _("Adjusting offset"), "color5"),
+            'save_offset_e2': self._gtk.Button("home-z", _("Save") + "\n" + _("Offset"), "color5"),
             "save_offset_probe": self._gtk.Button("home-z", _("Save Z") + "\n" + "Probe", "color1"),
             "save_offset_endstop": self._gtk.Button(
                 "home-z", _("Save Z") + "\n" + "Endstop", "color2"
@@ -407,10 +413,13 @@ class Panel(ScreenPanel):
         self.buttons["cancel"].connect("clicked", self.cancel)
         self.buttons["control"].connect("clicked", self._screen._go_to_submenu, "")
         self.buttons["fine_tune"].connect("clicked", self.menu_item_clicked, {"panel": "fine_tune"})
+        self.buttons['adjusting_offset'].connect("clicked", self.menu_item_clicked, "adjusting_offset", {
+            "panel": "adjusting_offset", "name": _("Adjusting offset")})
         self.buttons["menu"].connect("clicked", self.close_panel)
         self.buttons["pause"].connect("clicked", self.pause)
         self.buttons["restart"].connect("clicked", self.restart)
         self.buttons["resume"].connect("clicked", self.resume)
+        self.buttons['save_offset_e2'].connect("clicked", self.save_offset, "offset")
         self.buttons["save_offset_probe"].connect("clicked", self.save_offset, "probe")
         self.buttons["save_offset_endstop"].connect("clicked", self.save_offset, "endstop")
 
@@ -434,6 +443,8 @@ class Panel(ScreenPanel):
                 saved_z_offset = self._printer.get_config_section("stepper_z")["position_endstop"]
             elif "stepper_a" in self._printer.get_config_section_list():
                 saved_z_offset = self._printer.get_config_section("stepper_a")["position_endstop"]
+        elif device == "offset":
+            label.set_label(_("Apply the XYZ offset to the corresponding nozzle?"))
         if saved_z_offset:
             msg += "\n\n" + _("Saved offset: %s") % saved_z_offset
         label.set_label(msg)
@@ -450,6 +461,13 @@ class Panel(ScreenPanel):
                 self._screen._ws.api.gcode_script("Z_OFFSET_APPLY_PROBE")
             if device == "endstop":
                 self._screen._ws.api.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
+            if device == "offset":
+                endstop = (self._printer.config_section_exists("stepper_z") and
+                           not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
+                if endstop == 0:
+                    self._screen._ws.klippy.gcode_script("E_OFFSET_APPLY_PROBE")
+                else:
+                    self._screen._ws.klippy.gcode_script("E_OFFSET_APPLY_ENDSTOP")
             self._screen._ws.api.gcode_script("SAVE_CONFIG")
 
     def restart(self, widget):
@@ -465,6 +483,10 @@ class Panel(ScreenPanel):
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.set_markup(_("Are you sure you wish to restart this print?"))
         self._gtk.Dialog(_("Restart"), buttons, label, self.restart_confirm)
+        self._screen.filament_none = False
+        # self._screen.check_filament_time = None
+        self._screen.check_filament = [True, True]
+        self._screen.check_filament_cnt = 0
 
     def restart_print(self):
         if self.filename:
@@ -515,10 +537,12 @@ class Panel(ScreenPanel):
         self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")
         self._screen._ws.api.print_cancel()
+        self._screen._ws.klippy.gcode_script("PRINT_END")
 
     def close_panel(self, widget=None):
         if self.can_close:
             logging.debug("Closing job_status panel")
+            self._screen._ws.klippy.gcode_script("PRINT_END")
             self._screen.state_ready(wait=False)
 
     def enable_button(self, *args):
@@ -851,7 +875,11 @@ class Panel(ScreenPanel):
             self.buttons["button_grid"].attach(self.buttons["pause"], 0, 0, 1, 1)
             self.buttons["button_grid"].attach(self.buttons["cancel"], 1, 0, 1, 1)
             self.buttons["button_grid"].attach(self.buttons["fine_tune"], 2, 0, 1, 1)
-            self.buttons["button_grid"].attach(self.buttons["control"], 3, 0, 1, 1)
+            if self._printer.config_section_exists("extruder1"):
+                self.buttons['button_grid'].attach(self.buttons['adjusting_offset'], 3, 0, 1, 1)
+                self.buttons['button_grid'].attach(self.buttons['control'], 4, 0, 1, 1)
+            else:
+                self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("pause", "cancel")
             self._gtk.Button_busy(self.buttons["cancel"], False)
             self.can_close = False
@@ -859,7 +887,11 @@ class Panel(ScreenPanel):
             self.buttons["button_grid"].attach(self.buttons["resume"], 0, 0, 1, 1)
             self.buttons["button_grid"].attach(self.buttons["cancel"], 1, 0, 1, 1)
             self.buttons["button_grid"].attach(self.buttons["fine_tune"], 2, 0, 1, 1)
-            self.buttons["button_grid"].attach(self.buttons["control"], 3, 0, 1, 1)
+            if self._printer.config_section_exists("extruder1"):
+                self.buttons['button_grid'].attach(self.buttons['adjusting_offset'], 3, 0, 1, 1)
+                self.buttons['button_grid'].attach(self.buttons['control'], 4, 0, 1, 1)
+            else:
+                self.buttons['button_grid'].attach(self.buttons['control'], 3, 0, 1, 1)
             self.enable_button("resume", "cancel")
             self._gtk.Button_busy(self.buttons["cancel"], False)
             self.can_close = False
@@ -872,8 +904,13 @@ class Panel(ScreenPanel):
             self.disable_button("resume", "restart", "menu")
             self.can_close = False
         else:
-            offset = self._printer.get_stat("gcode_move", "homing_origin")
-            self.zoffset = float(offset[2]) if offset else 0
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            self.x_offset = float(offset[0])
+            self.y_offset = float(offset[1])
+            self.z_offset = float(offset[2])
+            self.zoffset = float(offset[3]) if offset[3] else 0
+            
+            #self.zoffset = float(offset[2]) if offset else 0
             if self.zoffset != 0:
                 if "Z_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
                     self.buttons["button_grid"].attach(
@@ -899,6 +936,38 @@ class Panel(ScreenPanel):
             self.buttons["button_grid"].attach(self.buttons["menu"], 3, 0, 1, 1)
             self.enable_button("menu")
             self.can_close = True
+            if self.state == "error":
+                self._screen._ws.klippy.gcode_script("ERROR_PRINT")
+            
+            if self.zoffset != 0:
+                endstop = (self._printer.config_section_exists("stepper_z") and
+                           not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
+                if endstop:
+                    if self._printer.config_section_exists("extruder1"):
+                        self.buttons['button_grid'].attach(Gtk.Label(""), 4, 0, 1, 1)
+                    else:
+                        self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 5, 0, 1, 1)
+                else:
+                    self.buttons['button_grid'].attach(Gtk.Label(""), 4, 0, 1, 1)
+                if self._printer.config_section_exists("extruder1"):
+                        self.buttons['button_grid'].attach(self.buttons["save_offset_e2"], 5, 0, 1, 1)
+                    # else:
+                    #     self.buttons['button_grid'].attach(Gtk.Label(""), 5, 0, 1, 1)
+                else:
+                    if endstop == 0:
+                        self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 5, 0, 1, 1)
+                    else:
+                        self.buttons['button_grid'].attach(Gtk.Label(""), 5, 0, 1, 1)
+            else:
+                self.buttons['button_grid'].attach(Gtk.Label(""), 4, 0, 1, 1)
+                if self._printer.config_section_exists("extruder1"):
+                    if self.x_offset != self.x_offsetbak or self.y_offset != self.y_offsetbak or self.z_offset != self.z_offsetbak :
+                        self.buttons['button_grid'].attach(self.buttons["save_offset_e2"], 5, 0, 1, 1)
+                else:
+                    self.buttons['button_grid'].attach(Gtk.Label(""), 5, 0, 1, 1)
+            
+            
+
         self.content.show_all()
 
     def show_file_thumbnail(self):

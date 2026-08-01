@@ -265,19 +265,31 @@ class Panel(ScreenPanel):
                         switch.handler_unblock(handler_id)
                     else:
                         switch.set_active(data[x]["enabled"])
-                if "filament_detected" in data[x] and self._printer.get_stat(x, "enabled"):
-                    if data[x]["filament_detected"]:
-                        self.labels[x]["box"].get_style_context().remove_class(
-                            "filament_sensor_empty"
-                        )
-                        self.labels[x]["box"].get_style_context().add_class(
-                            "filament_sensor_detected"
-                        )
-                    else:
-                        self.labels[x]["box"].get_style_context().remove_class(
-                            "filament_sensor_detected"
-                        )
-                        self.labels[x]["box"].get_style_context().add_class("filament_sensor_empty")
+
+                check_filament = True
+                filamentdata = self._screen.apiclient.send_request("printer/objects/query?" + x)
+                if x in filamentdata['result']['status'].keys() and 'filament_detected' in filamentdata['result']['status'][x]:
+                    check_filament = filamentdata['result']['status'][x]['filament_detected'] 
+                if check_filament == True:
+                    self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
+                    self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
+                else:
+                    self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
+                    self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
+
+                #if "filament_detected" in data[x] and self._printer.get_stat(x, "enabled"):
+                #    if data[x]["filament_detected"]:
+                #        self.labels[x]["box"].get_style_context().remove_class(
+                #            "filament_sensor_empty"
+                #        )
+                #        self.labels[x]["box"].get_style_context().add_class(
+                #            "filament_sensor_detected"
+                #        )
+                #    else:
+                #        self.labels[x]["box"].get_style_context().remove_class(
+                #            "filament_sensor_detected"
+                #        )
+                #        self.labels[x]["box"].get_style_context().add_class("filament_sensor_empty")
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
@@ -294,11 +306,16 @@ class Panel(ScreenPanel):
         for tool in self._printer.get_tools():
             self.labels[tool].get_style_context().remove_class("button_active")
         self.labels[extruder].get_style_context().add_class("button_active")
+        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         self._screen._send_action(
             widget,
             "printer.gcode.script",
             {"script": f"T{self._printer.get_tool_number(extruder)}"},
         )
+        if self._printer.config_section_exists("extruder1"):
+            self._screen._ws.klippy.gcode_script(
+                f"SAVE_VARIABLE VARIABLE=select_extruder VALUE={self._printer.get_tool_number(extruder) + 1}")
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")

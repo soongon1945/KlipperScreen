@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-21 12:14-0300\n"
+"POT-Creation-Date: 2026-08-02 00:42+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1107,4 +1107,61 @@ msgid "Initializing Klipper Connection"
 msgstr ""
 
 msgid "Klipper not responding after multiple attempts"
+msgstr ""
+
+msgid "Adjusting offset"
+msgstr ""
+
+msgid "All offset points have been completed"
+msgstr ""
+
+msgid "Apply the XYZ offset to the corresponding nozzle?"
+msgstr ""
+
+msgid "Do you need to replace the filament now?"
+msgstr ""
+
+msgid "Hot bed temperature below 60 °C"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No offset save command is available"
+msgstr ""
+
+msgid "Nozzle 1 temperature below 200 °C"
+msgstr ""
+
+msgid "Nozzle 2 temperature below 200 °C"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
+
+msgid "Offset calibration pattern exceeds printer limits"
+msgstr ""
+
+msgid "Offset cannot be adjusted in copy mode or mirror mode"
+msgstr ""
+
+msgid "Power-loss recovery"
+msgstr ""
+
+msgid "Printer axis limits are unavailable"
+msgstr ""
+
+msgid "Printer movement state is unavailable"
+msgstr ""
+
+msgid "Restore power off file"
+msgstr ""
+
+msgid "Save Offset"
+msgstr ""
+
+msgid "The default configuration cannot be deleted"
+msgstr ""
+
+msgid "The filament is used up"
 msgstr ""

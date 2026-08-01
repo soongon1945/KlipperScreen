@@ -172,11 +172,9 @@ msgstr "使用24小时制"
 msgid "Disable for 12hs with am / pm"
 msgstr "禁用以使用12小时制 (AM/PM)"
 
-#, fuzzy
 msgid "Action bar Shortcut"
 msgstr "操作栏快捷方式"
 
-#, fuzzy
 msgid "LEDs"
 msgstr "LEDs"
 
@@ -249,11 +247,9 @@ msgstr "显示光标"
 msgid "For mouse control or to verify touchscreen accuracy"
 msgstr "用于鼠标控制或验证触摸屏的准确性"
 
-#, fuzzy
 msgid "Screen wake delay"
 msgstr "屏幕唤醒延迟"
 
-#, fuzzy
 msgid "Helps to prevent unwanted touchs during screen wake up"
 msgstr "有助于防止屏幕唤醒时的误触"
 
@@ -342,7 +338,6 @@ msgstr "连接失败"
 msgid "No mesh has been loaded"
 msgstr "未加载网床"
 
-#, fuzzy
 msgid "Invalid Number"
 msgstr "无效数字"
 
@@ -718,15 +713,12 @@ msgstr "仅适用于移动面板"
 msgid "Z Speed (mm/s)"
 msgstr "Z轴速度（mm/s）"
 
-#, fuzzy
 msgid "Advanced Move"
 msgstr "高级移动"
 
-#, fuzzy
 msgid "Query Endstops"
 msgstr "查询限位开关"
 
-#, fuzzy
 msgid "Invalid position"
 msgstr "位置无效"
 
@@ -736,11 +728,9 @@ msgstr "初始化失败"
 msgid "Interface"
 msgstr "接口"
 
-#, fuzzy
 msgid "No network devices have been found"
 msgstr "未发现网络设备"
 
-#, fuzzy
 msgid "No network devices available"
 msgstr "无可用网络设备"
 
@@ -854,85 +844,66 @@ msgstr "重试"
 msgid "Power On Printer"
 msgstr "打印机通电"
 
-#, fuzzy
 msgid "Spool editor"
 msgstr "线轴编辑器"
 
-#, fuzzy
 msgid "No spool selected"
 msgstr "未选择线轴"
 
-#, fuzzy
 msgid "Measured weight"
 msgstr "实测重量"
 
-#, fuzzy
 msgid "Remaining weight"
 msgstr "剩余重量"
 
-#, fuzzy
 msgid "Initial weight"
 msgstr "初始重量"
 
-#, fuzzy
 msgid "Empty weight"
 msgstr "空线轴重量"
 
-#, fuzzy
 msgid "Invalid weight"
 msgstr "无效重量"
 
-#, fuzzy
 msgid "Restore"
 msgstr "恢复"
 
-#, fuzzy
 msgid "No"
 msgstr "否"
 
-#, fuzzy
 msgid "Yes"
 msgstr "是"
 
-#, fuzzy
 msgid "Vendor"
 msgstr "供应商"
 
 msgid "Material"
 msgstr "材料"
 
-#, fuzzy
 msgid "Used"
 msgstr "已使用"
 
-#, fuzzy
 msgid "Location"
 msgstr "位置"
 
 msgid "Archived"
 msgstr "已存档"
 
-#, fuzzy
 msgid "Price"
 msgstr "价格"
 
-#, fuzzy
 msgid "Comment"
 msgstr "注释"
 
-#, fuzzy
 msgid "Measured weight is below empty spool weight"
 msgstr "实测重量低于空线轴重量"
 
-#, fuzzy
 msgid "Value must be positive"
 msgstr "值必须为正数"
 
-#, fuzzy
 msgid "Error updating filament weight"
 msgstr "更新线材重量时出错"
 
-#, fuzzy
 msgid "Filament weight updated"
 msgstr "线材重量已更新"
 
@@ -942,7 +913,6 @@ msgstr "ID"
 msgid "Filter"
 msgstr "筛选"
 
-#, fuzzy
 msgid "Remaining length"
 msgstr "剩余长度"
 
@@ -961,15 +931,12 @@ msgstr "激活当前耗材时出错"
 msgid "No info available"
 msgstr "无可用信息"
 
-#, fuzzy
 msgid "Disk"
 msgstr "磁盘"
 
-#, fuzzy
 msgid "Cores"
 msgstr "核心"
 
-#, fuzzy
 msgid "IP Address"
 msgstr "IP 地址"
 
@@ -1003,7 +970,6 @@ msgstr "正在检查更新，请稍等..."
 msgid "Not working or not configured"
 msgstr "不工作或未配置"
 
-#, fuzzy
 msgid "Are you sure?"
 msgstr "确定吗？"
 
@@ -1069,7 +1035,6 @@ msgstr "降低喷嘴"
 msgid "Abort"
 msgstr "中止"
 
-#, fuzzy
 msgid "Calibration commands not available yet"
 msgstr "校准命令暂不可用"
 
@@ -1088,11 +1053,9 @@ msgstr "最小："
 msgid "System:"
 msgstr "系统："
 
-#, fuzzy
 msgid "Waiting connection closure"
 msgstr "等待连接关闭"
 
-#, fuzzy
 msgid "Initializing KlipperScreen"
 msgstr "正在初始化 KlipperScreen"
 
@@ -1102,11 +1065,9 @@ msgstr "寻求帮助的时候请提供KlipperScreen.log。\n"
 msgid "Close"
 msgstr "关闭"
 
-#, fuzzy
 msgid "DPMS has failed and has been disabled"
 msgstr "DPMS 失败并已禁用"
 
-#, fuzzy
 msgid "Moonraker Connected"
 msgstr "已连接 Moonraker"
 
@@ -1131,17 +1092,71 @@ msgstr "Klipper正在启动"
 msgid "Klipper has shutdown"
 msgstr "Klipper已关闭"
 
-#, fuzzy
 msgid "Waiting for Moonraker connection to close"
 msgstr "等待 Moonraker 连接关闭"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: 已连接"
 
-#, fuzzy
 msgid "Initializing Klipper Connection"
 msgstr "正在初始化 Klipper 连接"
 
-#, fuzzy
 msgid "Klipper not responding after multiple attempts"
 msgstr "多次尝试后 Klipper 无响应"
+
+msgid "Adjusting offset"
+msgstr "调整偏移"
+
+msgid "All offset points have been completed"
+msgstr "所有偏移点均已完成"
+
+msgid "Apply the XYZ offset to the corresponding nozzle?"
+msgstr "是否将 XYZ 偏移应用到对应喷嘴？"
+
+msgid "Do you need to replace the filament now?"
+msgstr "是否现在更换耗材？"
+
+msgid "Hot bed temperature below 60 °C"
+msgstr "热床温度低于 60 °C"
+
+msgid "Next"
+msgstr "下一步"
+
+msgid "No offset save command is available"
+msgstr "没有可用的偏移保存命令"
+
+msgid "Nozzle 1 temperature below 200 °C"
+msgstr "喷嘴 1 温度低于 200 °C"
+
+msgid "Nozzle 2 temperature below 200 °C"
+msgstr "喷嘴 2 温度低于 200 °C"
+
+msgid "Offset"
+msgstr "偏移"
+
+msgid "Offset calibration pattern exceeds printer limits"
+msgstr "偏移校准图案超出打印机行程范围"
+
+msgid "Offset cannot be adjusted in copy mode or mirror mode"
+msgstr "复制或镜像模式下无法调整偏移"
+
+msgid "Power-loss recovery"
+msgstr "断电续打"
+
+msgid "Printer axis limits are unavailable"
+msgstr "无法获取打印机轴限位"
+
+msgid "Printer movement state is unavailable"
+msgstr "无法获取打印机运动状态"
+
+msgid "Restore power off file"
+msgstr "恢复断电打印文件"
+
+msgid "Save Offset"
+msgstr "保存偏移"
+
+msgid "The default configuration cannot be deleted"
+msgstr "无法删除默认配置"
+
+msgid "The filament is used up"
+msgstr "耗材已用完"

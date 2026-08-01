@@ -547,6 +547,14 @@ class Panel(ScreenPanel):
 
     def _callback(self, action, data):
         logging.info(f"{action}: {data}")
+        item_path = data.get("item", {}).get("path", "")
+        if action == "create_dir" and os.path.basename(item_path).startswith(".usb-refresh-"):
+            # USB bind mounts do not emit a usable directory event themselves.
+            # The mount service creates this marker so the visible drive appears
+            # immediately instead of waiting for Moonraker's metadata scan.
+            logging.info("USB mount refresh signal received")
+            self._refresh_files()
+            return
         if action in {"create_dir", "create_file"}:
             self.add_item_from_callback(action, data)
         elif action == "delete_file":

@@ -44,8 +44,9 @@ class Panel(ScreenPanel):
                 ctx.add_class("distbutton_active")
             bsgrid.attach(self.labels[f"bdelta{i}"], j, 0, 1, 1)
 
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
+        # KlippyGtk no longer provides HomogeneousGrid; create the equivalent
+        # GTK grid directly so this custom panel remains loadable after merges.
+        grid = Gtk.Grid(column_homogeneous=True, row_homogeneous=False)
 
         self.labels['x+'] = self._gtk.Button("arrow-right", "X+", "color3")
         self.labels['x-'] = self._gtk.Button("arrow-left", "X-", "color3")

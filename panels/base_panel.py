@@ -43,6 +43,9 @@ class BasePanel(ScreenPanel):
         self.current_extruder = None
         self.last_usage_report = datetime.now()
         self.usage_report = 0
+        # Board images store the selected machine model in printer_model.conf.
+        # Resolve it from the service user's home so the titlebar is not tied to /home/mks.
+        self.printer_model = self._read_printer_model()
         # Action bar buttons
         self.abscale = self.bts * 1.1
         self.control["back"] = self._gtk.Button("back", scale=self.abscale)
@@ -93,7 +96,7 @@ class BasePanel(ScreenPanel):
         self.control["item_box"] = Gtk.Box(spacing=10)
 
         self.titlelbl = Gtk.Label(
-            hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END
+            halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END
         )
 
         self.control["time"] = Gtk.Label(label="00:00 AM")
@@ -101,10 +104,11 @@ class BasePanel(ScreenPanel):
         self.control["time_box"].pack_end(self.control["time"], True, True, 10)
 
         self.control["printer_info"] = Gtk.Label(
-            halign=Gtk.Align.END, ellipsize=Pango.EllipsizeMode.MIDDLE
+            hexpand=True,
+            halign=Gtk.Align.CENTER,
+            ellipsize=Pango.EllipsizeMode.MIDDLE,
         )
         self.control["printer_info"].set_max_width_chars(36)
-        self.control["printer_info"].set_margin_end(10)
 
         self.battery_icons = self.load_battery_icons()
         self.labels["battery"] = Gtk.Label()
@@ -131,9 +135,9 @@ class BasePanel(ScreenPanel):
         self.titlebar.get_style_context().add_class("title_bar")
         self.titlebar.add(self.control["item_box"])
         self.titlebar.add(self.titlelbl)
-        self.titlebar.add(self.control["time_box"])
-        self.titlebar.add(self.control["battery_box"])
         self.titlebar.add(self.control["printer_info"])
+        self.titlebar.add(self.control["battery_box"])
+        self.titlebar.add(self.control["time_box"])
         self.set_title(title)
 
         # Main layout
@@ -628,15 +632,8 @@ class BasePanel(ScreenPanel):
 
     def set_title(self, title):
         self.titlebar.get_style_context().remove_class("message_popup_error")
-        if (
-            self._screen.state.printer_name != "Printer"
-            and "printer_select" not in self._screen._cur_panels
-        ):
-            printer = self._screen.state.printer_name
-        else:
-            printer = ""
         if not title:
-            self.titlelbl.set_label(f"{printer}")
+            self.titlelbl.set_label("")
             return
         try:
             env = Environment(extensions=["jinja2.ext.i18n"], autoescape=True)
@@ -646,14 +643,24 @@ class BasePanel(ScreenPanel):
         except Exception as e:
             logging.debug(f"Error parsing jinja for title: {title}\n{e}")
 
-        self.titlelbl.set_label(f"{printer} {title}")
+        self.titlelbl.set_label(title)
+
+    @staticmethod
+    def _read_printer_model():
+        model_path = (
+            pathlib.Path.home() / "printer_data" / "config" / "printer_model.conf"
+        )
+        try:
+            for line in model_path.read_text(encoding="utf-8-sig").splitlines():
+                model_name = line.strip()
+                if model_name:
+                    return model_name
+        except (OSError, UnicodeError) as error:
+            logging.debug(f"Unable to read printer model from {model_path}: {error}")
+        return ""
 
     def _get_model_name(self):
-        printer_name = self._screen.state.printer_name or "Printer"
-        printer_config = self._config.get_printer_config(printer_name)
-        if printer_config is None:
-            return printer_name
-        return printer_config.get("model_name", printer_name).strip() or printer_name
+        return self.printer_model or self._screen.state.printer_name or "Printer"
 
     @staticmethod
     def _get_active_ipv4():

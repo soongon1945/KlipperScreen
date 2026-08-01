@@ -63,9 +63,8 @@ Multiple printers can be defined
 ```{ .ini .no-copy }
 # Define printer and name. Name is anything after the first printer word
 [printer MyPrinter]
-# Optional model name shown with the current IP address in the top-right titlebar.
-# Defaults to the printer name above.
-# model_name: K400_V3
+# The centered titlebar model name is read from the first non-empty line of
+# ~/printer_data/config/printer_model.conf, for example: K400_V3
 # Define the moonraker host/port if different from 127.0.0.1 and 7125
 moonraker_host: 127.0.0.1
 moonraker_port: 7125

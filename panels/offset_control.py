@@ -1,49 +1,57 @@
 import logging
-import contextlib
 
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk
 
-from ks_includes.KlippyGcodes import KlippyGcodes
+from ks_includes.offsetmap import OffsetMap
 from ks_includes.screen_panel import ScreenPanel
-from ks_includes.widgets.bedmap import BedMap
-from ks_includes.widgets.offsetmap import OffsetMap
-
-Current_point = 0
 
 
-def create_panel(*args):
-    return OffsetPanel(*args)
-
-
-class OffsetPanel(ScreenPanel):
+class Panel(ScreenPanel):
     bs_deltas = ["0.01", "0.05", "0.1"]
     bs_delta = bs_deltas[-1]
 
     def __init__(self, screen, title):
-        global Current_point
+        title = title or _("Offset")
         super().__init__(screen, title)
         self.show_create = False
         self.active_mesh = None
         self.profiles = {}
-        Current_point = 0
+        self.current_point = -1
+        self.preheat_started = False
+        offset_min = self._printer.get_stat("toolhead", "axis_minimum")
         offset_max = self._printer.get_stat("toolhead", "axis_maximum")
-        self.offset_bm = [[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
-                          [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
-                          [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
-                          [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]]
+        if (
+            not isinstance(offset_min, (list, tuple))
+            or len(offset_min) < 2
+            or not isinstance(offset_max, (list, tuple))
+            or len(offset_max) < 2
+        ):
+            raise RuntimeError(_("Printer axis limits are unavailable"))
+        self.offset_bm = [[[0, 0, 0] for _ in range(4)] for _ in range(4)]
 
-        self.probe_points = [(offset_max[0]/2-75, 20.0), (offset_max[0]/2-25, 20.0), (offset_max[0]/2+25, 20.0), (offset_max[0]/2+75, 20.0),
-                             (offset_max[0]/2+75, 73.33), (offset_max[0]/2+25, 73.33), (offset_max[0]/2-25, 73.33), (offset_max[0]/2-75, 73.33),
-                             (offset_max[0]/2-75, 126.66), (offset_max[0]/2-25, 126.66), (offset_max[0]/2+25, 126.66), (offset_max[0]/2+75, 126.66),
-                             (offset_max[0]/2+75, 179.99), (offset_max[0]/2+25, 179.99), (offset_max[0]/2-25, 179.99), (offset_max[0]/2-75, 179.99)]
-
-        self.record_position = [(0, 0), (0, 1), (0, 2), (0, 3),
-                                (1, 3), (1, 2), (1, 1), (1, 0),
-                                (2, 0), (2, 1), (2, 2), (2, 3),
-                                (3, 3), (3, 2), (3, 1), (3, 0)]
+        center_x = (offset_min[0] + offset_max[0]) / 2
+        x_positions = [center_x - 75, center_x - 25, center_x + 25, center_x + 75]
+        y_positions = [20.0, 73.33, 126.66, 179.99]
+        self.probe_points = []
+        self.record_position = []
+        for row, y_pos in enumerate(y_positions):
+            columns = range(4) if row % 2 == 0 else range(3, -1, -1)
+            for column in columns:
+                self.probe_points.append((x_positions[column], y_pos))
+                self.record_position.append((row, column))
+        if any(
+            x_pos - 20 < offset_min[0]
+            or x_pos + 20 > offset_max[0]
+            or y_pos - 20 < offset_min[1]
+            or y_pos + 20 > offset_max[1]
+            for x_pos, y_pos in self.probe_points
+        ):
+            # Each cross extends 20 mm around its center; reject the workflow
+            # before heating when this machine cannot contain the pattern.
+            raise RuntimeError(_("Offset calibration pattern exceeds printer limits"))
 
         self.labels['x+'] = self._gtk.Button("arrow-right", "X+", "color2")
         self.labels['x-'] = self._gtk.Button("arrow-left", "X-", "color2")
@@ -114,7 +122,9 @@ class OffsetPanel(ScreenPanel):
         if self._screen.vertical_mode:
             grid.attach(self.labels['map'], 0, 0, 3, 1)
             #            grid.attach(scroll, 0, 1, 2, 1)
-            self.labels['map'].set_size_request(self._gtk.content_width, self._gtk.content_height * .4)
+            self.labels['map'].set_size_request(
+                self._gtk.content_width, self._gtk.content_height * 0.4
+            )
         else:
             grid.attach(self.labels['map'], 0, 0, 2, 5)
         #            grid.attach(scroll, 1, 0, 1, 1)
@@ -158,19 +168,16 @@ class OffsetPanel(ScreenPanel):
             grid.attach(self.labels['zoffset'], 2, 3, 1, 1)
             grid.attach(bsgrid, 2, 4, 3, 1)
 
-        self._screen._ws.klippy.gcode_script("G28")
-        self._screen._ws.klippy.gcode_script("M104 T0 S200")
-        self._screen._ws.klippy.gcode_script("M104 T1 S200")
-        self._screen._ws.klippy.gcode_script("M140 S60")
-
     def update_graph(self, widget=None, profile=None):
         self.labels['map'].update_bm(self.offset_bm)
         self.labels['map'].queue_draw()
 
     def back(self):
-        self._screen._ws.klippy.gcode_script("M104 T0 S0")
-        self._screen._ws.klippy.gcode_script("M104 T1 S0")
-        self._screen._ws.klippy.gcode_script("M140 S0")
+        if self.preheat_started:
+            self._screen._ws.klippy.gcode_script("M104 T0 S0")
+            self._screen._ws.klippy.gcode_script("M104 T1 S0")
+            if self._printer.config_section_exists("heater_bed"):
+                self._screen._ws.klippy.gcode_script("M140 S0")
         if self.show_create is True:
             self.remove_create()
             return True
@@ -183,12 +190,12 @@ class OffsetPanel(ScreenPanel):
 
         if "gcode_move" in data:
             if self._printer.config_section_exists("extruder1"):
-                if "offset_position" in data["gcode_move"]:
-                    self.labels['zoffset'].set_label(f'  {data["gcode_move"]["offset_position"][2]:.3f}mm')
-                if "offset_position" in data["gcode_move"]:
-                    self.labels['xoffset'].set_label(f'  {data["gcode_move"]["offset_position"][0]:.2f}mm')
-                if "offset_position" in data["gcode_move"]:
-                    self.labels['yoffset'].set_label(f'  {data["gcode_move"]["offset_position"][1]:.2f}mm')
+                offset = data["gcode_move"].get("offset_position")
+                if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                    self.labels["xoffset"].set_label(f"  {offset[0]:.2f}mm")
+                    self.labels["yoffset"].set_label(f"  {offset[1]:.2f}mm")
+                    self.labels["zoffset"].set_label(f"  {offset[2]:.3f}mm")
+                    self._record_current_offset(offset)
 
     def remove_create(self):
         if self.show_create is False:
@@ -207,118 +214,159 @@ class OffsetPanel(ScreenPanel):
             self.labels['xoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET X=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                x_offset = float(self._printer.data["gcode_move"]["offset_position"][0])
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                x_offset = float(offset[0])
                 if direction == "+":
                     x_offset += float(self.bs_delta)
                 else:
                     x_offset -= float(self.bs_delta)
                 self.labels['xoffset'].set_label(f'  {x_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_EOFFSET X_ADJUST={direction}{self.bs_delta} MOVE=1")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_GCODE_EOFFSET X_ADJUST={direction}{self.bs_delta} MOVE=1"
+            )
 
     def Y_offset_adjustment(self, widget, direction):
         if direction == "reset":
             self.labels['yoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Y=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                y_offset = float(self._printer.data["gcode_move"]["offset_position"][1])
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                y_offset = float(offset[1])
                 if direction == "+":
                     y_offset += float(self.bs_delta)
                 else:
                     y_offset -= float(self.bs_delta)
                 self.labels['yoffset'].set_label(f'  {y_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_EOFFSET Y_ADJUST={direction}{self.bs_delta} MOVE=1")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_GCODE_EOFFSET Y_ADJUST={direction}{self.bs_delta} MOVE=1"
+            )
 
     def Z_offset_adjustment(self, widget, direction):
         if direction == "reset":
             self.labels['zoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                z_offset = float(self._printer.data["gcode_move"]["offset_position"][2])
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                z_offset = float(offset[2])
                 if direction == "+":
                     z_offset += float(self.bs_delta)
                 else:
                     z_offset -= float(self.bs_delta)
                 self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_EOFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_GCODE_EOFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1"
+            )
 
     def send_next_offset(self, widget):
-        global Current_point
-        if self._printer.get_dev_stat('extruder', "temperature") < 195:
-            self._screen.show_popup_message(_("Nozzle 1 temperature below 200℃"))
+        next_point = self.current_point + 1
+        if next_point >= len(self.probe_points):
+            self._screen.show_popup_message(_("All offset points have been completed"), level=1)
+            self.labels["next"].set_sensitive(False)
+            return
+
+        absolute_coordinates = self._printer.get_stat(
+            "gcode_move", "absolute_coordinates"
+        )
+        absolute_extrude = self._printer.get_stat("gcode_move", "absolute_extrude")
+        if not isinstance(absolute_coordinates, bool) or not isinstance(
+            absolute_extrude, bool
+        ):
+            # Guessing a missing modal state can leave later print commands in
+            # G91 or the wrong extrusion mode, so wait for subscription data.
+            self._screen.show_popup_message(_("Printer movement state is unavailable"), level=2)
+            return
+
+        # Opening a panel must not move or heat the printer.  Start the
+        # calibration preparation only after the user explicitly presses Next.
+        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
+            self._screen._ws.klippy.gcode_script("G28")
+        if not self.preheat_started:
+            self._screen._ws.klippy.gcode_script("M104 T0 S200")
+            self._screen._ws.klippy.gcode_script("M104 T1 S200")
+            if self._printer.config_section_exists("heater_bed"):
+                self._screen._ws.klippy.gcode_script("M140 S60")
+            self.preheat_started = True
+
+        if float(self._printer.get_stat("extruder", "temperature") or 0) < 195:
+            self._screen.show_popup_message(_("Nozzle 1 temperature below 200 °C"))
             return
         if self._printer.config_section_exists("extruder1"):
-            if self._printer.get_dev_stat('extruder1', "temperature") < 195:
-                self._screen.show_popup_message(_("Nozzle 1 temperature below 200℃"))
+            if float(self._printer.get_stat("extruder1", "temperature") or 0) < 195:
+                self._screen.show_popup_message(_("Nozzle 2 temperature below 200 °C"))
                 return
         if self._printer.config_section_exists("heater_bed"):
-            if self._printer.get_dev_stat('heater_bed', "temperature") < 55:
-                self._screen.show_popup_message(_("Hot bed temperature below 60℃"))
+            if float(self._printer.get_stat("heater_bed", "temperature") or 0) < 55:
+                self._screen.show_popup_message(_("Hot bed temperature below 60 °C"))
                 return
-        self._screen._ws.klippy.gcode_script("M83")
-        self._screen._ws.klippy.gcode_script("G1 Z3 F1000")
-        self._screen._ws.klippy.gcode_script("T0")
-        for i in range(1):
-            self._screen._ws.klippy.gcode_script(
-                f"G0 X{self.probe_points[Current_point][0] - 20} Y{self.probe_points[Current_point][1]} F3000")
-            self._screen._ws.klippy.gcode_script("G1 Z0.25 F1000")
-            self._screen._ws.klippy.gcode_script("G1 E5 F500")
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0]} Y{self.probe_points[Current_point][1]} E2 F1000")
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0]} Y{self.probe_points[Current_point][1] + 20} E2 F1000")
+        self.current_point = next_point
+        point_x, point_y = self.probe_points[self.current_point]
+        restore_xyz = "" if absolute_coordinates else "\nG91"
+        restore_e = "M82" if absolute_extrude else "M83"
+        # Submit one ordered script so another UI action cannot interleave with
+        # the two tool patterns.  Restore the caller's XYZ/E modal state.
+        script = f"""M83
+G90
+G1 Z3 F1000
+T0
+G0 X{point_x - 20} Y{point_y} F3000
+G1 Z0.25 F1000
+G1 E5 F500
+G1 X{point_x} Y{point_y} E2 F1000
+G1 X{point_x} Y{point_y + 20} E2 F1000
+G1 X{point_x} Y{point_y} E2 F1000
+G1 X{point_x - 20} Y{point_y} E2 F1000
+G1 E-4 F3000
+G1 Z3 F1000
+T1
+G0 X{point_x + 20} Y{point_y} F3000
+G1 Z0.25 F1000
+G1 E5 F500
+G1 X{point_x} Y{point_y} E2 F1000
+G1 X{point_x} Y{point_y - 20} E2 F1000
+G1 X{point_x} Y{point_y} E2 F1000
+G1 X{point_x + 20} Y{point_y} E2 F1000
+G1 E-4 F3000
+G1 Z3 F1000
+T0
+{restore_e}{restore_xyz}"""
+        self._screen._ws.klippy.gcode_script(script)
 
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0]} Y{self.probe_points[Current_point][1]} E2 F1000")
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0] - 20} Y{self.probe_points[Current_point][1]} E2 F1000")
-            self._screen._ws.klippy.gcode_script("G1 E-4 F3000")
-
-        self._screen._ws.klippy.gcode_script("G1 Z3 F1000")
-        self._screen._ws.klippy.gcode_script("T1")
-        for i in range(1):
-            self._screen._ws.klippy.gcode_script(
-                f"G0 X{self.probe_points[Current_point][0] + 20} Y{self.probe_points[Current_point][1]} F3000")
-            self._screen._ws.klippy.gcode_script("G1 Z0.25 F1000")
-            self._screen._ws.klippy.gcode_script("G1 E5 F500")   
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0]} Y{self.probe_points[Current_point][1]} E2 F1000")
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0]} Y{self.probe_points[Current_point][1] - 20} E2 F1000")
-
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0]} Y{self.probe_points[Current_point][1]} E2 F1000")
-            self._screen._ws.klippy.gcode_script(
-                f"G1 X{self.probe_points[Current_point][0] + 20} Y{self.probe_points[Current_point][1]} E2 F1000")
-            self._screen._ws.klippy.gcode_script("G1 E-4 F3000")
-
-        self._screen._ws.klippy.gcode_script("G1 Z3 F1000")
-        self._screen._ws.klippy.gcode_script("T0")
-
-        x_point = self.record_position[Current_point][0]
-        y_point = self.record_position[Current_point][1]
-        self.offset_bm[x_point][y_point][0] = self._printer.data["gcode_move"]["offset_position"][0]
-        self.offset_bm[x_point][y_point][1] = self._printer.data["gcode_move"]["offset_position"][1]
-        self.offset_bm[x_point][y_point][2] = self._printer.data["gcode_move"]["offset_position"][2]
-        Current_point += 1
+        if self.current_point == len(self.probe_points) - 1:
+            self.labels["next"].set_sensitive(False)
 
     def send_save_offset(self, widget):
-        endstop = (self._printer.config_section_exists("stepper_z") and
-                    not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"))
-        if endstop == 0:
-            self._screen._ws.klippy.gcode_script("E_OFFSET_APPLY_PROBE")
+        self._record_current_offset(
+            self._printer.get_stat("gcode_move", "offset_position")
+        )
+        if "E_OFFSET_APPLY_PROBE" in self._printer.available_commands:
+            apply_command = "E_OFFSET_APPLY_PROBE"
+        elif "E_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
+            apply_command = "E_OFFSET_APPLY_ENDSTOP"
         else:
-            self._screen._ws.klippy.gcode_script("E_OFFSET_APPLY_ENDSTOP")
+            self._screen.show_popup_message(_("No offset save command is available"), level=2)
+            return
+        # The apply command only stages configfile values.  SAVE_CONFIG is
+        # required to persist the calibrated nozzle geometry across restarts.
+        self._screen._ws.klippy.gcode_script(f"{apply_command}\nSAVE_CONFIG")
 
     def send_remove_offset(self, widget):
-        global Current_point
-        Current_point = 0
-        self.offset_bm = [[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
-                          [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
-                          [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
-                          [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]]
+        self.current_point = -1
+        self.labels["next"].set_sensitive(True)
+        self.offset_bm = [[[0, 0, 0] for _ in range(4)] for _ in range(4)]
+        self.update_graph()
+
+    def _record_current_offset(self, offset):
+        if self.current_point < 0 or not isinstance(offset, (list, tuple)):
+            return
+        if len(offset) < 3:
+            return
+        row, column = self.record_position[self.current_point]
+        # Status updates arrive after the queued motion.  Recording them here
+        # keeps each displayed cell aligned with the point the user adjusted.
+        self.offset_bm[row][column] = list(offset[:3])
 
     def change_bs_delta(self, widget, bs):
         logging.info(f"### BabyStepping {bs}")

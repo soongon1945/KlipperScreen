@@ -2,6 +2,7 @@
 
 import argparse
 import ast
+import configparser
 import gc
 import json
 import logging
@@ -13,8 +14,6 @@ import traceback  # noqa
 from dataclasses import dataclass
 
 import gi
-import ast, configparser
-
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 from datetime import datetime
@@ -39,8 +38,6 @@ from ks_includes.widgets.lockscreen import LockScreen
 from ks_includes.widgets.prompts import Prompt
 from ks_includes.widgets.screensaver import ScreenSaver
 from panels.base_panel import BasePanel
-from ks_includes.KlippyGcodes import KlippyGcodes
-
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 klipperscreendir = pathlib.Path(__file__).parent.resolve()
@@ -73,18 +70,15 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.panels_reinit = []
         self._cur_panels = []
 
-        self.print_temp_mark =False
-
-        self.allow_poweroff = True
         self.poweroff_filename = ""
-        self.path = "/home/mks/printer_data/config/PowerOffData.cfg"
-        self.was_interrupted = False
+        self.poweroff_data_path = os.path.expanduser(
+            "~/printer_data/config/PowerOffData.cfg"
+        )
 
         self.filament_none = False
         self.check_filament_time = None
-        self.check_filament = [True,True]
+        self.check_filament = [True, True]
         self.check_filament_cnt = 0
-        self.current_sensor_index = 0
 
         self.server_info = None
         self.files = None
@@ -106,7 +100,6 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.confirm = None
         self.popup_message = None
         self.popup_timeout = None
-        self.tempstore_timeout = None
         self.last_popup_time = datetime.now()
         self.last_error = ""
         self.inhibit_cookie = None
@@ -327,11 +320,20 @@ class KlipperScreen(Gtk.ApplicationWindow):
     def ws_subscribe(self):
         requested_updates = {
             "objects": {
-                "bed_mesh": ["profile_name", "mesh_max", "mesh_min", "probed_matrix", "bmc_points", "profiles"],
+                "bed_mesh": [
+                    "profile_name",
+                    "mesh_max",
+                    "mesh_min",
+                    "probed_matrix",
+                    "bmc_points",
+                    "profiles",
+                ],
                 "configfile": ["config", "warnings"],
                 "display_status": ["progress", "message"],
                 "fan": ["speed"],
                 "gcode_move": [
+                    "absolute_coordinates",
+                    "absolute_extrude",
                     "extrude_factor",
                     "gcode_position",
                     "homing_origin",
@@ -351,6 +353,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
                     "info",
                 ],
                 "toolhead": [
+                    "axis_minimum",
+                    "axis_maximum",
                     "homed_axes",
                     "estimated_print_time",
                     "print_time",
@@ -429,8 +433,13 @@ class KlipperScreen(Gtk.ApplicationWindow):
                         self.gtk.remove_dialog(dialog)
             else:
                 self._remove_current_panel()
-            extruder_mark = panel_name == 'extrude' if self.printer.config_section_exists("extruder1") else 0
-            if panel_name not in self.panels or panel_name == 'offset_control' or panel_name == 'adjusting_offset' or extruder_mark:
+            has_extruder1 = bool(self.printer) and self.printer.config_section_exists("extruder1")
+            extruder_mark = panel_name == "extrude" and has_extruder1
+            if (
+                panel_name not in self.panels
+                or panel_name in {"offset_control", "adjusting_offset"}
+                or extruder_mark
+            ):
                 try:
                     self.panels[panel_name] = self._load_panel(panel).Panel(self, title, **kwargs)
                 except Exception as e:
@@ -896,6 +905,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def state_disconnected(self):
         logging.debug("### Going to disconnected")
+        self._cleanup_filament_timer()
         self.printer.stop_tempstore_updates()
         self.state.initialized = False
         self.state.reinit_count = 0
@@ -903,6 +913,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self._init_printer(_("Klipper has disconnected"), go_to_splash=True)
 
     def state_error(self):
+        self._cleanup_filament_timer()
         msg = _("Klipper has encountered an error.") + "\n"
         state = self.printer.get_stat("webhooks", "state_message")
         if "FIRMWARE_RESTART" in state:
@@ -918,8 +929,15 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.show_panel("extrude")
 
     def state_printing(self):
-        if self.printer.config_section_exists("extruder1"):
-            self.print_temp_mark = True
+        sensors = self.printer.get_filament_sensors()
+        if (
+            self.printer.config_section_exists("extruder1")
+            and len(sensors) >= 2
+            and self.check_filament_time is None
+        ):
+            # The first two configured sensors map to T0 and T1.  Poll the
+            # already subscribed state; synchronous REST calls would block GTK.
+            self.check_filament_time = GLib.timeout_add_seconds(3, self.charge_filament)
         if self.filament_none:
             self.filament_none = False
             script = {"script": "M117 Printing..."}
@@ -935,31 +953,35 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def read_poweroff(self):
         allvars = {}
-        varfile = configparser.ConfigParser()
-        if os.path.exists(self.path):
+        varfile = configparser.ConfigParser(interpolation=None)
+        if os.path.exists(self.poweroff_data_path):
             try:
-                varfile.read(self.path)
+                varfile.read(self.poweroff_data_path)
                 if varfile.has_section('Variables'):
                     for name, val in varfile.items('Variables'):
                         allvars[name] = ast.literal_eval(val)
-                if 'was_interrupted' in allvars and 'filename' in allvars:
-                    if allvars['was_interrupted'] == True:
-                        self.poweroff_filename = allvars['filename']
-                        return True
-            except Exception as err:
-                pass
+                filename = allvars.get("filename")
+                if allvars.get("was_interrupted") is True and isinstance(filename, str):
+                    self.poweroff_filename = filename
+                    return bool(filename)
+            except (OSError, ValueError, SyntaxError, configparser.Error) as err:
+                logging.warning(
+                    "Unable to read power-loss state from %s: %s",
+                    self.poweroff_data_path,
+                    err,
+                )
 
         return False
 
     def poweroff_warning(self, filename):
-        warnings = "Restore power off files: "
+        warning = _("Restore power off file") + ": "
         buttons = [
             {"name": _("Print"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
 
         label = Gtk.Label()
-        label.set_markup(f"<b>{warnings}{filename}</b>\n")
+        label.set_markup(f"<b>{GLib.markup_escape_text(warning + filename)}</b>\n")
         label.set_hexpand(True)
         label.set_halign(Gtk.Align.CENTER)
         label.set_vexpand(True)
@@ -967,42 +989,68 @@ class KlipperScreen(Gtk.ApplicationWindow):
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        self.gtk.Dialog(self, buttons, label, self.power_ks, filename)
+        if self.confirm is None:
+            self.confirm = self.gtk.Dialog(
+                _("Power-loss recovery"), buttons, label, self.power_ks, filename
+            )
 
     def power_ks(self, widget, response_id, filename):
-        widget.destroy()
+        self.gtk.remove_dialog(widget)
         if response_id == Gtk.ResponseType.CANCEL:
-            self.show_panel('main_panel', "main_menu", None, 2, items=self._config.get_menu_items("__main"))
+            self.show_panel(
+                "main_menu",
+                remove_all=True,
+                items=self._config.get_menu_items("__main"),
+            )
             self.base_panel_show_all()
             self._ws.klippy.gcode_script("PRINT_END")
-            # if os.path.exists(self.path):
-            #     os.remove(self.path)
             return
         logging.info(f"Starting print: {filename}")
-        self._ws.klippy.gcode_script("ALLOW_INTERRUPT")
-        self._ws.klippy.print_start(filename)
+        # Each recovery stage depends on the previous command.  Callback
+        # chaining prevents ALLOW_INTERRUPT or RESUME_INTERRUPTED from racing
+        # printer.print.start on a busy Moonraker connection.
+        self._ws.klippy.gcode_script(
+            "ALLOW_INTERRUPT", self._start_interrupted_print, filename
+        )
+
+    def _start_interrupted_print(self, response, method, params, filename):
+        if "error" in response:
+            self.show_popup_message(str(response["error"]), level=3)
+            return
+        self._ws.klippy.print_start(filename, self._resume_interrupted)
+
+    def _resume_interrupted(self, response, method, params):
+        if "error" in response:
+            self.show_popup_message(str(response["error"]), level=3)
+            return
         self._ws.klippy.gcode_script("RESUME_INTERRUPTED")
 
 
     def state_ready(self, wait=True):
+        # A completed/cancelled print no longer emits useful sensor checks.
+        # Stop the GLib source here so it cannot survive into the next job.
+        self._cleanup_filament_timer()
         # Do not return to main menu if completing a job, timeouts/user input will return
         if "job_status" in self._cur_panels and wait:
+            return
+        if not self.state.initialized:
+            logging.debug("Printer not initialized yet")
+            self.printer.state = "not ready"
             return
         if self.read_poweroff() and "job_status" not in self._cur_panels:
             self.poweroff_warning(self.poweroff_filename)
         else:
-            if not self.state.initialized:
-                logging.debug("Printer not initialized yet")
-                self.printer.state = "not ready"
-                return
             self.files.refresh_files()
-            self.show_panel("main_menu", remove_all=True, items=self._config.get_menu_items("__main"))
+            self.show_panel(
+                "main_menu", remove_all=True, items=self._config.get_menu_items("__main")
+            )
             self.check_active_commands()
 
     def state_startup(self):
         self.printer_initializing(_("Klipper is attempting to start"))
 
     def state_shutdown(self):
+        self._cleanup_filament_timer()
         self.printer.stop_tempstore_updates()
         msg = self.printer.get_stat("webhooks", "state_message")
         self.printer_initializing(_("Klipper has shutdown") + "\n\n" + msg, go_to_splash=True)
@@ -1044,123 +1092,112 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self._ws.klippy.gcode_script(f"SET_NOZZLE_SIZE S={args[0]}")
 
     def charge_filament(self):
-        # 获取温度状态
-        T0_target = self.printer.get_dev_stat("extruder", "target")
-        T1_target = self.printer.get_dev_stat("extruder1", "target") if self.printer.config_section_exists("extruder1") else 0
-        T0_current = self.printer.get_dev_stat("extruder", "temperature")
-        T1_current = self.printer.get_dev_stat("extruder1", "temperature")
-        
-        # 处理恢复条件
-        if self.check_filament_cnt == 5 and T1_current >= T1_target and T1_target > 100:
+        has_extruder1 = self.printer.config_section_exists("extruder1")
+        t0_target = float(self.printer.get_stat("extruder", "target") or 0)
+        t0_current = float(self.printer.get_stat("extruder", "temperature") or 0)
+        t1_target = (
+            float(self.printer.get_stat("extruder1", "target") or 0)
+            if has_extruder1
+            else 0
+        )
+        t1_current = (
+            float(self.printer.get_stat("extruder1", "temperature") or 0)
+            if has_extruder1
+            else 0
+        )
+
+        if self.check_filament_cnt == 5 and t1_current >= t1_target and t1_target > 100:
             self.check_filament_cnt = 0
             self._ws.klippy.gcode_script("M104 T0 S0")
             self._ws.klippy.gcode_script("RESUME")
-        if self.check_filament_cnt == 6 and T0_current >= T0_target and T0_target > 100:
+        if self.check_filament_cnt == 6 and t0_current >= t0_target and t0_target > 100:
             self.check_filament_cnt = 0
             self._ws.klippy.gcode_script("M104 T1 S0")
             self._ws.klippy.gcode_script("RESUME")
-        
-        # 检查打印状态
+
         ps = self.printer.get_stat("print_stats")
-        if 'print_duration' not in ps or ps['print_duration'] <= 0 or ps['state'] != "printing":
+        if ps.get("print_duration", 0) <= 0 or ps.get("state") != "printing":
             return True
         if self.filament_none or self.check_filament_cnt >= 5:
             return True
-        # 获取当前挤出头
-        if self.printer.get_tools():
-            self.current_extruder = self.printer.get_stat("toolhead", "extruder")
-        
-        sensors = self.printer.get_filament_sensors()
-        if not sensors:  # 如果没有传感器
+
+        sensors = self.printer.get_filament_sensors()[:2]
+        if len(sensors) < 2:
+            # Automatic failover needs one deterministic sensor per tool.
+            self.check_filament_time = None
             return False
-        
-        # 获取当前要检测的传感器
-        x = sensors[self.current_sensor_index]
-        
-        try:
-            filamentdata = self.apiclient.send_request(f"printer/objects/query?{x}")
-            # 安全访问嵌套字典
-            status = filamentdata.get('result', {}).get('status', {})
-            if isinstance(status, dict):
-                sensor_status = status.get(x)
-                if isinstance(sensor_status, dict) and 'filament_detected' in sensor_status and 'enabled' in sensor_status:
-                    self.check_filament[self.current_sensor_index] = sensor_status['filament_detected']
-                    if sensor_status['enabled'] == False:
-                        self.check_filament[self.current_sensor_index] = True
-            
-            # 更新索引以便下次检测下一个传感器
-            self.current_sensor_index = (self.current_sensor_index + 1) % len(sensors)
-            
-        except Exception as e:
-            print(f"Error checking sensor {x}: {str(e)}")
-        
-        # 确定有温度的挤出头
-        has_temp_T0 = T0_target > 0
-        has_temp_T1 = T1_target > 0 and self.printer.config_section_exists("extruder1")
-        
-        # 检测逻辑
-        if has_temp_T0 and has_temp_T1:
-            # 双挤出头都有温度：任一挤出头持续无料就计数
+
+        # Sensor state is already delivered by printer.objects.subscribe.  The
+        # configuration order is the T0/T1 mapping used by this custom feature.
+        for index, sensor in enumerate(sensors):
+            sensor_state = self.printer.get_stat(sensor)
+            if not {"enabled", "filament_detected"}.issubset(sensor_state):
+                # Missing subscription data is unknown, not a runout event.
+                continue
+            enabled = bool(sensor_state["enabled"])
+            detected = bool(sensor_state["filament_detected"])
+            self.check_filament[index] = detected if enabled else True
+
+        self.current_extruder = self.printer.get_stat("toolhead", "extruder")
+        has_temp_t0 = t0_target > 0
+        has_temp_t1 = t1_target > 0 and has_extruder1
+
+        if has_temp_t0 and has_temp_t1:
             if not self.check_filament[0] or not self.check_filament[1]:
                 self.check_filament_cnt += 1
             else:
                 self.check_filament_cnt = 0
-        elif has_temp_T0:
-            # 只有T0有温度
+        elif has_temp_t0:
             if not self.check_filament[0]:
                 self.check_filament_cnt += 1
             else:
                 self.check_filament_cnt = 0
-        elif has_temp_T1:
-            # 只有T1有温度
+        elif has_temp_t1:
             if not self.check_filament[1]:
                 self.check_filament_cnt += 1
             else:
                 self.check_filament_cnt = 0
-        
-        # 处理无料情况
-        if self.check_filament_cnt > 3 and self.check_filament_cnt < 5:
-            self._handle_empty_filament(has_temp_T0, has_temp_T1, T0_target, T1_target)
+
+        if self.check_filament_cnt == 4:
+            self._handle_empty_filament(has_temp_t0, has_temp_t1, t0_target, t1_target)
 
         return True
 
-    def _handle_empty_filament(self, has_temp_T0, has_temp_T1, T0_target, T1_target):
-        #处理无料情况
-        if has_temp_T0 and has_temp_T1:
-            # 双挤出头都有温度 - 直接暂停
+    def _handle_empty_filament(self, has_temp_t0, has_temp_t1, t0_target, t1_target):
+        if has_temp_t0 and has_temp_t1:
             self.check_filament_cnt = 7
             self.filament_none = True
             self._ws.klippy.print_pause()
-        elif has_temp_T0 and not has_temp_T1:
-            # 只有T0有温度 - 检查是否可以切换到T1
-            if (self.printer.config_section_exists("extruder1") and 
-                not self.check_filament[0] and 
-                self.check_filament[1] and 
-                self.current_extruder == 'extruder'):
-                self._switch_to_backup(5, "T0", "T1", T0_target, "E1", "E2")
+        elif has_temp_t0 and not has_temp_t1:
+            if (
+                self.printer.config_section_exists("extruder1")
+                and not self.check_filament[0]
+                and self.check_filament[1]
+                and self.current_extruder == "extruder"
+            ):
+                self._switch_to_backup(5, "T0", "T1", t0_target, "E1", "E2")
             else:
                 self.check_filament_cnt = 7
                 self.filament_none = True
                 self._ws.klippy.print_pause()
-        elif has_temp_T1 and not has_temp_T0:
-            # 只有T1有温度 - 检查是否可以切换到T0
-            if (self.printer.config_section_exists("extruder") and 
-                not self.check_filament[1] and 
-                self.check_filament[0] and 
-                self.current_extruder == 'extruder1'):
-                self._switch_to_backup(6, "T1", "T0", T1_target, "E2", "E1")
+        elif has_temp_t1 and not has_temp_t0:
+            if (
+                self.printer.config_section_exists("extruder")
+                and not self.check_filament[1]
+                and self.check_filament[0]
+                and self.current_extruder == "extruder1"
+            ):
+                self._switch_to_backup(6, "T1", "T0", t1_target, "E2", "E1")
             else:
                 self.check_filament_cnt = 7
                 self.filament_none = True
                 self._ws.klippy.print_pause()
         else:
-            # 其他情况直接暂停
             self.check_filament_cnt = 7
             self.filament_none = True
             self._ws.klippy.print_pause()
 
     def _switch_to_backup(self, cnt, from_ext, to_ext, temp, from_msg, to_msg):
-        #切换到备用挤出头
         self.check_filament_cnt = cnt
         self._ws.klippy.print_pause()
         self._ws.klippy.gcode_script(from_ext)
@@ -1169,8 +1206,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.show_popup_message(_(f"{from_msg} filament is empty, switch to {to_msg}"), level=1)
 
     def _cleanup_filament_timer(self):
-        #清理定时器
         self.filament_none = False
+        self.check_filament = [True, True]
         self.check_filament_cnt = 0
         if self.check_filament_time is not None:
             GLib.source_remove(self.check_filament_time)
@@ -1250,8 +1287,14 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
         if self.confirm is not None:
             self.gtk.remove_dialog(self.confirm)
-        self.confirm = self.gtk.Dialog(self, buttons, label, self._filament_change_action_response, method, params)
-        self.confirm.set_title("KlipperScreen")
+        self.confirm = self.gtk.Dialog(
+            "KlipperScreen",
+            buttons,
+            label,
+            self._filament_change_action_response,
+            method,
+            params,
+        )
 
     def _filament_change_action_response(self, dialog, response_id, method, params):
         if response_id == Gtk.ResponseType.APPLY:

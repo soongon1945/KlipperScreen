@@ -55,9 +55,17 @@ class OffsetMap(Gtk.DrawingArea):
                 ctx.set_source_rgb(0, 0, 0)
                 for k, value in enumerate(column):
                     if value > 0:
-                        ctx.move_to((lx + rx) / 2 - self.font_size, (ty + by + self.font_size) / 2 + (k - 1) * self.font_size)
+                        ctx.move_to(
+                            (lx + rx) / 2 - self.font_size,
+                            (ty + by + self.font_size) / 2
+                            + (k - 1) * self.font_size,
+                        )
                     else:
-                        ctx.move_to((lx + rx) / 2 - self.font_size * 1.2, (ty + by + self.font_size) / 2 + (k - 1) * self.font_size)
+                        ctx.move_to(
+                            (lx + rx) / 2 - self.font_size * 1.2,
+                            (ty + by + self.font_size) / 2
+                            + (k - 1) * self.font_size,
+                        )
                     ctx.show_text(f"{axis_names[k]}:{value:.2f}")
                     ctx.stroke()
 

@@ -59,7 +59,7 @@ class Panel(ScreenPanel):
             self.x_offset = 0.0
             self.y_offset = 0.0
             self.z_offset = 0.0
-        self.bmc_points = None
+        self.bmc_points = self._printer.get_stat("bed_mesh", "bmc_points") or []
         logging.info(f"Offset X:{self.x_offset} Y:{self.y_offset} Z:{self.z_offset}")
 
     def setup_ui(self):
@@ -280,9 +280,20 @@ class Panel(ScreenPanel):
             logging.error("Couldn't get max position from stepper_x and stepper_y")
             return None, None
 
-        if self.bmc_points[0][0] is not None and self.bmc_points[0][1] is not None:
-            x_position = self.bmc_points[0][0] - x_offset
-            y_position = self.bmc_points[0][1] - y_offset
+        for point in self.bmc_points:
+            if (
+                not isinstance(point, (list, tuple))
+                or len(point) < 2
+                or not all(isinstance(value, (int, float)) for value in point[:2])
+            ):
+                continue
+            # The custom Klipper fork exposes the generated mesh points.  Use
+            # the first valid point only when no explicit calibration location
+            # or rectangular mesh center is available.
+            return (
+                point[0] - self.x_offset,
+                point[1] - self.y_offset,
+            )
 
         logging.debug(f"Probe in the center X:{mid_x} Y:{mid_y}")
         return mid_x - self.x_offset, mid_y - self.y_offset
@@ -295,7 +306,7 @@ class Panel(ScreenPanel):
 
     def process_update(self, action, data):
         if action == "notify_status_update":
-            if 0: #self._printer.get_stat("toolhead", "homed_axes") != "xyz":
+            if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
                 self.widgets["zposition"].set_text("Z: ?")
             elif "gcode_move" in data and "gcode_position" in data["gcode_move"]:
                 self.update_position(data["gcode_move"]["gcode_position"])

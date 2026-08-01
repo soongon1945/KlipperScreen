@@ -1,26 +1,23 @@
+import ast
+import configparser
 import logging
+import os
 import re
-import contextlib
 
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
-from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
-import os
-import ast, configparser
-
-def create_panel(*args):
-    return AdjustingOffsetPanel(*args)
 
 
-class AdjustingOffsetPanel(ScreenPanel):
+class Panel(ScreenPanel):
     bs_deltas = ["0.01", "0.05", "0.1", "0.5", "1"]
     bs_delta = bs_deltas[-1]
 
     def __init__(self, screen, title):
+        title = title or _("Adjusting offset")
         super().__init__(screen, title)
         if self.ks_printer_cfg is not None:
             bs = self.ks_printer_cfg.get("z_babystep_values", "0.01, 0.05")
@@ -108,18 +105,19 @@ class AdjustingOffsetPanel(ScreenPanel):
 
     def check_copy_mode(self):
         allvars = {}
-        varfile = configparser.ConfigParser()
-        if os.path.exists("/home/mks/printer_data/config/PowerOffData.cfg"):
+        varfile = configparser.ConfigParser(interpolation=None)
+        poweroff_path = self._screen.poweroff_data_path
+        if os.path.exists(poweroff_path):
             try:
-                varfile.read("/home/mks/printer_data/config/PowerOffData.cfg")
+                varfile.read(poweroff_path)
                 if varfile.has_section('Variables'):
                     for name, val in varfile.items('Variables'):
                         allvars[name] = ast.literal_eval(val)
-                if 'print_mode' in allvars:
-                    if 'PRIMARY_MODE' not in allvars['print_mode']:
-                        return True
-            except Exception as err:
-                pass
+                print_mode = allvars.get("print_mode")
+                if isinstance(print_mode, str) and "PRIMARY_MODE" not in print_mode:
+                    return True
+            except (OSError, ValueError, SyntaxError, configparser.Error) as err:
+                logging.warning("Unable to read print mode from %s: %s", poweroff_path, err)
 
         return False
 
@@ -131,9 +129,12 @@ class AdjustingOffsetPanel(ScreenPanel):
             self.labels[button].set_sensitive(not enabled)
             if enabled:
                 self.labels[button].get_style_context().add_class("disabled")
-                self._screen.show_popup_message(_("Offset cannot be adjusted in copy mode or mirror mode"),level=1)
             else:
                 self.labels[button].get_style_context().remove_class("disabled")
+        if enabled:
+            self._screen.show_popup_message(
+                _("Offset cannot be adjusted in copy mode or mirror mode"), level=1
+            )
 
 
     def process_update(self, action, data):
@@ -142,54 +143,61 @@ class AdjustingOffsetPanel(ScreenPanel):
             return
 
         if "gcode_move" in data:
-            if "offset_position" in data["gcode_move"]:
-                self.labels['zoffset'].set_label(f'  {data["gcode_move"]["offset_position"][2]:.3f}mm')
-            if "offset_position" in data["gcode_move"]:
-                self.labels['xoffset'].set_label(f'  {data["gcode_move"]["offset_position"][0]:.3f}mm')
-            if "offset_position" in data["gcode_move"]:
-                self.labels['yoffset'].set_label(f'  {data["gcode_move"]["offset_position"][1]:.3f}mm')
+            offset = data["gcode_move"].get("offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                for axis, index in (("x", 0), ("y", 1), ("z", 2)):
+                    self.labels[f"{axis}offset"].set_label(f"  {offset[index]:.3f}mm")
 
     def change_babystepping_z(self, widget, direction):
         if direction == "reset":
             self.labels['zoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                z_offset = float(self._printer.data["gcode_move"]["offset_position"][2])
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                z_offset = float(offset[2])
                 if direction == "+":
                     z_offset += float(self.bs_delta)
                 else:
                     z_offset -= float(self.bs_delta)
                 self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_EOFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_GCODE_EOFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1"
+            )
 
     def change_babystepping_x(self, widget, direction):
         if direction == "reset":
             self.labels['xoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET X=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                x_offset = float(self._printer.data["gcode_move"]["offset_position"][0])
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                x_offset = float(offset[0])
                 if direction == "+":
                     x_offset += float(self.bs_delta)
                 else:
                     x_offset -= float(self.bs_delta)
                 self.labels['xoffset'].set_label(f'  {x_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_EOFFSET X_ADJUST={direction}{self.bs_delta} MOVE=1")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_GCODE_EOFFSET X_ADJUST={direction}{self.bs_delta} MOVE=1"
+            )
 
     def change_babystepping_y(self, widget, direction):
         if direction == "reset":
             self.labels['yoffset'].set_label('  0.00mm')
             self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Y=0 MOVE=1")
         elif direction in ["+", "-"]:
-            with contextlib.suppress(KeyError):
-                y_offset = float(self._printer.data["gcode_move"]["offset_position"][1])
+            offset = self._printer.get_stat("gcode_move", "offset_position")
+            if isinstance(offset, (list, tuple)) and len(offset) >= 3:
+                y_offset = float(offset[1])
                 if direction == "+":
                     y_offset += float(self.bs_delta)
                 else:
                     y_offset -= float(self.bs_delta)
                 self.labels['yoffset'].set_label(f'  {y_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(f"SET_GCODE_EOFFSET Y_ADJUST={direction}{self.bs_delta} MOVE=1")
+            self._screen._ws.klippy.gcode_script(
+                f"SET_GCODE_EOFFSET Y_ADJUST={direction}{self.bs_delta} MOVE=1"
+            )
 
     def change_bs_delta(self, widget, bs):
         logging.info(f"### BabyStepping {bs}")

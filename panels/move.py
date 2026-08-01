@@ -235,8 +235,6 @@ class Panel(ScreenPanel):
     def set_toolhead_label(self):
         if "switch_toolhead" not in self.buttons:
             return
-        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         current = self._printer.get_stat("toolhead", "extruder")
         if current and current.startswith("extruder"):
             t_num = current[8:] or "0"
@@ -285,7 +283,9 @@ class Panel(ScreenPanel):
         )
         if speed is None:
             speed = self._config.get_config()["main"].getint(config_key, self.max_z_velocity)
-        speed = 60 * max(1, speed
+        speed = 60 * max(1, speed)
+        # A move request is explicit user intent; home before moving so an
+        # uninitialized axis cannot receive a relative move.
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
         script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"

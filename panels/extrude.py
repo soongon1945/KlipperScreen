@@ -266,30 +266,24 @@ class Panel(ScreenPanel):
                     else:
                         switch.set_active(data[x]["enabled"])
 
-                check_filament = True
-                filamentdata = self._screen.apiclient.send_request("printer/objects/query?" + x)
-                if x in filamentdata['result']['status'].keys() and 'filament_detected' in filamentdata['result']['status'][x]:
-                    check_filament = filamentdata['result']['status'][x]['filament_detected'] 
-                if check_filament == True:
-                    self.labels[x]['box'].get_style_context().remove_class("filament_sensor_empty")
-                    self.labels[x]['box'].get_style_context().add_class("filament_sensor_detected")
-                else:
-                    self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
-                    self.labels[x]['box'].get_style_context().add_class("filament_sensor_empty")
-
-                #if "filament_detected" in data[x] and self._printer.get_stat(x, "enabled"):
-                #    if data[x]["filament_detected"]:
-                #        self.labels[x]["box"].get_style_context().remove_class(
-                #            "filament_sensor_empty"
-                #        )
-                #        self.labels[x]["box"].get_style_context().add_class(
-                #            "filament_sensor_detected"
-                #        )
-                #    else:
-                #        self.labels[x]["box"].get_style_context().remove_class(
-                #            "filament_sensor_detected"
-                #        )
-                #        self.labels[x]["box"].get_style_context().add_class("filament_sensor_empty")
+                # Status callbacks run on GTK's main loop.  Use the subscribed
+                # value instead of a blocking REST query so sensor updates do
+                # not freeze the touchscreen when Moonraker is slow.
+                if "filament_detected" in data[x] and self._printer.get_stat(x, "enabled"):
+                    if data[x]["filament_detected"]:
+                        self.labels[x]["box"].get_style_context().remove_class(
+                            "filament_sensor_empty"
+                        )
+                        self.labels[x]["box"].get_style_context().add_class(
+                            "filament_sensor_detected"
+                        )
+                    else:
+                        self.labels[x]["box"].get_style_context().remove_class(
+                            "filament_sensor_detected"
+                        )
+                        self.labels[x]["box"].get_style_context().add_class(
+                            "filament_sensor_empty"
+                        )
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
@@ -315,7 +309,9 @@ class Panel(ScreenPanel):
         )
         if self._printer.config_section_exists("extruder1"):
             self._screen._ws.klippy.gcode_script(
-                f"SAVE_VARIABLE VARIABLE=select_extruder VALUE={self._printer.get_tool_number(extruder) + 1}")
+                "SAVE_VARIABLE VARIABLE=select_extruder "
+                f"VALUE={self._printer.get_tool_number(extruder) + 1}"
+            )
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")

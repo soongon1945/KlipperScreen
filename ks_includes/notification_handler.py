@@ -39,11 +39,11 @@ class NotificationHandler:
         self._screen._cleanup_filament_timer()
 
     def _klippy_ready(self, data):
+        self._screen._cleanup_filament_timer()
         if not self._screen.state.initialized:
             self._screen.init_klipper()
             return True
         self._screen.printer.process_update({"webhooks": {"state": "ready"}})
-        self._screen._cleanup_filament_timer()
 
     def _status_update(self, data):
         if self._screen.printer.state == "shutdown":

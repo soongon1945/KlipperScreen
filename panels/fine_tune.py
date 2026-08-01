@@ -125,8 +125,6 @@ class Panel(ScreenPanel):
         if action != "notify_status_update":
             return
         if "gcode_move" in data:
-            if "offset_position" in data["gcode_move"]:
-                self.labels['zoffset'].set_label(f'  {data["gcode_move"]["offset_position"][3]:.3f}mm')
             if "homing_origin" in data["gcode_move"]:
                 self.labels["zoffset"].set_label(
                     f"  {data['gcode_move']['homing_origin'][2]:.3f}mm"
@@ -147,10 +145,8 @@ class Panel(ScreenPanel):
             )
             return
         elif direction == "+":
-            self.z_offset = float(self._printer.data["gcode_move"]["offset_position"][2])
             self.z_offset += float(self.z_delta)
         elif direction == "-":
-            self.z_offset = float(self._printer.data["gcode_move"]["offset_position"][2])
             self.z_offset -= float(self.z_delta)
         self.labels["zoffset"].set_label(f"  {self.z_offset:.3f}mm")
         self._screen._send_action(

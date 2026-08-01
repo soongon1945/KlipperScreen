@@ -396,6 +396,8 @@ class Panel(ScreenPanel):
             self.animation_timeout = None
 
     def create_buttons(self):
+        # KlipperScreen's bundled themes only define color1-color4. Use the
+        # supported fourth accent so custom offset actions retain theme styling.
         self.buttons = {
             "cancel": self._gtk.Button("stop", _("Cancel"), "color2"),
             "control": self._gtk.Button("settings", _("Settings"), "color3"),
@@ -404,8 +406,8 @@ class Panel(ScreenPanel):
             "pause": self._gtk.Button("pause", _("Pause"), "color1"),
             "restart": self._gtk.Button("refresh", _("Restart"), "color3"),
             "resume": self._gtk.Button("resume", _("Resume"), "color1"),
-            "adjusting_offset": self._gtk.Button("bed-level", _("Adjusting offset"), "color5"),
-            'save_offset_e2': self._gtk.Button("home-z", _("Save") + "\n" + _("Offset"), "color5"),
+            "adjusting_offset": self._gtk.Button("bed-level", _("Adjusting offset"), "color4"),
+            'save_offset_e2': self._gtk.Button("home-z", _("Save") + "\n" + _("Offset"), "color4"),
             "save_offset_probe": self._gtk.Button("home-z", _("Save Z") + "\n" + "Probe", "color1"),
             "save_offset_endstop": self._gtk.Button(
                 "home-z", _("Save Z") + "\n" + "Endstop", "color2"

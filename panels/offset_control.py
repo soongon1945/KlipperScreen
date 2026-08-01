@@ -58,10 +58,12 @@ class Panel(ScreenPanel):
         self.labels['xoffset'] = self._gtk.Button("refresh", '  0.00' + ("mm"),
                                                   "color2", self.bts, Gtk.PositionType.LEFT, 1)
 
-        self.labels['y+'] = self._gtk.Button("arrow-up", "Y+", "color5")
-        self.labels['y-'] = self._gtk.Button("arrow-down", "Y-", "color5")
+        # Bundled themes expose color1-color4 only; color4 keeps these
+        # controls visibly grouped instead of silently falling back to default.
+        self.labels['y+'] = self._gtk.Button("arrow-up", "Y+", "color4")
+        self.labels['y-'] = self._gtk.Button("arrow-down", "Y-", "color4")
         self.labels['yoffset'] = self._gtk.Button("refresh", '  0.00' + ("mm"),
-                                                  "color5", self.bts, Gtk.PositionType.LEFT, 1)
+                                                  "color4", self.bts, Gtk.PositionType.LEFT, 1)
 
         self.labels['z+'] = self._gtk.Button("z-farther", "Z+", "color1")
         self.labels['z-'] = self._gtk.Button("z-closer", "Z-", "color1")

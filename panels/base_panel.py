@@ -2,6 +2,7 @@
 import logging
 import os
 import pathlib
+import socket
 
 import gi
 
@@ -99,6 +100,12 @@ class BasePanel(ScreenPanel):
         self.control["time_box"] = Gtk.Box(halign=Gtk.Align.END)
         self.control["time_box"].pack_end(self.control["time"], True, True, 10)
 
+        self.control["printer_info"] = Gtk.Label(
+            halign=Gtk.Align.END, ellipsize=Pango.EllipsizeMode.MIDDLE
+        )
+        self.control["printer_info"].set_max_width_chars(36)
+        self.control["printer_info"].set_margin_end(10)
+
         self.battery_icons = self.load_battery_icons()
         self.labels["battery"] = Gtk.Label()
         self.labels["battery_icon"] = self._gtk.Image()
@@ -126,6 +133,7 @@ class BasePanel(ScreenPanel):
         self.titlebar.add(self.titlelbl)
         self.titlebar.add(self.control["time_box"])
         self.titlebar.add(self.control["battery_box"])
+        self.titlebar.add(self.control["printer_info"])
         self.set_title(title)
 
         # Main layout
@@ -640,7 +648,58 @@ class BasePanel(ScreenPanel):
 
         self.titlelbl.set_label(f"{printer} {title}")
 
+    def _get_model_name(self):
+        printer_name = self._screen.state.printer_name or "Printer"
+        printer_config = self._config.get_printer_config(printer_name)
+        if printer_config is None:
+            return printer_name
+        return printer_config.get("model_name", printer_name).strip() or printer_name
+
+    @staticmethod
+    def _get_active_ipv4():
+        candidates = []
+        if psutil_available:
+            try:
+                interface_stats = psutil.net_if_stats()
+                for interface, addresses in psutil.net_if_addrs().items():
+                    stats = interface_stats.get(interface)
+                    if stats is None or not stats.isup:
+                        continue
+                    for address in addresses:
+                        if address.family != socket.AF_INET:
+                            continue
+                        if address.address.startswith(("127.", "169.254.")):
+                            continue
+                        name = interface.lower()
+                        if name.startswith(("wl", "wlan")):
+                            priority = 0
+                        elif name.startswith(("en", "eth")):
+                            priority = 1
+                        else:
+                            priority = 2
+                        candidates.append((priority, name, address.address))
+            except (OSError, RuntimeError) as error:
+                logging.debug(f"Unable to inspect network interfaces: {error}")
+        if candidates:
+            return min(candidates)[2]
+
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+                sock.connect(("192.0.2.1", 9))
+                return sock.getsockname()[0]
+        except OSError:
+            return ""
+
+    def _update_printer_info(self):
+        # DHCP can assign an address after KlipperScreen starts. Re-read active
+        # interfaces every tick so Wi-Fi changes appear without restarting UI.
+        address = self._get_active_ipv4()
+        text = f"{self._get_model_name()}  IP: {address or '--'}"
+        if self.control["printer_info"].get_text() != text:
+            self.control["printer_info"].set_text(text)
+
     def update_time(self):
+        self._update_printer_info()
         now = datetime.now()
         confopt = self._config.get_main_config().getboolean("24htime", True)
         if now.minute != self.time_min or self.time_format != confopt:

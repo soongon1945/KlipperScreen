@@ -240,6 +240,7 @@ class KlipperScreenConfig:
                     "moonraker_api_key",
                     "moonraker_host",
                     "moonraker_path",
+                    "model_name",
                     "titlebar_name_type",
                     "screw_positions",
                     "power_devices",

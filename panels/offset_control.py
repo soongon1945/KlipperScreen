@@ -115,8 +115,9 @@ class Panel(ScreenPanel):
         scroll.add(self.labels['profiles'])
         scroll.set_vexpand(True)
 
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
+        # KlippyGtk no longer provides HomogeneousGrid; create the equivalent
+        # GTK grid directly so the custom offset panel survives upstream merges.
+        grid = Gtk.Grid(column_homogeneous=True, row_homogeneous=False)
 
         self.labels['map'] = OffsetMap(self._gtk.font_size, self.active_mesh)
         if self._screen.vertical_mode:

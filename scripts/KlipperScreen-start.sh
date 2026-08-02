@@ -16,6 +16,9 @@ fi
 
 start_x11() {
     echo "Running KlipperScreen on X11"
+    # The service waits for a fresh marker before letting Plymouth exit.  A
+    # stale marker after a KlipperScreen restart would expose a black VT.
+    rm -f "$XDG_RUNTIME_DIR/x11-handoff-ready"
     # Initialize Panfrost through the render node while Plymouth's retained
     # framebuffer is still visible.  Cold glamor setup otherwise leaves the
     # display without a usable X client for several seconds during boot.

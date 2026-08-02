@@ -1,9 +1,10 @@
 [Unit]
 Description=KlipperScreen
 StartLimitIntervalSec=0
-# Make sure we are started after logins are permitted. If Plymouth is
-# used, we want to start when it is on its way out.
-After=systemd-user-sessions.service plymouth-quit-wait.service
+# Start X while Plymouth still owns the final frame, then allow the normal
+# quit units to run only after X has painted its replacement frame.
+After=systemd-user-sessions.service plymouth-start.service
+Before=plymouth-quit.service plymouth-quit-wait.service
 # On systems without virtual consoles, do not start.
 ConditionPathExists=/dev/tty0
 # D-Bus is necessary for contacting logind, which is required.
@@ -24,7 +25,12 @@ RuntimeDirectoryMode=0700
 Environment=XDG_RUNTIME_DIR=/run/klipperscreen
 WorkingDirectory=KS_DIR
 Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py" BACKEND=KS_BACKEND
+# Debian Plymouth 24 can crash in libply-splash-core when quit uses
+# --retain-splash.  Deactivate releases DRM while preserving the framebuffer;
+# the normal quit runs after KlipperScreen reports that X is ready.
+ExecStartPre=-/usr/bin/plymouth deactivate
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"
+ExecStartPost="KS_DIR/scripts/KlipperScreen-wait-display-ready.sh"
 
 # Log this user with utmp, letting it show up with commands 'w' and
 # 'who'. This is needed since we replace (a)getty.

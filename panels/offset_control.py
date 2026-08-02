@@ -177,10 +177,10 @@ class Panel(ScreenPanel):
 
     def back(self):
         if self.preheat_started:
-            self._screen._ws.klippy.gcode_script("M104 T0 S0")
-            self._screen._ws.klippy.gcode_script("M104 T1 S0")
+            self._screen._ws.api.gcode_script("M104 T0 S0")
+            self._screen._ws.api.gcode_script("M104 T1 S0")
             if self._printer.config_section_exists("heater_bed"):
-                self._screen._ws.klippy.gcode_script("M140 S0")
+                self._screen._ws.api.gcode_script("M140 S0")
         if self.show_create is True:
             self.remove_create()
             return True
@@ -215,7 +215,7 @@ class Panel(ScreenPanel):
     def X_offset_adjustment(self, widget, direction):
         if direction == "reset":
             self.labels['xoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET X=0 MOVE=1")
+            self._screen._ws.api.gcode_script("SET_GCODE_EOFFSET X=0 MOVE=1")
         elif direction in ["+", "-"]:
             offset = self._printer.get_stat("gcode_move", "offset_position")
             if isinstance(offset, (list, tuple)) and len(offset) >= 3:
@@ -225,14 +225,14 @@ class Panel(ScreenPanel):
                 else:
                     x_offset -= float(self.bs_delta)
                 self.labels['xoffset'].set_label(f'  {x_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_GCODE_EOFFSET X_ADJUST={direction}{self.bs_delta} MOVE=1"
             )
 
     def Y_offset_adjustment(self, widget, direction):
         if direction == "reset":
             self.labels['yoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Y=0 MOVE=1")
+            self._screen._ws.api.gcode_script("SET_GCODE_EOFFSET Y=0 MOVE=1")
         elif direction in ["+", "-"]:
             offset = self._printer.get_stat("gcode_move", "offset_position")
             if isinstance(offset, (list, tuple)) and len(offset) >= 3:
@@ -242,14 +242,14 @@ class Panel(ScreenPanel):
                 else:
                     y_offset -= float(self.bs_delta)
                 self.labels['yoffset'].set_label(f'  {y_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_GCODE_EOFFSET Y_ADJUST={direction}{self.bs_delta} MOVE=1"
             )
 
     def Z_offset_adjustment(self, widget, direction):
         if direction == "reset":
             self.labels['zoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Z=0 MOVE=1")
+            self._screen._ws.api.gcode_script("SET_GCODE_EOFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
             offset = self._printer.get_stat("gcode_move", "offset_position")
             if isinstance(offset, (list, tuple)) and len(offset) >= 3:
@@ -259,7 +259,7 @@ class Panel(ScreenPanel):
                 else:
                     z_offset -= float(self.bs_delta)
                 self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_GCODE_EOFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1"
             )
 
@@ -285,12 +285,12 @@ class Panel(ScreenPanel):
         # Opening a panel must not move or heat the printer.  Start the
         # calibration preparation only after the user explicitly presses Next.
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script("G28")
+            self._screen._ws.api.gcode_script("G28")
         if not self.preheat_started:
-            self._screen._ws.klippy.gcode_script("M104 T0 S200")
-            self._screen._ws.klippy.gcode_script("M104 T1 S200")
+            self._screen._ws.api.gcode_script("M104 T0 S200")
+            self._screen._ws.api.gcode_script("M104 T1 S200")
             if self._printer.config_section_exists("heater_bed"):
-                self._screen._ws.klippy.gcode_script("M140 S60")
+                self._screen._ws.api.gcode_script("M140 S60")
             self.preheat_started = True
 
         if float(self._printer.get_stat("extruder", "temperature") or 0) < 195:
@@ -335,7 +335,7 @@ G1 E-4 F3000
 G1 Z3 F1000
 T0
 {restore_e}{restore_xyz}"""
-        self._screen._ws.klippy.gcode_script(script)
+        self._screen._ws.api.gcode_script(script)
 
         if self.current_point == len(self.probe_points) - 1:
             self.labels["next"].set_sensitive(False)
@@ -353,7 +353,7 @@ T0
             return
         # The apply command only stages configfile values.  SAVE_CONFIG is
         # required to persist the calibrated nozzle geometry across restarts.
-        self._screen._ws.klippy.gcode_script(f"{apply_command}\nSAVE_CONFIG")
+        self._screen._ws.api.gcode_script(f"{apply_command}\nSAVE_CONFIG")
 
     def send_remove_offset(self, widget):
         self.current_point = -1

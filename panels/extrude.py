@@ -301,14 +301,14 @@ class Panel(ScreenPanel):
             self.labels[tool].get_style_context().remove_class("button_active")
         self.labels[extruder].get_style_context().add_class("button_active")
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.api.gcode_script(KlippyGcodes.HOME)
         self._screen._send_action(
             widget,
             "printer.gcode.script",
             {"script": f"T{self._printer.get_tool_number(extruder)}"},
         )
         if self._printer.config_section_exists("extruder1"):
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 "SAVE_VARIABLE VARIABLE=select_extruder "
                 f"VALUE={self._printer.get_tool_number(extruder) + 1}"
             )

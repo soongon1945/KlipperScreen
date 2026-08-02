@@ -152,7 +152,7 @@ class Panel(ScreenPanel):
     def change_babystepping_z(self, widget, direction):
         if direction == "reset":
             self.labels['zoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Z=0 MOVE=1")
+            self._screen._ws.api.gcode_script("SET_GCODE_EOFFSET Z=0 MOVE=1")
         elif direction in ["+", "-"]:
             offset = self._printer.get_stat("gcode_move", "offset_position")
             if isinstance(offset, (list, tuple)) and len(offset) >= 3:
@@ -162,14 +162,14 @@ class Panel(ScreenPanel):
                 else:
                     z_offset -= float(self.bs_delta)
                 self.labels['zoffset'].set_label(f'  {z_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_GCODE_EOFFSET Z_ADJUST={direction}{self.bs_delta} MOVE=1"
             )
 
     def change_babystepping_x(self, widget, direction):
         if direction == "reset":
             self.labels['xoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET X=0 MOVE=1")
+            self._screen._ws.api.gcode_script("SET_GCODE_EOFFSET X=0 MOVE=1")
         elif direction in ["+", "-"]:
             offset = self._printer.get_stat("gcode_move", "offset_position")
             if isinstance(offset, (list, tuple)) and len(offset) >= 3:
@@ -179,14 +179,14 @@ class Panel(ScreenPanel):
                 else:
                     x_offset -= float(self.bs_delta)
                 self.labels['xoffset'].set_label(f'  {x_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_GCODE_EOFFSET X_ADJUST={direction}{self.bs_delta} MOVE=1"
             )
 
     def change_babystepping_y(self, widget, direction):
         if direction == "reset":
             self.labels['yoffset'].set_label('  0.00mm')
-            self._screen._ws.klippy.gcode_script("SET_GCODE_EOFFSET Y=0 MOVE=1")
+            self._screen._ws.api.gcode_script("SET_GCODE_EOFFSET Y=0 MOVE=1")
         elif direction in ["+", "-"]:
             offset = self._printer.get_stat("gcode_move", "offset_position")
             if isinstance(offset, (list, tuple)) and len(offset) >= 3:
@@ -196,7 +196,7 @@ class Panel(ScreenPanel):
                 else:
                     y_offset -= float(self.bs_delta)
                 self.labels['yoffset'].set_label(f'  {y_offset:.3f}mm')
-            self._screen._ws.klippy.gcode_script(
+            self._screen._ws.api.gcode_script(
                 f"SET_GCODE_EOFFSET Y_ADJUST={direction}{self.bs_delta} MOVE=1"
             )
 

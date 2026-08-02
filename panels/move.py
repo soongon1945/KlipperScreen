@@ -287,7 +287,7 @@ class Panel(ScreenPanel):
         # A move request is explicit user intent; home before moving so an
         # uninitialized axis cannot receive a relative move.
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.api.gcode_script(KlippyGcodes.HOME)
         script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
         self._screen._send_action(widget, "printer.gcode.script", {"script": script})
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):

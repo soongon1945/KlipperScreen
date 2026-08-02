@@ -52,6 +52,9 @@ class KlippyWebsocket(threading.Thread):
         self._wst = None
         self.ws_url = None
         self._callback = callback
+        # Printer actions are exposed through one MoonrakerApi route. Panels
+        # merged from legacy branches must use ``_ws.api`` or they fail at the
+        # first user action because KlippyWebsocket has no ``klippy`` facade.
         self.api = MoonrakerApi(self)
         self.ws = None
         self.closing = False

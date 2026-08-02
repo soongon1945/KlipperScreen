@@ -474,9 +474,9 @@ class Panel(ScreenPanel):
                 self._screen._ws.api.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
             if device == "offset":
                 if "E_OFFSET_APPLY_PROBE" in self._printer.available_commands:
-                    self._screen._ws.klippy.gcode_script("E_OFFSET_APPLY_PROBE")
+                    self._screen._ws.api.gcode_script("E_OFFSET_APPLY_PROBE")
                 elif "E_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
-                    self._screen._ws.klippy.gcode_script("E_OFFSET_APPLY_ENDSTOP")
+                    self._screen._ws.api.gcode_script("E_OFFSET_APPLY_ENDSTOP")
                 else:
                     self._screen.show_popup_message(
                         _("No offset save command is available"), level=2
@@ -548,12 +548,12 @@ class Panel(ScreenPanel):
         self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")
         self._screen._ws.api.print_cancel()
-        self._screen._ws.klippy.gcode_script("PRINT_END")
+        self._screen._ws.api.gcode_script("PRINT_END")
 
     def close_panel(self, widget=None):
         if self.can_close:
             logging.debug("Closing job_status panel")
-            self._screen._ws.klippy.gcode_script("PRINT_END")
+            self._screen._ws.api.gcode_script("PRINT_END")
             self._screen.state_ready(wait=False)
 
     def enable_button(self, *args):
@@ -950,7 +950,7 @@ class Panel(ScreenPanel):
             self.enable_button("menu")
             self.can_close = True
             if self.state == "error":
-                self._screen._ws.klippy.gcode_script("ERROR_PRINT")
+                self._screen._ws.api.gcode_script("ERROR_PRINT")
 
             if self._supports_eoffset():
                 # Secondary-nozzle geometry is independent of the primary Z

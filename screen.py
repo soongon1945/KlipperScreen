@@ -1003,13 +1003,13 @@ class KlipperScreen(Gtk.ApplicationWindow):
                 items=self._config.get_menu_items("__main"),
             )
             self.base_panel_show_all()
-            self._ws.klippy.gcode_script("PRINT_END")
+            self._ws.api.gcode_script("PRINT_END")
             return
         logging.info(f"Starting print: {filename}")
         # Each recovery stage depends on the previous command.  Callback
         # chaining prevents ALLOW_INTERRUPT or RESUME_INTERRUPTED from racing
         # printer.print.start on a busy Moonraker connection.
-        self._ws.klippy.gcode_script(
+        self._ws.api.gcode_script(
             "ALLOW_INTERRUPT", self._start_interrupted_print, filename
         )
 
@@ -1017,13 +1017,13 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if "error" in response:
             self.show_popup_message(str(response["error"]), level=3)
             return
-        self._ws.klippy.print_start(filename, self._resume_interrupted)
+        self._ws.api.print_start(filename, self._resume_interrupted)
 
     def _resume_interrupted(self, response, method, params):
         if "error" in response:
             self.show_popup_message(str(response["error"]), level=3)
             return
-        self._ws.klippy.gcode_script("RESUME_INTERRUPTED")
+        self._ws.api.gcode_script("RESUME_INTERRUPTED")
 
 
     def state_ready(self, wait=True):
@@ -1089,7 +1089,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.show_panel(home)
 
     def change_nozzle_size(self, *args):
-        self._ws.klippy.gcode_script(f"SET_NOZZLE_SIZE S={args[0]}")
+        self._ws.api.gcode_script(f"SET_NOZZLE_SIZE S={args[0]}")
 
     def charge_filament(self):
         has_extruder1 = self.printer.config_section_exists("extruder1")
@@ -1108,12 +1108,12 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
         if self.check_filament_cnt == 5 and t1_current >= t1_target and t1_target > 100:
             self.check_filament_cnt = 0
-            self._ws.klippy.gcode_script("M104 T0 S0")
-            self._ws.klippy.gcode_script("RESUME")
+            self._ws.api.gcode_script("M104 T0 S0")
+            self._ws.api.gcode_script("RESUME")
         if self.check_filament_cnt == 6 and t0_current >= t0_target and t0_target > 100:
             self.check_filament_cnt = 0
-            self._ws.klippy.gcode_script("M104 T1 S0")
-            self._ws.klippy.gcode_script("RESUME")
+            self._ws.api.gcode_script("M104 T1 S0")
+            self._ws.api.gcode_script("RESUME")
 
         ps = self.printer.get_stat("print_stats")
         if ps.get("print_duration", 0) <= 0 or ps.get("state") != "printing":
@@ -1167,7 +1167,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if has_temp_t0 and has_temp_t1:
             self.check_filament_cnt = 7
             self.filament_none = True
-            self._ws.klippy.print_pause()
+            self._ws.api.print_pause()
         elif has_temp_t0 and not has_temp_t1:
             if (
                 self.printer.config_section_exists("extruder1")
@@ -1179,7 +1179,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
             else:
                 self.check_filament_cnt = 7
                 self.filament_none = True
-                self._ws.klippy.print_pause()
+                self._ws.api.print_pause()
         elif has_temp_t1 and not has_temp_t0:
             if (
                 self.printer.config_section_exists("extruder")
@@ -1191,18 +1191,18 @@ class KlipperScreen(Gtk.ApplicationWindow):
             else:
                 self.check_filament_cnt = 7
                 self.filament_none = True
-                self._ws.klippy.print_pause()
+                self._ws.api.print_pause()
         else:
             self.check_filament_cnt = 7
             self.filament_none = True
-            self._ws.klippy.print_pause()
+            self._ws.api.print_pause()
 
     def _switch_to_backup(self, cnt, from_ext, to_ext, temp, from_msg, to_msg):
         self.check_filament_cnt = cnt
-        self._ws.klippy.print_pause()
-        self._ws.klippy.gcode_script(from_ext)
-        self._ws.klippy.gcode_script(to_ext)
-        self._ws.klippy.gcode_script(f"M109 {to_ext} S{temp}")
+        self._ws.api.print_pause()
+        self._ws.api.gcode_script(from_ext)
+        self._ws.api.gcode_script(to_ext)
+        self._ws.api.gcode_script(f"M109 {to_ext} S{temp}")
         self.show_popup_message(_(f"{from_msg} filament is empty, switch to {to_msg}"), level=1)
 
     def _cleanup_filament_timer(self):
@@ -1299,13 +1299,13 @@ class KlipperScreen(Gtk.ApplicationWindow):
     def _filament_change_action_response(self, dialog, response_id, method, params):
         if response_id == Gtk.ResponseType.APPLY:
             self.show_popup_message("Start unload filament!.")
-            self._ws.klippy.gcode_script(f"UNLOAD_FILAMENT SPEED={2 * 60}")
+            self._ws.api.gcode_script(f"UNLOAD_FILAMENT SPEED={2 * 60}")
         elif response_id == Gtk.ResponseType.OK:
             self.show_popup_message("Start load filament!.")
-            self._ws.klippy.gcode_script(f"LOAD_FILAMENT SPEED={2 * 60}")
+            self._ws.api.gcode_script(f"LOAD_FILAMENT SPEED={2 * 60}")
         elif response_id == Gtk.ResponseType.YES:
             self.gtk.remove_dialog(dialog)
-            self._ws.klippy.gcode_script("RESUME")
+            self._ws.api.gcode_script("RESUME")
             self.check_filament_cnt = 0
         elif response_id == Gtk.ResponseType.CANCEL:
             self.gtk.remove_dialog(dialog)

@@ -7,7 +7,7 @@ if command -v xsetroot >/dev/null 2>&1; then
     /usr/bin/xsetroot -solid "#ffffff" 2>/dev/null || true
 fi
 
-SPLASH_IMAGE="${KS_X11_SPLASH_IMAGE:-/usr/share/plymouth/themes/makerpi/progress-91.png}"
+SPLASH_IMAGE="${KS_X11_SPLASH_IMAGE:-/usr/share/plymouth/themes/makerpi/progress-61.png}"
 if command -v feh >/dev/null 2>&1 && [ -r "$SPLASH_IMAGE" ]; then
     /usr/bin/feh \
         --no-fehbg \

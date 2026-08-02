@@ -13,7 +13,9 @@ fi
 
 start_x11() {
     echo "Running KlipperScreen on X11"
-    exec /usr/bin/xinit "$SCRIPTPATH/KlipperScreen-x11-client.sh"
+    # Preserve Plymouth's retained framebuffer until the lightweight X client
+    # paints the handoff frame; Xorg's default root background is black.
+    exec /usr/bin/xinit "$SCRIPTPATH/KlipperScreen-x11-client.sh" -- -background none
 }
 
 start_cage() {

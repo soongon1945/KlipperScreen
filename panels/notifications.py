@@ -25,9 +25,11 @@ class Panel(ScreenPanel):
         self.tb = Gtk.TextBuffer(text=self.empty)
         tv = Gtk.TextView(editable=False, cursor_visible=False, wrap_mode=Pango.WrapMode.WORD_CHAR)
         tv.set_buffer(self.tb)
+        tv.get_style_context().add_class("notifications-output")
         tv.connect("size-allocate", self._autoscroll)
 
         scroll = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
+        scroll.get_style_context().add_class("notifications-output")
         scroll.add(tv)
 
         clear_button = self._gtk.Button(
@@ -38,6 +40,7 @@ class Panel(ScreenPanel):
         clear_button.connect("clicked", self.clear)
 
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        content_box.get_style_context().add_class("notifications-panel")
         content_box.add(clear_button)
         content_box.add(scroll)
         self.content.add(content_box)

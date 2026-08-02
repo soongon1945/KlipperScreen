@@ -180,13 +180,17 @@ entry image {
     padding: .5em;
 }
 
-/* Keep the whole console opaque on GTK themes whose panel and TextView canvas
+/* Keep log-style panels opaque on GTK themes whose panel and TextView canvas
  * default to transparent. Styling the outer box and all text canvas nodes
- * prevents printer output from blending into the previous panel. */
+ * prevents console or notification text from blending into the previous panel. */
 box.console-panel,
+box.notifications-panel,
 scrolledwindow.console-output,
+scrolledwindow.notifications-output,
 textview.console-output,
-textview.console-output text {
+textview.notifications-output,
+textview.console-output text,
+textview.notifications-output text {
     background-color: #101418;
     background-image: none;
     color: #f2f2f2;

@@ -1,6 +1,9 @@
 #!/bin/bash
 
-XDG_RUNTIME_DIR="/run/user/$(id -u)"
+# A systemd system service may supply a private runtime directory whose
+# lifetime is tied to KlipperScreen.  Do not replace it with /run/user/<uid>,
+# because that directory can disappear when an unrelated SSH session ends.
+XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 export XDG_RUNTIME_DIR
 
 SCRIPTPATH="$(dirname "$(realpath "$0")")"

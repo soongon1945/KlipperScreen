@@ -17,6 +17,11 @@ Restart=always
 RestartSec=2
 User=KS_USER
 SupplementaryGroups=klipperscreen
+# Keep the display client's runtime files independent of transient login
+# sessions; an SSH logout must not terminate Xorg and blank the touchscreen.
+RuntimeDirectory=klipperscreen
+RuntimeDirectoryMode=0700
+Environment=XDG_RUNTIME_DIR=/run/klipperscreen
 WorkingDirectory=KS_DIR
 Environment="KS_XCLIENT=KS_ENV/bin/python KS_DIR/screen.py" BACKEND=KS_BACKEND
 ExecStart="KS_DIR/scripts/KlipperScreen-start.sh"

@@ -46,6 +46,8 @@ class Panel(ScreenPanel):
 
         tb = Gtk.TextBuffer()
         tv = Gtk.TextView(buffer=tb, editable=False, cursor_visible=False)
+        sw.get_style_context().add_class("console-output")
+        tv.get_style_context().add_class("console-output")
         tv.connect("size-allocate", self._autoscroll)
         tv.connect("touch-event", self._screen.remove_keyboard)
         tv.connect("button-press-event", self._screen.remove_keyboard)

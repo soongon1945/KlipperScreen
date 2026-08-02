@@ -180,9 +180,10 @@ entry image {
     padding: .5em;
 }
 
-/* Keep the console opaque on GTK themes whose TextView canvas defaults to
- * transparent. Styling both widgets and the inner text node prevents printer
- * output from blending into panels behind it and becoming unreadable. */
+/* Keep the whole console opaque on GTK themes whose panel and TextView canvas
+ * default to transparent. Styling the outer box and all text canvas nodes
+ * prevents printer output from blending into the previous panel. */
+box.console-panel,
 scrolledwindow.console-output,
 textview.console-output,
 textview.console-output text {

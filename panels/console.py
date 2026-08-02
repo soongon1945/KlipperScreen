@@ -77,6 +77,7 @@ class Panel(ScreenPanel):
         self.labels.update({"entry": entry, "sw": sw, "tb": tb, "tv": tv})
 
         content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        content_box.get_style_context().add_class("console-panel")
         content_box.pack_start(options, False, False, 5)
         content_box.add(sw)
         content_box.pack_end(ebox, False, False, 0)

@@ -13,7 +13,7 @@ fi
 
 start_x11() {
     echo "Running KlipperScreen on X11"
-    exec /usr/bin/xinit $KS_XCLIENT
+    exec /usr/bin/xinit "$SCRIPTPATH/KlipperScreen-x11-client.sh"
 }
 
 start_cage() {

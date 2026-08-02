@@ -13,6 +13,12 @@ fi
 
 start_x11() {
     echo "Running KlipperScreen on X11"
+    # Initialize Panfrost through the render node while Plymouth's retained
+    # framebuffer is still visible.  Cold glamor setup otherwise leaves the
+    # display without a usable X client for several seconds during boot.
+    if command -v eglinfo >/dev/null 2>&1 && [ -r /dev/dri/renderD128 ]; then
+        /usr/bin/eglinfo -p surfaceless -B >/dev/null 2>&1 || true
+    fi
     # Preserve Plymouth's retained framebuffer until the lightweight X client
     # paints the handoff frame; Xorg's default root background is black.
     exec /usr/bin/xinit "$SCRIPTPATH/KlipperScreen-x11-client.sh" -- -background none

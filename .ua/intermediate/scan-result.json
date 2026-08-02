@@ -1,0 +1,1877 @@
+{
+  "name": "KlipperScreen",
+  "description": "KlipperScreen 是面向 Klipper 的触摸屏 GUI，通过 Moonraker 连接打印机，并支持在一个界面中管理多台打印机。注意：本项目包含超过 100 个源文件；为加快分析，建议将范围限定到子目录。",
+  "languages": [
+    "conf",
+    "css",
+    "desktop",
+    "json",
+    "markdown",
+    "mo",
+    "po",
+    "pot",
+    "python",
+    "service",
+    "shell",
+    "toml",
+    "txt",
+    "xbm",
+    "xml",
+    "yaml"
+  ],
+  "frameworks": [
+    "GTK3",
+    "GitHub Actions"
+  ],
+  "files": [
+    {
+      "path": ".github/dependabot.yml",
+      "language": "yaml",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/FUNDING.yml",
+      "language": "yaml",
+      "sizeLines": 1,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "language": "yaml",
+      "sizeLines": 70,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "language": "yaml",
+      "sizeLines": 8,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "language": "yaml",
+      "sizeLines": 45,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "language": "yaml",
+      "sizeLines": 85,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/docs.yml",
+      "language": "yaml",
+      "sizeLines": 29,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/linter.yml",
+      "language": "yaml",
+      "sizeLines": 19,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/missing_log.yml",
+      "language": "yaml",
+      "sizeLines": 24,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "language": "yaml",
+      "sizeLines": 7,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".readthedocs.yaml",
+      "language": "yaml",
+      "sizeLines": 28,
+      "fileCategory": "config"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "language": "markdown",
+      "sizeLines": 337,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "config/defaults.conf",
+      "language": "conf",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "config/main_menu.conf",
+      "language": "conf",
+      "sizeLines": 159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "config/move_menu.conf",
+      "language": "conf",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "config/print_menu.conf",
+      "language": "conf",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "config/splash_menu.conf",
+      "language": "conf",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docs/Android.md",
+      "language": "markdown",
+      "sizeLines": 150,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Backends.md",
+      "language": "markdown",
+      "sizeLines": 66,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/breaking.md",
+      "language": "markdown",
+      "sizeLines": 40,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/changelog.md",
+      "language": "markdown",
+      "sizeLines": 0,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Configuration.md",
+      "language": "markdown",
+      "sizeLines": 325,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Contact.md",
+      "language": "markdown",
+      "sizeLines": 23,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Developers.md",
+      "language": "markdown",
+      "sizeLines": 75,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/FAQ.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Hardware.md",
+      "language": "markdown",
+      "sizeLines": 31,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Hardware/GPIO_35.md",
+      "language": "markdown",
+      "sizeLines": 203,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Hardware/HDMI.md",
+      "language": "markdown",
+      "sizeLines": 56,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/index.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Installation.md",
+      "language": "markdown",
+      "sizeLines": 84,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/macros.md",
+      "language": "markdown",
+      "sizeLines": 288,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Multi_instance.md",
+      "language": "markdown",
+      "sizeLines": 132,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Panels.md",
+      "language": "markdown",
+      "sizeLines": 133,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Panels/Job_status.md",
+      "language": "markdown",
+      "sizeLines": 28,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Panels/Screws.md",
+      "language": "markdown",
+      "sizeLines": 54,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Panels/Temperature.md",
+      "language": "markdown",
+      "sizeLines": 23,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Panels/Zcalibrate.md",
+      "language": "markdown",
+      "sizeLines": 61,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Quicktips.md",
+      "language": "markdown",
+      "sizeLines": 168,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/requirements.txt",
+      "language": "txt",
+      "sizeLines": 2,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/stylesheets/extra.css",
+      "language": "css",
+      "sizeLines": 27,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "docs/Theming.md",
+      "language": "markdown",
+      "sizeLines": 80,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Thumbnails.md",
+      "language": "markdown",
+      "sizeLines": 66,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Translations.md",
+      "language": "markdown",
+      "sizeLines": 44,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting.md",
+      "language": "markdown",
+      "sizeLines": 148,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Desktop.md",
+      "language": "markdown",
+      "sizeLines": 19,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/FBturbo.md",
+      "language": "markdown",
+      "sizeLines": 22,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Framebuffer_id.md",
+      "language": "markdown",
+      "sizeLines": 56,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Framebuffer.md",
+      "language": "markdown",
+      "sizeLines": 75,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Last_resort.md",
+      "language": "markdown",
+      "sizeLines": 27,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Network.md",
+      "language": "markdown",
+      "sizeLines": 54,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Physical_Install.md",
+      "language": "markdown",
+      "sizeLines": 26,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Rotation.md",
+      "language": "markdown",
+      "sizeLines": 196,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/Touch_issues.md",
+      "language": "markdown",
+      "sizeLines": 246,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Troubleshooting/VC_ERROR.md",
+      "language": "markdown",
+      "sizeLines": 39,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/Updating.md",
+      "language": "markdown",
+      "sizeLines": 36,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/VNC.md",
+      "language": "markdown",
+      "sizeLines": 85,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "ks_includes/config.py",
+      "language": "python",
+      "sizeLines": 911,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/emptyCursor.xbm",
+      "language": "xbm",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/files.py",
+      "language": "python",
+      "sizeLines": 144,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/functions.py",
+      "language": "python",
+      "sizeLines": 194,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/KlippyGcodes.py",
+      "language": "python",
+      "sizeLines": 49,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/KlippyGtk.py",
+      "language": "python",
+      "sizeLines": 380,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/KlippyRest.py",
+      "language": "python",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/KlippyUDS.py",
+      "language": "python",
+      "sizeLines": 159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/KlippyWebsocket.py",
+      "language": "python",
+      "sizeLines": 178,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1179,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1115,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1174,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1157,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1158,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1394,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1157,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1274,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1185,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/keyboard.xml",
+      "language": "xml",
+      "sizeLines": 205,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/KlipperScreen.pot",
+      "language": "pot",
+      "sizeLines": 1167,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1174,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1124,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1155,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1129,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 49,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1157,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1167,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1162,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1155,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1251,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/stats/ar.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/bg.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/cs.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/da.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/de.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/es.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/fa.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/fr.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/he.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/hr.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/hu.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/it.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/jp.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/lt.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/nl.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/pl.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/pt_BR.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/pt.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/ru.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/sk.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/tr.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/zh_CN.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/stats/zh_TW.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1226,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1111,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1169,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1184,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1162,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.mo",
+      "language": "mo",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.po",
+      "language": "po",
+      "sizeLines": 1147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/MoonrakerApi.py",
+      "language": "python",
+      "sizeLines": 167,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/notification_handler.py",
+      "language": "python",
+      "sizeLines": 151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/offsetmap.py",
+      "language": "python",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/printer.py",
+      "language": "python",
+      "sizeLines": 435,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/screen_panel.py",
+      "language": "python",
+      "sizeLines": 357,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/sdbus_nm.py",
+      "language": "python",
+      "sizeLines": 438,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/spoolman_api.py",
+      "language": "python",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/svg_gradient.py",
+      "language": "python",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/autogrid.py",
+      "language": "python",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/bedmap.py",
+      "language": "python",
+      "sizeLines": 205,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/combo.py",
+      "language": "python",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/flowboxchild_extended.py",
+      "language": "python",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/heatergraph.py",
+      "language": "python",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/keyboard.py",
+      "language": "python",
+      "sizeLines": 266,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/keypad.py",
+      "language": "python",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/lockscreen.py",
+      "language": "python",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/objectmap.py",
+      "language": "python",
+      "sizeLines": 157,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/prompts.py",
+      "language": "python",
+      "sizeLines": 151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/screensaver.py",
+      "language": "python",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "ks_includes/widgets/scroll.py",
+      "language": "python",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "mkdocs.yml",
+      "language": "yaml",
+      "sizeLines": 90,
+      "fileCategory": "config"
+    },
+    {
+      "path": "panels/__init__.py",
+      "language": "python",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/adjusting_offset.py",
+      "language": "python",
+      "sizeLines": 208,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/base_panel.py",
+      "language": "python",
+      "sizeLines": 836,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/bed_level.py",
+      "language": "python",
+      "sizeLines": 347,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/bed_mesh.py",
+      "language": "python",
+      "sizeLines": 299,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/camera.py",
+      "language": "python",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/console.py",
+      "language": "python",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/example.py",
+      "language": "python",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/exclude.py",
+      "language": "python",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/extrude.py",
+      "language": "python",
+      "sizeLines": 391,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/fan.py",
+      "language": "python",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/fine_tune.py",
+      "language": "python",
+      "sizeLines": 204,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/gcode_macros.py",
+      "language": "python",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/gcodes.py",
+      "language": "python",
+      "sizeLines": 664,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/input_shaper.py",
+      "language": "python",
+      "sizeLines": 210,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/job_status.py",
+      "language": "python",
+      "sizeLines": 1086,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/led.py",
+      "language": "python",
+      "sizeLines": 237,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/limits.py",
+      "language": "python",
+      "sizeLines": 159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/main_menu.py",
+      "language": "python",
+      "sizeLines": 349,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/menu.py",
+      "language": "python",
+      "sizeLines": 133,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/move_advanced.py",
+      "language": "python",
+      "sizeLines": 205,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/move.py",
+      "language": "python",
+      "sizeLines": 309,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/network.py",
+      "language": "python",
+      "sizeLines": 587,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/notifications.py",
+      "language": "python",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/offset_control.py",
+      "language": "python",
+      "sizeLines": 378,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/pins.py",
+      "language": "python",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/power.py",
+      "language": "python",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/pressure_advance.py",
+      "language": "python",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/printer_select.py",
+      "language": "python",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/retraction.py",
+      "language": "python",
+      "sizeLines": 160,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/settings.py",
+      "language": "python",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/shutdown.py",
+      "language": "python",
+      "sizeLines": 148,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/splash_screen.py",
+      "language": "python",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/spool_editor.py",
+      "language": "python",
+      "sizeLines": 407,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/spoolman.py",
+      "language": "python",
+      "sizeLines": 550,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/system.py",
+      "language": "python",
+      "sizeLines": 315,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/temperature.py",
+      "language": "python",
+      "sizeLines": 632,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/updater.py",
+      "language": "python",
+      "sizeLines": 360,
+      "fileCategory": "code"
+    },
+    {
+      "path": "panels/zcalibrate.py",
+      "language": "python",
+      "sizeLines": 374,
+      "fileCategory": "code"
+    },
+    {
+      "path": "pyproject.toml",
+      "language": "toml",
+      "sizeLines": 32,
+      "fileCategory": "config"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "screen.py",
+      "language": "python",
+      "sizeLines": 1814,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build_docs.sh",
+      "language": "shell",
+      "sizeLines": 3,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/check_code.sh",
+      "language": "shell",
+      "sizeLines": 3,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/dev-requirements.txt",
+      "language": "txt",
+      "sizeLines": 3,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "scripts/KlipperScreen-install.sh",
+      "language": "shell",
+      "sizeLines": 361,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/KlipperScreen-requirements.txt",
+      "language": "txt",
+      "sizeLines": 28,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "scripts/KlipperScreen-start.sh",
+      "language": "shell",
+      "sizeLines": 83,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/KlipperScreen.desktop",
+      "language": "desktop",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/KlipperScreen.service",
+      "language": "service",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/sample-android-adb.sh",
+      "language": "shell",
+      "sizeLines": 40,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/sample-launch-remote-xserver.sh",
+      "language": "shell",
+      "sizeLines": 55,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/system-dependencies.json",
+      "language": "json",
+      "sizeLines": 30,
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/Uninstall.sh",
+      "language": "shell",
+      "sizeLines": 28,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/update_translation_files.sh",
+      "language": "shell",
+      "sizeLines": 29,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/xsdl_wrapper.sh",
+      "language": "shell",
+      "sizeLines": 42,
+      "fileCategory": "script"
+    },
+    {
+      "path": "styles/base.conf",
+      "language": "conf",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "styles/base.css",
+      "language": "css",
+      "sizeLines": 735,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "styles/colorized/style.conf",
+      "language": "conf",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "styles/colorized/style.css",
+      "language": "css",
+      "sizeLines": 295,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "styles/material-dark/style.conf",
+      "language": "conf",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "styles/material-dark/style.css",
+      "language": "css",
+      "sizeLines": 264,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "styles/material-darker/style.conf",
+      "language": "conf",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "styles/material-darker/style.css",
+      "language": "css",
+      "sizeLines": 259,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "styles/material-light/style.conf",
+      "language": "conf",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "styles/material-light/style.css",
+      "language": "css",
+      "sizeLines": 332,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "styles/printers/readme.md",
+      "language": "markdown",
+      "sizeLines": 7,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "styles/z-bolt/style.conf",
+      "language": "conf",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "styles/z-bolt/style.css",
+      "language": "css",
+      "sizeLines": 219,
+      "fileCategory": "markup"
+    }
+  ],
+  "totalFiles": 244,
+  "filteredByIgnore": 2,
+  "estimatedComplexity": "large",
+  "importMap": {
+    ".github/dependabot.yml": [],
+    ".github/FUNDING.yml": [],
+    ".github/ISSUE_TEMPLATE/bug_report.yml": [],
+    ".github/ISSUE_TEMPLATE/config.yml": [],
+    ".github/ISSUE_TEMPLATE/feature_request.yml": [],
+    ".github/workflows/codeql.yml": [],
+    ".github/workflows/docs.yml": [],
+    ".github/workflows/linter.yml": [],
+    ".github/workflows/missing_log.yml": [],
+    ".pre-commit-config.yaml": [],
+    ".readthedocs.yaml": [],
+    "CHANGELOG.md": [],
+    "config/defaults.conf": [],
+    "config/main_menu.conf": [],
+    "config/move_menu.conf": [],
+    "config/print_menu.conf": [],
+    "config/splash_menu.conf": [],
+    "docs/Android.md": [],
+    "docs/Backends.md": [],
+    "docs/breaking.md": [],
+    "docs/changelog.md": [],
+    "docs/Configuration.md": [],
+    "docs/Contact.md": [],
+    "docs/Developers.md": [],
+    "docs/FAQ.md": [],
+    "docs/Hardware.md": [],
+    "docs/Hardware/GPIO_35.md": [],
+    "docs/Hardware/HDMI.md": [],
+    "docs/index.md": [],
+    "docs/Installation.md": [],
+    "docs/macros.md": [],
+    "docs/Multi_instance.md": [],
+    "docs/Panels.md": [],
+    "docs/Panels/Job_status.md": [],
+    "docs/Panels/Screws.md": [],
+    "docs/Panels/Temperature.md": [],
+    "docs/Panels/Zcalibrate.md": [],
+    "docs/Quicktips.md": [],
+    "docs/requirements.txt": [],
+    "docs/stylesheets/extra.css": [],
+    "docs/Theming.md": [],
+    "docs/Thumbnails.md": [],
+    "docs/Translations.md": [],
+    "docs/Troubleshooting.md": [],
+    "docs/Troubleshooting/Desktop.md": [],
+    "docs/Troubleshooting/FBturbo.md": [],
+    "docs/Troubleshooting/Framebuffer_id.md": [],
+    "docs/Troubleshooting/Framebuffer.md": [],
+    "docs/Troubleshooting/Last_resort.md": [],
+    "docs/Troubleshooting/Network.md": [],
+    "docs/Troubleshooting/Physical_Install.md": [],
+    "docs/Troubleshooting/Rotation.md": [],
+    "docs/Troubleshooting/Touch_issues.md": [],
+    "docs/Troubleshooting/VC_ERROR.md": [],
+    "docs/Updating.md": [],
+    "docs/VNC.md": [],
+    "ks_includes/config.py": [],
+    "ks_includes/emptyCursor.xbm": [],
+    "ks_includes/files.py": [],
+    "ks_includes/functions.py": [],
+    "ks_includes/KlippyGcodes.py": [],
+    "ks_includes/KlippyGtk.py": [
+      "ks_includes/widgets/scroll.py"
+    ],
+    "ks_includes/KlippyRest.py": [],
+    "ks_includes/KlippyUDS.py": [
+      "ks_includes/MoonrakerApi.py"
+    ],
+    "ks_includes/KlippyWebsocket.py": [
+      "ks_includes/MoonrakerApi.py"
+    ],
+    "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/keyboard.xml": [],
+    "ks_includes/locales/KlipperScreen.pot": [],
+    "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/stats/ar.json": [],
+    "ks_includes/locales/stats/bg.json": [],
+    "ks_includes/locales/stats/cs.json": [],
+    "ks_includes/locales/stats/da.json": [],
+    "ks_includes/locales/stats/de.json": [],
+    "ks_includes/locales/stats/es.json": [],
+    "ks_includes/locales/stats/fa.json": [],
+    "ks_includes/locales/stats/fr.json": [],
+    "ks_includes/locales/stats/he.json": [],
+    "ks_includes/locales/stats/hr.json": [],
+    "ks_includes/locales/stats/hu.json": [],
+    "ks_includes/locales/stats/it.json": [],
+    "ks_includes/locales/stats/jp.json": [],
+    "ks_includes/locales/stats/lt.json": [],
+    "ks_includes/locales/stats/nl.json": [],
+    "ks_includes/locales/stats/pl.json": [],
+    "ks_includes/locales/stats/pt_BR.json": [],
+    "ks_includes/locales/stats/pt.json": [],
+    "ks_includes/locales/stats/ru.json": [],
+    "ks_includes/locales/stats/sk.json": [],
+    "ks_includes/locales/stats/tr.json": [],
+    "ks_includes/locales/stats/zh_CN.json": [],
+    "ks_includes/locales/stats/zh_TW.json": [],
+    "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.mo": [],
+    "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.po": [],
+    "ks_includes/MoonrakerApi.py": [
+      "ks_includes/KlippyGcodes.py"
+    ],
+    "ks_includes/notification_handler.py": [],
+    "ks_includes/offsetmap.py": [],
+    "ks_includes/printer.py": [],
+    "ks_includes/screen_panel.py": [
+      "ks_includes/KlippyGtk.py"
+    ],
+    "ks_includes/sdbus_nm.py": [],
+    "ks_includes/spoolman_api.py": [],
+    "ks_includes/svg_gradient.py": [],
+    "ks_includes/widgets/autogrid.py": [],
+    "ks_includes/widgets/bedmap.py": [],
+    "ks_includes/widgets/combo.py": [],
+    "ks_includes/widgets/flowboxchild_extended.py": [],
+    "ks_includes/widgets/heatergraph.py": [],
+    "ks_includes/widgets/keyboard.py": [],
+    "ks_includes/widgets/keypad.py": [],
+    "ks_includes/widgets/lockscreen.py": [],
+    "ks_includes/widgets/objectmap.py": [],
+    "ks_includes/widgets/prompts.py": [],
+    "ks_includes/widgets/screensaver.py": [],
+    "ks_includes/widgets/scroll.py": [],
+    "mkdocs.yml": [],
+    "panels/__init__.py": [],
+    "panels/adjusting_offset.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/base_panel.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/svg_gradient.py"
+    ],
+    "panels/bed_level.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/bed_mesh.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/bedmap.py"
+    ],
+    "panels/camera.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/console.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/example.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/exclude.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/objectmap.py"
+    ],
+    "panels/extrude.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/autogrid.py"
+    ],
+    "panels/fan.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/fine_tune.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/gcode_macros.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/gcodes.py": [
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/flowboxchild_extended.py"
+    ],
+    "panels/input_shaper.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/job_status.py": [
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/led.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/limits.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/main_menu.py": [
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/widgets/heatergraph.py",
+      "ks_includes/widgets/keypad.py",
+      "panels/menu.py"
+    ],
+    "panels/menu.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/autogrid.py"
+    ],
+    "panels/move_advanced.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/keypad.py"
+    ],
+    "panels/move.py": [
+      "ks_includes/KlippyGcodes.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/network.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/sdbus_nm.py"
+    ],
+    "panels/notifications.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/offset_control.py": [
+      "ks_includes/offsetmap.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/pins.py": [
+      "ks_includes/functions.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/power.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/pressure_advance.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/printer_select.py": [
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/autogrid.py"
+    ],
+    "panels/retraction.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/settings.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/shutdown.py": [
+      "ks_includes/functions.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/splash_screen.py": [
+      "ks_includes/functions.py",
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/spool_editor.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/keypad.py"
+    ],
+    "panels/spoolman.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/svg_gradient.py",
+      "ks_includes/widgets/combo.py"
+    ],
+    "panels/system.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/temperature.py": [
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/heatergraph.py",
+      "ks_includes/widgets/keypad.py"
+    ],
+    "panels/updater.py": [
+      "ks_includes/screen_panel.py"
+    ],
+    "panels/zcalibrate.py": [
+      "ks_includes/screen_panel.py",
+      "ks_includes/widgets/combo.py"
+    ],
+    "pyproject.toml": [],
+    "README.md": [],
+    "screen.py": [
+      "ks_includes/config.py",
+      "ks_includes/files.py",
+      "ks_includes/KlippyGtk.py",
+      "ks_includes/KlippyRest.py",
+      "ks_includes/KlippyUDS.py",
+      "ks_includes/KlippyWebsocket.py",
+      "ks_includes/notification_handler.py",
+      "ks_includes/printer.py",
+      "ks_includes/spoolman_api.py",
+      "ks_includes/widgets/keyboard.py",
+      "ks_includes/widgets/lockscreen.py",
+      "ks_includes/widgets/prompts.py",
+      "ks_includes/widgets/screensaver.py",
+      "panels/base_panel.py"
+    ],
+    "scripts/build_docs.sh": [],
+    "scripts/check_code.sh": [],
+    "scripts/dev-requirements.txt": [],
+    "scripts/KlipperScreen-install.sh": [],
+    "scripts/KlipperScreen-requirements.txt": [],
+    "scripts/KlipperScreen-start.sh": [],
+    "scripts/KlipperScreen.desktop": [],
+    "scripts/KlipperScreen.service": [],
+    "scripts/sample-android-adb.sh": [],
+    "scripts/sample-launch-remote-xserver.sh": [],
+    "scripts/system-dependencies.json": [],
+    "scripts/Uninstall.sh": [],
+    "scripts/update_translation_files.sh": [],
+    "scripts/xsdl_wrapper.sh": [],
+    "styles/base.conf": [],
+    "styles/base.css": [],
+    "styles/colorized/style.conf": [],
+    "styles/colorized/style.css": [],
+    "styles/material-dark/style.conf": [],
+    "styles/material-dark/style.css": [],
+    "styles/material-darker/style.conf": [],
+    "styles/material-darker/style.css": [],
+    "styles/material-light/style.conf": [],
+    "styles/material-light/style.css": [],
+    "styles/printers/readme.md": [],
+    "styles/z-bolt/style.conf": [],
+    "styles/z-bolt/style.css": []
+  }
+}

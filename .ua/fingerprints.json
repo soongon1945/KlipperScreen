@@ -1,0 +1,6879 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "dd1527f3dc62562095837b2f51931f15cfdfa629",
+  "generatedAt": "2026-08-02T09:06:12.855Z",
+  "files": {
+    ".github/dependabot.yml": {
+      "filePath": ".github/dependabot.yml",
+      "contentHash": "53ad3259fe9255362c0d9fb5411ea1b67cab48966a9e730ecc07b749ae86cf45",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    ".github/FUNDING.yml": {
+      "filePath": ".github/FUNDING.yml",
+      "contentHash": "8f36b07ac5da6020810af5a61bff216d1784f04668cf31cb1461ee911c9a7bdf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    ".github/ISSUE_TEMPLATE/bug_report.yml": {
+      "filePath": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "contentHash": "0f6fe5ee65857b7cc15864c3cdae5266a0657a2dd1745547ac3f89b1ee67c6bb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 71,
+      "hasStructuralAnalysis": true
+    },
+    ".github/ISSUE_TEMPLATE/config.yml": {
+      "filePath": ".github/ISSUE_TEMPLATE/config.yml",
+      "contentHash": "49429be0db90b9547b026a1c62eb5a15299a220452ac4be22fca1f1f381ddd72",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9,
+      "hasStructuralAnalysis": true
+    },
+    ".github/ISSUE_TEMPLATE/feature_request.yml": {
+      "filePath": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "contentHash": "fdf58c202f57d18c71ed6d5196b23918141137970fe4cb6825353798a189bac7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 46,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/codeql.yml": {
+      "filePath": ".github/workflows/codeql.yml",
+      "contentHash": "7f7b8a77f361c3d11d0a9c22ca9cc78708d0007bd638f8e1fb9f1f54d9cb9c21",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/docs.yml": {
+      "filePath": ".github/workflows/docs.yml",
+      "contentHash": "8d71c019e99481fb4f3a3c4bef46307be09ef8e8db1ee9a293386b3c432bd8f6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/linter.yml": {
+      "filePath": ".github/workflows/linter.yml",
+      "contentHash": "8f8d8138bf33c3d59abd8147e614207a59c1bb0d780144dae76842de19a850d4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    ".github/workflows/missing_log.yml": {
+      "filePath": ".github/workflows/missing_log.yml",
+      "contentHash": "afcda56307ff7c16f59904df68d7589df29db7741220dc22c763677488e7a92c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    ".pre-commit-config.yaml": {
+      "filePath": ".pre-commit-config.yaml",
+      "contentHash": "153f5c9715275cfce38942032b3d01934cf543311680aee442371b7d66eb2782",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    ".readthedocs.yaml": {
+      "filePath": ".readthedocs.yaml",
+      "contentHash": "2f53bd3b44568106148199533297260d41dfdd7d578fea00df387917891388f4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "CHANGELOG.md": {
+      "filePath": "CHANGELOG.md",
+      "contentHash": "3a3ceeb568be81d44dedc8dd0156741fb8af871111c7827d1c04eeae4187bd40",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 338,
+      "hasStructuralAnalysis": true
+    },
+    "config/defaults.conf": {
+      "filePath": "config/defaults.conf",
+      "contentHash": "bc98f9c22b6fb77470fe6f579f98a8ff66226432fbcdcf1722ad271a495a8c42",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": false
+    },
+    "config/main_menu.conf": {
+      "filePath": "config/main_menu.conf",
+      "contentHash": "f6d083db9fabf91c9db06142ca77ab34f8d62cd832b690c8188fac1461db5393",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 160,
+      "hasStructuralAnalysis": false
+    },
+    "config/move_menu.conf": {
+      "filePath": "config/move_menu.conf",
+      "contentHash": "e5c625e70d371a4bb01e57ab5acf778043cebacf015332765eb535d434c21379",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 48,
+      "hasStructuralAnalysis": false
+    },
+    "config/print_menu.conf": {
+      "filePath": "config/print_menu.conf",
+      "contentHash": "fc85403695f42e93816d9e9daae5bbb40ff307127b636894857df7e24a6477da",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 103,
+      "hasStructuralAnalysis": false
+    },
+    "config/splash_menu.conf": {
+      "filePath": "config/splash_menu.conf",
+      "contentHash": "2068a143a802c12319c114a4f1fd27fac98385267828841dc59783b4b77b930b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 35,
+      "hasStructuralAnalysis": false
+    },
+    "docs/Android.md": {
+      "filePath": "docs/Android.md",
+      "contentHash": "dc985ddfce0d1fa62d3ca2cc86b62aab17009455afc4fe7795fe32376b63b08b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 151,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Backends.md": {
+      "filePath": "docs/Backends.md",
+      "contentHash": "1e9bbb192d427ef933ec4535796248949646e3a1992d70a8e39f5ff62ac89a2c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": true
+    },
+    "docs/breaking.md": {
+      "filePath": "docs/breaking.md",
+      "contentHash": "2a29f280287ef1ce1947fcc5bace0d66bc7bc027f099699b8fb17bbfc3feee80",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "docs/changelog.md": {
+      "filePath": "docs/changelog.md",
+      "contentHash": "5b1ace6cbf670b5d35b515086985890d889090026e075bb900834cea4945afba",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Configuration.md": {
+      "filePath": "docs/Configuration.md",
+      "contentHash": "82e422de1f592e7b0b57e77ce8d7bf2f0e57ed56af7ffdb4bf867050ea1be478",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 326,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Contact.md": {
+      "filePath": "docs/Contact.md",
+      "contentHash": "437c8006ef8ee8143f3aef4e7f4498f672c0b6e57b47e6a01b620d7036f15dee",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Developers.md": {
+      "filePath": "docs/Developers.md",
+      "contentHash": "ac59a9963d9c57cc692aab3c316b957779bd64adadb47ee5d3c5bd19860b47f1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
+    },
+    "docs/FAQ.md": {
+      "filePath": "docs/FAQ.md",
+      "contentHash": "678144898cdef175fe369858553b87a8298c3b7a38baa79f3fdfbbd5e97dca18",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Hardware.md": {
+      "filePath": "docs/Hardware.md",
+      "contentHash": "32562a3977a975918c4fce79d373dffa6f89e1f1d722184d0366d4c07e243bad",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Hardware/GPIO_35.md": {
+      "filePath": "docs/Hardware/GPIO_35.md",
+      "contentHash": "523c35ebd8ff183170b8091e8c8dd0f05b207c73dd5371bb1fb16998528db00b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 204,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Hardware/HDMI.md": {
+      "filePath": "docs/Hardware/HDMI.md",
+      "contentHash": "11d61d6c846ea73871b676b02e3d0195fb5f7e0c0300d6e0f4a303b84edf8636",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    "docs/index.md": {
+      "filePath": "docs/index.md",
+      "contentHash": "7b84420d4dd7de5356a44daaa86e7c877532fe434c43fd89994c906f5891b20f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Installation.md": {
+      "filePath": "docs/Installation.md",
+      "contentHash": "e191b7a8e2ab99260090df49431706c4d58dfc84499216aa112c849dd57e018d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 85,
+      "hasStructuralAnalysis": true
+    },
+    "docs/macros.md": {
+      "filePath": "docs/macros.md",
+      "contentHash": "f6cdffad62fc076819610f4d3bb01c7bfc4445494bfbbd951a11b765c8e68ed1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 289,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Multi_instance.md": {
+      "filePath": "docs/Multi_instance.md",
+      "contentHash": "57287e34663d5b664cd417619715b743af0ba00e5e899e434dcacf64c38335bc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 133,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Panels.md": {
+      "filePath": "docs/Panels.md",
+      "contentHash": "d4ea2ef87e5fcbd4891a3126a6921f16585641fbe47caf38f1ae3bdfa6437272",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 134,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Panels/Job_status.md": {
+      "filePath": "docs/Panels/Job_status.md",
+      "contentHash": "7cc92c91e8b770588357218dad4ff32a9efafc6251858f1735ff97b07b919cf0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Panels/Screws.md": {
+      "filePath": "docs/Panels/Screws.md",
+      "contentHash": "3ad48f74a5efaf554b445d072e2db2b61fa07f2a615d8f0a86437520ba7f37b3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 55,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Panels/Temperature.md": {
+      "filePath": "docs/Panels/Temperature.md",
+      "contentHash": "1b7549fa216c2c608b420631d6e8dff57ea5bf2d08d47c3b5d6681e37fb58f86",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 24,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Panels/Zcalibrate.md": {
+      "filePath": "docs/Panels/Zcalibrate.md",
+      "contentHash": "078f4bee561404ddcc3cffb1e7fbf4d31aca44acec35ced4dfda49d6f0722662",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 62,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Quicktips.md": {
+      "filePath": "docs/Quicktips.md",
+      "contentHash": "7eab13ebb2772ddebc5ff98500ec03af865c4a4ae51919c07179de21afee6c77",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 169,
+      "hasStructuralAnalysis": true
+    },
+    "docs/requirements.txt": {
+      "filePath": "docs/requirements.txt",
+      "contentHash": "31f83e3ae9c579ec3a192934d104e1e1a220b4a62da7df0fdb9052fc769d82f1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 3,
+      "hasStructuralAnalysis": false
+    },
+    "docs/stylesheets/extra.css": {
+      "filePath": "docs/stylesheets/extra.css",
+      "contentHash": "2ecf131c79fbc61080d86fb60568130604a611ed880f505497374107d6a18d10",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": false
+    },
+    "docs/Theming.md": {
+      "filePath": "docs/Theming.md",
+      "contentHash": "f316dab4bd40cfbd6ebb9183add9a60f034871da08a84a701eda72b483d1def6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 81,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Thumbnails.md": {
+      "filePath": "docs/Thumbnails.md",
+      "contentHash": "b0cae9c8053428f5e741ce7768a6b6da7d0d7ed8dde670e0fe4899ef13bd9158",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Translations.md": {
+      "filePath": "docs/Translations.md",
+      "contentHash": "9ee50c97cb642681d0205a81bc3a9e57ace714f6fe33dd8e077b1b3877ca45cb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting.md": {
+      "filePath": "docs/Troubleshooting.md",
+      "contentHash": "3e25a82d01d9defb4f3031be020cdb1dec037c781a7d193c4e3f2a56e9299630",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 149,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Desktop.md": {
+      "filePath": "docs/Troubleshooting/Desktop.md",
+      "contentHash": "fbe9e2653adb61ea80b0ba1b47c8d5274c22bf0fbe71579b6ab381ac10c883c5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 20,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/FBturbo.md": {
+      "filePath": "docs/Troubleshooting/FBturbo.md",
+      "contentHash": "5e87319d09d1966cd42f1f8cd1fefcd44ec8fa2e513649daa7d20b98ecb615f8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 23,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Framebuffer_id.md": {
+      "filePath": "docs/Troubleshooting/Framebuffer_id.md",
+      "contentHash": "4a59a75baa9db080a0740014e675b512399535573b67e36c38cfc36cdd3db576",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 57,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Framebuffer.md": {
+      "filePath": "docs/Troubleshooting/Framebuffer.md",
+      "contentHash": "c8c2629969f640de414ea2c1baa16de16e748dcb338c9cd8826ae0b559d20929",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Last_resort.md": {
+      "filePath": "docs/Troubleshooting/Last_resort.md",
+      "contentHash": "c3a81a6f100dc3efc84cc6768818fd9c0ab6a54742deaa1ac9359134f13acd9a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Network.md": {
+      "filePath": "docs/Troubleshooting/Network.md",
+      "contentHash": "48aa52778e0e25fec658b5e8dcd8ef47e6cc4ce301fe408e382d5ff007ac52df",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 55,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Physical_Install.md": {
+      "filePath": "docs/Troubleshooting/Physical_Install.md",
+      "contentHash": "834b2dc8e0519c1b2107fcf57eef97a672a0042e10a2afef7ab17831e2a650af",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Rotation.md": {
+      "filePath": "docs/Troubleshooting/Rotation.md",
+      "contentHash": "6d1f5d48763062bc174d17150872349b23c9120936287c95f6ef7e38dccb392d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 197,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/Touch_issues.md": {
+      "filePath": "docs/Troubleshooting/Touch_issues.md",
+      "contentHash": "911b442818fdd5deae19833e540cd352dde0dd084b8bfc841bde300354ba76b1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 247,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Troubleshooting/VC_ERROR.md": {
+      "filePath": "docs/Troubleshooting/VC_ERROR.md",
+      "contentHash": "128db8bf2bafe9ae8df6aa6a8c0e31c3d926c9bc25eb91c5e8a59649dfefc4c9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": true
+    },
+    "docs/Updating.md": {
+      "filePath": "docs/Updating.md",
+      "contentHash": "7b8ad8e6e34dec1361284d07344dadc38c5f529bdb9525686a9171db9ce12668",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "docs/VNC.md": {
+      "filePath": "docs/VNC.md",
+      "contentHash": "83ab3f8e5713b46cc637d45081f792d1205ccf257142def6396730c67fccabb8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/config.py": {
+      "filePath": "ks_includes/config.py",
+      "contentHash": "acf6400ba4a6e6b8169a173bfe13ccfdbba46692f346f044157d238bced68216",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ConfigError",
+          "methods": [],
+          "properties": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "KlipperScreenConfig",
+          "methods": [
+            "__init__",
+            "create_translations",
+            "find_language",
+            "install_language",
+            "validate_config",
+            "is_float",
+            "is_bool",
+            "get_errors",
+            "_create_configurable_options",
+            "exclude_menu_from_config",
+            "exclude_preheat_from_config",
+            "exclude_from_config",
+            "_include_config",
+            "separate_saved_config",
+            "check_path_exists",
+            "get_config_file_location",
+            "get_config",
+            "get_configurable_options",
+            "get_lang",
+            "get_main_config",
+            "get_menu_items",
+            "get_menu_name",
+            "get_preheat_options",
+            "_build_preheat_item",
+            "get_printer_config",
+            "get_printers",
+            "save_user_config_options",
+            "set",
+            "log_config",
+            "_build_config_string",
+            "_build_menu_item"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 878
+        }
+      ],
+      "imports": [
+        {
+          "source": "configparser",
+          "specifiers": [
+            "configparser"
+          ]
+        },
+        {
+          "source": "copy",
+          "specifiers": [
+            "copy"
+          ]
+        },
+        {
+          "source": "gettext",
+          "specifiers": [
+            "gettext"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "locale",
+          "specifiers": [
+            "locale"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "pathlib"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "traceback",
+          "specifiers": [
+            "traceback"
+          ]
+        },
+        {
+          "source": "io",
+          "specifiers": [
+            "StringIO"
+          ]
+        }
+      ],
+      "exports": [
+        "ConfigError",
+        "KlipperScreenConfig"
+      ],
+      "totalLines": 912,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/emptyCursor.xbm": {
+      "filePath": "ks_includes/emptyCursor.xbm",
+      "contentHash": "6acd8f67c0f42ceb7749c0df8250d7db16ddc0d6c6e0fc6850fed2d9669badf9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/files.py": {
+      "filePath": "ks_includes/files.py",
+      "contentHash": "1af79069a7e82db85fd5e0bfba8dba4a9c82cd9e46524f0cabdfef9924473be9",
+      "functions": [],
+      "classes": [
+        {
+          "name": "KlippyFiles",
+          "methods": [
+            "__init__",
+            "reinit",
+            "set_gcodes_path",
+            "_callback",
+            "add_file",
+            "remove_file",
+            "add_callback",
+            "remove_callback",
+            "process_update",
+            "is_gcode",
+            "file_metadata_exists",
+            "get_thumbnail_location",
+            "has_thumbnail",
+            "request_metadata",
+            "refresh_files",
+            "run_callbacks",
+            "get_file_info",
+            "get_dir_info"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 136
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        }
+      ],
+      "exports": [
+        "KlippyFiles"
+      ],
+      "totalLines": 145,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/functions.py": {
+      "filePath": "ks_includes/functions.py",
+      "contentHash": "48c41d89e9702b3307af5007ef12fb3f4411bd1c0269af19d8ed8af0b032e4a7",
+      "functions": [
+        {
+          "name": "get_software_version",
+          "params": [],
+          "exported": true,
+          "lineCount": 30
+        },
+        {
+          "name": "parse_bool",
+          "params": [
+            "value"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "patch_threading_excepthook",
+          "params": [],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "setup_logging",
+          "params": [
+            "log_file"
+          ],
+          "exported": true,
+          "lineCount": 39
+        },
+        {
+          "name": "run_systemctl",
+          "params": [
+            "action"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [
+        {
+          "name": "KlipperScreenLoggingHandler",
+          "methods": [
+            "__init__",
+            "set_rollover_info",
+            "doRollover",
+            "log_start"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 20
+        }
+      ],
+      "imports": [
+        {
+          "source": "ctypes",
+          "specifiers": [
+            "ctypes"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "logging.handlers",
+          "specifiers": [
+            "logging.handlers"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "struct",
+          "specifiers": [
+            "struct"
+          ]
+        },
+        {
+          "source": "subprocess",
+          "specifiers": [
+            "subprocess"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "traceback",
+          "specifiers": [
+            "traceback"
+          ]
+        },
+        {
+          "source": "queue",
+          "specifiers": [
+            "Queue"
+          ]
+        }
+      ],
+      "exports": [
+        "get_software_version",
+        "parse_bool",
+        "patch_threading_excepthook",
+        "KlipperScreenLoggingHandler",
+        "setup_logging",
+        "run_systemctl"
+      ],
+      "totalLines": 195,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/KlippyGcodes.py": {
+      "filePath": "ks_includes/KlippyGcodes.py",
+      "contentHash": "3d7cb6953848a3ed376cfc0cf3a2ae1cd3e513db8e571497b50ffd52b418a3f7",
+      "functions": [],
+      "classes": [
+        {
+          "name": "KlippyGcodes",
+          "methods": [
+            "set_bed_temp",
+            "set_ext_temp",
+            "set_heater_temp",
+            "set_temp_fan_temp",
+            "set_extrusion_rate",
+            "set_speed_rate",
+            "bed_mesh_load",
+            "bed_mesh_remove",
+            "bed_mesh_save",
+            "set_led_color"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 49
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "KlippyGcodes"
+      ],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/KlippyGtk.py": {
+      "filePath": "ks_includes/KlippyGtk.py",
+      "contentHash": "f57d04b1b1b5ff7db24ce37b9f1b3b2f8b73542d00e2371ba61b5b813b873245",
+      "functions": [
+        {
+          "name": "find_widget",
+          "params": [
+            "widget",
+            "wanted_type"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "format_label",
+          "params": [
+            "widget",
+            "lines"
+          ],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "KlippyGtk",
+          "methods": [
+            "__init__",
+            "update_layout",
+            "get_temp_color",
+            "reset_temp_color",
+            "Image",
+            "update_themedir",
+            "PixbufFromIcon",
+            "_PixbufFromIcon",
+            "PixbufFromFile",
+            "clear_file_image_cache",
+            "_http_pixbuf_cache_put",
+            "_http_pixbuf_cache_get",
+            "PixbufFromHttpAsync",
+            "Button",
+            "Button_busy",
+            "dialog_content_decouple",
+            "Dialog",
+            "remove_dialog",
+            "ScrolledWindow",
+            "set_cursor",
+            "shutdown"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 342
+        }
+      ],
+      "imports": [
+        {
+          "source": "concurrent.futures",
+          "specifiers": [
+            "concurrent.futures"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "pathlib"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "OrderedDict"
+          ]
+        },
+        {
+          "source": "functools",
+          "specifiers": [
+            "lru_cache"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "GdkPixbuf",
+            "Gio",
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.scroll",
+          "specifiers": [
+            "CustomScrolledWindow"
+          ]
+        }
+      ],
+      "exports": [
+        "find_widget",
+        "format_label",
+        "KlippyGtk"
+      ],
+      "totalLines": 381,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/KlippyRest.py": {
+      "filePath": "ks_includes/KlippyRest.py",
+      "contentHash": "5e65d37cbc697561452488205810904278c241ddf35e3b22111ad2700ca42c88",
+      "functions": [],
+      "classes": [
+        {
+          "name": "KlippyRest",
+          "methods": [
+            "__init__",
+            "endpoint",
+            "process_response",
+            "get_thumbnail_stream",
+            "_do_request",
+            "post_request",
+            "send_request"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "requests",
+          "specifiers": [
+            "requests"
+          ]
+        }
+      ],
+      "exports": [
+        "KlippyRest"
+      ],
+      "totalLines": 48,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/KlippyUDS.py": {
+      "filePath": "ks_includes/KlippyUDS.py",
+      "contentHash": "a152fc08c37c2d0caf2d0df3d506365be64985fdd176cbcc8614253fdcce1e0c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "KlippyUDS",
+          "methods": [
+            "__init__",
+            "initial_connect",
+            "connect",
+            "close",
+            "_listen",
+            "_on_message",
+            "send_method",
+            "on_open"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 143
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "socket",
+          "specifiers": [
+            "socket"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib"
+          ]
+        },
+        {
+          "source": "ks_includes.MoonrakerApi",
+          "specifiers": [
+            "MoonrakerApi"
+          ]
+        }
+      ],
+      "exports": [
+        "KlippyUDS"
+      ],
+      "totalLines": 160,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/KlippyWebsocket.py": {
+      "filePath": "ks_includes/KlippyWebsocket.py",
+      "contentHash": "726a4cae214320f38218004b22d2fee62e7a3590a05f501b687219943775068c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "KlippyWebsocket",
+          "methods": [
+            "_format_error",
+            "_format_close",
+            "__init__",
+            "_url",
+            "ws_proto",
+            "initial_connect",
+            "connect",
+            "close",
+            "on_message",
+            "send_method",
+            "on_open",
+            "on_close",
+            "on_error"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 163
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "threading",
+          "specifiers": [
+            "threading"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "websocket",
+          "specifiers": [
+            "websocket"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib"
+          ]
+        },
+        {
+          "source": "ks_includes.MoonrakerApi",
+          "specifiers": [
+            "MoonrakerApi"
+          ]
+        }
+      ],
+      "exports": [
+        "KlippyWebsocket"
+      ],
+      "totalLines": 179,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "0a7c87071c3afad3196e7d1c13229a1a933ab54cacf3b58760aa7ad7aa535ae7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/ar/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "1ad7966d712e28adbffbd1e84dc13dc24ec462d20925e0b2ab78b4dcc38e705d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1180,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "e55dd2aed693272d4af60f5dd7561469d9d97bb3c38959690bb7e8e29dc9f733",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/bg/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "98ad6eb844007a1896688be120308234ab0e2c5769032355f82181b39c51ee53",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1116,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "7c3be5f7aa8db1bbad72639e3d789528f99433c4eec8e8da8b1d676daeb31433",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/cs/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "1321c327e0434537b4c031346cba46a477071385a1fb429729d11c6bfed75c49",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1160,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "95e3d98b12099e02edbf1faae1c4e8b69b7500861dbb728874bb13e35634ac8e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/da/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "ad0441fd50e9aac94889ff58fd2a18820f75be0222bc7a7d67786c0834a6fb34",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1150,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "bf836fba33b9d41ac99fa9765c9fb8d3a2af91691a6d0d80f34bced995ed7396",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/de_formal/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "eeb10ae8aa48d647924e19e0a7e2b8e88e76aa12781c986d0b4648b7c9d5aa14",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1175,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "4292ef147843282c7aa451597a1602da0d8a34dabc3da3a04998485af80baa63",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/de/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "7ab6cf54c93c823d1da5b54e4aa671e76c310e9f258ffaaa422db4c71dd72024",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1158,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "a3efd8f8ef113ff7656011252b8bc75b67ff35914b2cd1a744d7b52b65ce36f1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/en/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "b69a4376f3b6e22f7b10bfdca1c73c7b0856e32aea64f31c48d1c334841d1860",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1107,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "f9564c0b3a72efb40ab7cb41e4bfa248bdb46b6d331c8f656dcea73d8a3105b8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 55,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/es/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "13f935ecd52650fef97830e43d5691479a651e122582e5bfd1661b29e77e13a4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1153,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "b6c2a1ac34aadbd160ba5afbb34df3b09ee021888d1a4eb8f1d720036697c706",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/et/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "898d34f7a8df73bdbf119055a6cb823dfffe6c40b7119cc498480f5cc85b4031",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1159,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "e3c0d9f018279f4aa8fa4240641662169d5a446c11d704b156a3b56266f85805",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/fa/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "b722e680f85c31207a913fa7004a02c692508069dd6349c497eec68a6ed3813e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1395,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "8109fb50692f06e9afe0ee54ccd3cb5221359c0472aa677184e99f82eef96f52",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/fr/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "12de367ee4432266c60096325fec42bf97dfaa2be2aeda9feb65e1575731a0f8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1158,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "53a6b8179871e8f8b4cec24b99d04051d6368e557e3bdf918cf8e51f634fb6e1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/he/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "f2fffd3e49b3f7544447610885ba626ca7c30e40dd11eec96e861df12be5020f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1275,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "3ffc40247f6461022da04e92d9051a02dff7f161da991c1d15fdf961831ddfe6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/hr/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "d8b84b3caabda9d4c4e388751e7fb558bc6d320f343d69624174b4803c5cdb20",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1127,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "bad9b2061c723d736daf86342cb8338a1216d6ca39a4d8f780a0dec564580e93",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 48,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/hu/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "9396a139555cb25fad1ff4169bc31b555bd0d697af70d45a8a7b404c487db1ce",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1152,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "0391d0721fcce2048c7df99085b26e64e0c4fcdb6a79b0296dac3e28b0a02820",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/it/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "08420edd628cd720f0bffb427de5b5b5a493df849b7a807762f0054a33775119",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1152,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "3405c0c54829204fd62dcba7ea157d1ad69699c9994f7398c3f0272188541ee3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/jp/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "f9e7c3786f033fad8e95dc7359086c61a44f477ef36e2ca36f9f195f95e1c73f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1186,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/keyboard.xml": {
+      "filePath": "ks_includes/locales/keyboard.xml",
+      "contentHash": "6d3127aa8c2a2920ea811529fa6371282b690e5b8fdfeb539341ec3e515f0c2a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 206,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/KlipperScreen.pot": {
+      "filePath": "ks_includes/locales/KlipperScreen.pot",
+      "contentHash": "4a7043ae25ddca4baaf9ebcdaaaa287f9326b3efa89f175881e6c7a151eb4f14",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1168,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "84296bd87a6d95ebd6a2aba12a4a76be5c5783c89d0112b3a51f0967e68e8bb0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/ko/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "81caaf3e7a6945fe83afd7bf27eb0c78ca12de347d467feacab9966f749361af",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1175,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "7bf27423e83e4f9e2d305f752e37b679be8157f750bfce50d82736a691421b49",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 64,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/lt/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "eba6d13447e86a74bb29f0ccb51440887583f35e4e8474469efb28491728ee6e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1125,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "b17f355e2bb26856f7d8eaa0e57ca8780143d87626aa5dd903b053084c538546",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 48,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/nl/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "a58d34a8c29bf2717bd29034d48b25fbe810cf7cbcc005a139792fd732faa2bc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1156,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "50b74986c4625c515056cb2c79a8a80888ad93c28717232a6da7724148ebbec3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 49,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/pl/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "62a2b2eaa88cabf3a36bce0db26c962c6c707152d6d4f210c07b057f3abd05d2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1130,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "f293197a9993eb3d86992d2e212790fe5e95026ca5cf9ce72abba4860a908ffa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/pt_BR/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "e88719811b27150c62362e2925563dab7bf9b73cda3e3676d13e5732837e6191",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1158,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "6691908bb5586e79f05e0b3da7aa045b028ad92733ebb6a97b0d5878ffb072e6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/pt/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "b9623301d58534548c4c057b02e14cf790e49c219d2b380b6bc92de9489c51db",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1168,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "4ae2040733daea11fb628ec399702cc6c0e87a0c569649951e8642c8a827e9c0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 47,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/rs/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "11a50cc3fcbd3204fbab80638a98aa80f79ab86d3396e57b8d5f670a52fd4264",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1131,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "117e826633465e31dbc79ebbed2c820963164ac68099e0cfdad2f33f1893c1cf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/ru/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "e6ac1168a887c4e1450b23c6c08a8a3c728922e19bd5e7b30921c8e70f94dae8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1163,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "ae8b56443c2c8cd37028db6d6538cdbf1f2ae54acfa7b26d6d4072d332ca29cb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 48,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/sk/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "c3f3953a794cf492992e5cc6b816af3895aa487d0655d625d6b4d30198736ace",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1156,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "f117eb556e87224c603e8e39cf21dec7ff04b40a7d25cbd9e8efbf4206092a71",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 32,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/sl/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "dd661fbc2196b37d34493181f8519f418f860365aa138eef35cabbd5ea781cb9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1252,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/stats/ar.json": {
+      "filePath": "ks_includes/locales/stats/ar.json",
+      "contentHash": "701d1754dcad5cc9321b954bdd40488139b7f00e1b08df3bcaecca9b8720b590",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/bg.json": {
+      "filePath": "ks_includes/locales/stats/bg.json",
+      "contentHash": "e185fe89bc0be2e9029b231c3d852955da8e28402979212a2ba4db4bfc2537e5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/cs.json": {
+      "filePath": "ks_includes/locales/stats/cs.json",
+      "contentHash": "b1a768514c68da0c95386480b3fec65293ca2f8896d14815727fb9cafa611690",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/da.json": {
+      "filePath": "ks_includes/locales/stats/da.json",
+      "contentHash": "2a15b7bf142f38d23c2ce0d14bcfbd527a47a9fa8426384731eb6251b2e33ad1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/de.json": {
+      "filePath": "ks_includes/locales/stats/de.json",
+      "contentHash": "4e2a2b18bfe0728098b62d0ee12cb7d93ca47289112d13c0e0181c251ad3e5de",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/es.json": {
+      "filePath": "ks_includes/locales/stats/es.json",
+      "contentHash": "4d31832bb9c73c38a03262d299b6558892e7d61e178f3b064dad8388d81b2685",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/fa.json": {
+      "filePath": "ks_includes/locales/stats/fa.json",
+      "contentHash": "6b5335c9e107d9ba2c08c66750d8f30e2f523fa71f6742459f47feaef17add27",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/fr.json": {
+      "filePath": "ks_includes/locales/stats/fr.json",
+      "contentHash": "46400b4483f7f580a6f5fe3177d4aa90a69e720484fdbbcb3c859d1ed628bbd7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/he.json": {
+      "filePath": "ks_includes/locales/stats/he.json",
+      "contentHash": "8bc4369144d669fecfd0e386049b021d73601e9bc6396557beb15e30d5681484",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/hr.json": {
+      "filePath": "ks_includes/locales/stats/hr.json",
+      "contentHash": "164ecf545daebb8e3603e4850959743146b991a9d57cf1096542c95f63499ea1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/hu.json": {
+      "filePath": "ks_includes/locales/stats/hu.json",
+      "contentHash": "ddc27ca31ccd45a9f8bb5cbd83fe98cfac583bbae9c7a80fc1fad82cc8948491",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/it.json": {
+      "filePath": "ks_includes/locales/stats/it.json",
+      "contentHash": "4439391eaf19c11afc0493dbc1454dcc4b1b7ea001a22c1a58646a8b0a8f510d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/jp.json": {
+      "filePath": "ks_includes/locales/stats/jp.json",
+      "contentHash": "f33692154468f11c7f7f41d24de2f8ae040dc3432f10116d5d27b74b3202749d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/lt.json": {
+      "filePath": "ks_includes/locales/stats/lt.json",
+      "contentHash": "2123e8562d81a653d0e9662ee196f9c1c049ec2507b12775c83260deebdc4828",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/nl.json": {
+      "filePath": "ks_includes/locales/stats/nl.json",
+      "contentHash": "1aa7d3ff7662ffae19c323d27c660f170c8c6a4ee3af5f4dcbde799fd866d404",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/pl.json": {
+      "filePath": "ks_includes/locales/stats/pl.json",
+      "contentHash": "228e7823303d9c952567d708eccc5347158ebebd609b8039a134a02a24c23ec9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/pt_BR.json": {
+      "filePath": "ks_includes/locales/stats/pt_BR.json",
+      "contentHash": "b9c77cee5caedd8458a8cd1c171475b66aa83d318fc7652b5037a657d0b927b9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/pt.json": {
+      "filePath": "ks_includes/locales/stats/pt.json",
+      "contentHash": "e402460cf06e7e7f77534347a9206e6b287f033fde2af03f2a595f0f1d4b68fe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/ru.json": {
+      "filePath": "ks_includes/locales/stats/ru.json",
+      "contentHash": "fee5f90d8023540a3c1468190202a73b7800cd9b8d81cdcff26f54705198db62",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/sk.json": {
+      "filePath": "ks_includes/locales/stats/sk.json",
+      "contentHash": "227955ab5d1f94c2ef6b398202584905dfc3777a24515b52675f1911d3711729",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/tr.json": {
+      "filePath": "ks_includes/locales/stats/tr.json",
+      "contentHash": "45bc519b67c91feaf2a09e27cc8a236abcff8644481af805026841a68d5471fe",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/zh_CN.json": {
+      "filePath": "ks_includes/locales/stats/zh_CN.json",
+      "contentHash": "ac46f3ce751e2dd243ee51684847987490ccf47ae6297925be0a63c902bb69d8",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/stats/zh_TW.json": {
+      "filePath": "ks_includes/locales/stats/zh_TW.json",
+      "contentHash": "68b1662f67a60105538088304fc92dd4c5739f150ddc9b6af4cb5ed54ee1d6b4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 5,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "1b0048806df411c1c1897057c6576ff1e18fedab30b71d70ebc958524711b6b9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/sv/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "e537ed2040e2959c82453eb617713c6a0d2e02ac0e745b359eb0f106d9bd6018",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1227,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "85ee8351612cd4acbfb676dfb54188e86025131c81f0fec4de670ffd2f58ff17",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 40,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/tr/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "245e42d84b76ab33123629b04486b4d214a195b95c781a974f69cb9831a9a59e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1112,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "f45979b9f32c66207e24fa860ad87d9291da7329c4ff2349d0ea5d4d9993d940",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/uk/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "93fd202cb3ee8afc5eb94e616accbd0bd1144173be0e6dcfec6fd703bb02e301",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1170,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "46ca2b499af03192c36022853add834097bf341dbbcf72d6384f32a0bb02f0ce",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 42,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/vi/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "8c3ba484d997005c893db24c1884a761f1c2a8817b85e443cd67529a2eaa89d9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1185,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "edfacdb5d605a40c8b03390ef67e3705ece9e55a088ad558f6803aa699fdcb12",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/zh_CN/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "2470f5b41ffa3db9f7e60b7b75af2e8581f5b2f6fb8622ee94683c7249820f02",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1163,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.mo": {
+      "filePath": "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.mo",
+      "contentHash": "ea9de61b952aa6907ae670a6ec464519436c52f284545e4394a5c0ab7a834c4d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 39,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.po": {
+      "filePath": "ks_includes/locales/zh_TW/LC_MESSAGES/KlipperScreen.po",
+      "contentHash": "f5fb70ce09f5fd880a6423252aa1c8570becd8a6c08b9973dd33dcc714fd34f0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1148,
+      "hasStructuralAnalysis": false
+    },
+    "ks_includes/MoonrakerApi.py": {
+      "filePath": "ks_includes/MoonrakerApi.py",
+      "contentHash": "ddc5e48126f4211d89e197de3919c677e6112aa84764f8c2a4207986eec72e52",
+      "functions": [],
+      "classes": [
+        {
+          "name": "MoonrakerApi",
+          "methods": [
+            "__init__",
+            "emergency_stop",
+            "gcode_script",
+            "get_file_dir",
+            "get_file_list",
+            "get_dir_info",
+            "get_file_roots",
+            "get_file_metadata",
+            "object_subscription",
+            "power_device_off",
+            "power_device_on",
+            "print_cancel",
+            "print_pause",
+            "print_resume",
+            "print_start",
+            "set_bed_temp",
+            "set_heater_temp",
+            "set_temp_fan_temp",
+            "set_tool_temp",
+            "restart",
+            "restart_firmware",
+            "identify_client",
+            "query_server_info",
+            "list_webcams",
+            "get_power_devices",
+            "get_printer_info",
+            "query_configfile",
+            "query_objects",
+            "get_printer_objects",
+            "get_available_commands",
+            "get_system_info",
+            "get_single_job_history",
+            "get_temperature_store",
+            "get_server_config"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 155
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        }
+      ],
+      "exports": [
+        "MoonrakerApi"
+      ],
+      "totalLines": 168,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/notification_handler.py": {
+      "filePath": "ks_includes/notification_handler.py",
+      "contentHash": "ecfb2fe56ebb05566d3af314f7964ca94aeef7017d465bc0ce499ce58ab16ab2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "NotificationHandler",
+          "methods": [
+            "__init__",
+            "handle",
+            "_klippy_disconnected",
+            "_klippy_shutdown",
+            "_klippy_ready",
+            "_status_update",
+            "__remove_confirm_dialogs",
+            "_filelist_changed",
+            "_metadata_update",
+            "_update_response",
+            "_power_changed",
+            "_webcams_changed",
+            "_gcode_response",
+            "_active_spool_set"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 147
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        }
+      ],
+      "exports": [
+        "NotificationHandler"
+      ],
+      "totalLines": 152,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/offsetmap.py": {
+      "filePath": "ks_includes/offsetmap.py",
+      "contentHash": "c2befb680062afcf9338e30729178c8fa905409e79c60ac5295d49d3e964b870",
+      "functions": [],
+      "classes": [
+        {
+          "name": "OffsetMap",
+          "methods": [
+            "__init__",
+            "update_bm",
+            "draw_graph",
+            "colorbar"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 68
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "OffsetMap"
+      ],
+      "totalLines": 75,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/printer.py": {
+      "filePath": "ks_includes/printer.py",
+      "contentHash": "a92e06cb0b64d2320528f8b8ad33299135fcda81206a09a283703a705a823947",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Printer",
+          "methods": [
+            "__init__",
+            "reinit",
+            "register_dynamic_sensors",
+            "log_counts",
+            "stop_tempstore_updates",
+            "process_update",
+            "evaluate_state",
+            "process_status_update",
+            "process_power_update",
+            "change_state",
+            "configure_power_devices",
+            "configure_cameras",
+            "get_config_section_list",
+            "get_config_section",
+            "get_macro",
+            "get_fans",
+            "get_pwm_tools",
+            "get_output_pins",
+            "get_gcode_macros",
+            "get_heaters",
+            "get_temp_fans",
+            "get_temp_sensors",
+            "get_filament_sensors",
+            "get_probe",
+            "get_printer_status_data",
+            "get_leds",
+            "get_led_color_order",
+            "get_power_devices",
+            "get_power_device_status",
+            "get_stat",
+            "set_stat",
+            "get_fan_speed",
+            "get_pin_value",
+            "get_temp_store_devices",
+            "device_has_target",
+            "device_has_power",
+            "get_temp_store",
+            "get_tempstore_size",
+            "get_temp_devices",
+            "get_tools",
+            "get_tool_number",
+            "init_temp_store",
+            "config_section_exists",
+            "_update_temp_store",
+            "enable_spoolman",
+            "set_active_spool"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 427
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib"
+          ]
+        }
+      ],
+      "exports": [
+        "Printer"
+      ],
+      "totalLines": 436,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/screen_panel.py": {
+      "filePath": "ks_includes/screen_panel.py",
+      "contentHash": "a0ba9d6f3e98e2c58d0ec706fa605a8f74c3903eede88a681835276cf4837f71",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ScreenPanel",
+          "methods": [
+            "__init__",
+            "_autoscroll",
+            "emergency_stop",
+            "load_image_async",
+            "menu_item_clicked",
+            "load_menu",
+            "unload_menu",
+            "back",
+            "on_dropdown_change",
+            "scale_moved",
+            "switch_config_option",
+            "format_time",
+            "format_eta",
+            "format_size",
+            "format_speed",
+            "prettify",
+            "update_temp",
+            "add_option"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 346
+        }
+      ],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        }
+      ],
+      "exports": [
+        "ScreenPanel"
+      ],
+      "totalLines": 358,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/sdbus_nm.py": {
+      "filePath": "ks_includes/sdbus_nm.py",
+      "contentHash": "6c99adcd70e261d81ab67a420bbd3da3e8c5a4c00c5220876c19e83c9a5bf821",
+      "functions": [
+        {
+          "name": "get_encryption",
+          "params": [
+            "flags"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "WifiChannels",
+          "params": [
+            "freq"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [
+        {
+          "name": "SdbusNm",
+          "methods": [
+            "__init__",
+            "ensure_nm_running",
+            "is_wifi_enabled",
+            "get_interfaces",
+            "get_wireless_interfaces",
+            "get_all_network_devices",
+            "get_ip_for_interface",
+            "set_selected_interface",
+            "get_selected_interface",
+            "get_interface_status",
+            "get_primary_interface",
+            "get_known_networks",
+            "is_known",
+            "get_networks",
+            "get_bssid_from_ssid",
+            "get_connected_ap",
+            "get_connected_bssid",
+            "get_security_type",
+            "add_network",
+            "disconnect_network",
+            "delete_network",
+            "delete_connection_path",
+            "rescan",
+            "get_connection_path_by_ssid",
+            "connect",
+            "toggle_wifi",
+            "monitor_connection_status",
+            "set_connection_monitoring"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 351
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "subprocess",
+          "specifiers": [
+            "subprocess"
+          ]
+        },
+        {
+          "source": "uuid",
+          "specifiers": [
+            "uuid4"
+          ]
+        },
+        {
+          "source": "sdbus",
+          "specifiers": [
+            "sdbus"
+          ]
+        },
+        {
+          "source": "sdbus_block.networkmanager",
+          "specifiers": [
+            "AccessPoint",
+            "ActiveConnection",
+            "IPv4Config",
+            "NetworkConnectionSettings",
+            "NetworkDeviceGeneric",
+            "NetworkDeviceWireless",
+            "NetworkManager",
+            "NetworkManagerConnectionProperties",
+            "NetworkManagerSettings",
+            "enums",
+            "exceptions"
+          ]
+        }
+      ],
+      "exports": [
+        "get_encryption",
+        "WifiChannels",
+        "SdbusNm"
+      ],
+      "totalLines": 439,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/spoolman_api.py": {
+      "filePath": "ks_includes/spoolman_api.py",
+      "contentHash": "75037393558af47feaf8421cb71168acd5582b69dca8b7dccb0da7ccee218271",
+      "functions": [],
+      "classes": [
+        {
+          "name": "SpoolmanAPI",
+          "methods": [
+            "__init__",
+            "_send_request",
+            "_make_request",
+            "get_active_spool_id",
+            "set_active_spool_id",
+            "clear_active_spool",
+            "get_spool_details",
+            "load_all_spools",
+            "update_spool"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 103
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        }
+      ],
+      "exports": [
+        "SpoolmanAPI"
+      ],
+      "totalLines": 107,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/svg_gradient.py": {
+      "filePath": "ks_includes/svg_gradient.py",
+      "contentHash": "942395a1a0c41cdbe12e9a5429266d673b40193fa4d2fa51e9852c4b5d91a426",
+      "functions": [
+        {
+          "name": "normalize_hex",
+          "params": [
+            "value"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "filament_colors_from_dict",
+          "params": [
+            "filament"
+          ],
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "_gradient_stops",
+          "params": [
+            "colors"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "apply_filament_gradient",
+          "params": [
+            "svg_text",
+            "colors"
+          ],
+          "exported": true,
+          "lineCount": 57
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        }
+      ],
+      "exports": [
+        "normalize_hex",
+        "filament_colors_from_dict",
+        "_gradient_stops",
+        "apply_filament_gradient"
+      ],
+      "totalLines": 108,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/autogrid.py": {
+      "filePath": "ks_includes/widgets/autogrid.py",
+      "contentHash": "9f8246850710d8924e4ad010abba9bc25a4ebfcb33e6d7b708c056e53b750976",
+      "functions": [],
+      "classes": [
+        {
+          "name": "AutoGrid",
+          "methods": [
+            "__init__",
+            "clear"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 46
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "AutoGrid"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/bedmap.py": {
+      "filePath": "ks_includes/widgets/bedmap.py",
+      "contentHash": "31dd1e0a0e8b1e0f5d5629d59494592c47a676ecab63bd4efb8e5020cca91f77",
+      "functions": [],
+      "classes": [
+        {
+          "name": "BedMap",
+          "methods": [
+            "__init__",
+            "update_bm",
+            "transform_points_to_matrix",
+            "rotate_matrix",
+            "draw_graph",
+            "round_bed_skip",
+            "colorbar",
+            "set_inversion",
+            "set_rotation"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 199
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "BedMap"
+      ],
+      "totalLines": 206,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/combo.py": {
+      "filePath": "ks_includes/widgets/combo.py",
+      "contentHash": "50b18d00ee58ec6a87a93bfad31dedf7a59d5d4ec9566a758c05dc110f015597",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ComboBoxPlus",
+          "methods": [
+            "__init__",
+            "_on_popup_shown",
+            "_reopen_now"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 25
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "ComboBoxPlus"
+      ],
+      "totalLines": 32,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/flowboxchild_extended.py": {
+      "filePath": "ks_includes/widgets/flowboxchild_extended.py",
+      "contentHash": "a7e5b01007482e381708de9ec901e29ed8b3bafdd44c0f06d94dea229cd5767f",
+      "functions": [],
+      "classes": [
+        {
+          "name": "PrintListItem",
+          "methods": [
+            "__init__",
+            "set_date",
+            "set_size",
+            "set_as_dir",
+            "set_path",
+            "get_date",
+            "get_size",
+            "get_is_dir",
+            "get_path"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 31
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "PrintListItem"
+      ],
+      "totalLines": 38,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/heatergraph.py": {
+      "filePath": "ks_includes/widgets/heatergraph.py",
+      "contentHash": "b2346696713fa43dafd25240eedc57b02a49cb364d057b1079198266e0773741",
+      "functions": [],
+      "classes": [
+        {
+          "name": "HeaterGraph",
+          "methods": [
+            "__init__",
+            "update_graph",
+            "show_fullscreen_graph",
+            "close_fullscreen_graph",
+            "event_cb",
+            "add_object",
+            "get_max_num",
+            "draw_graph",
+            "graph_data",
+            "graph_lines",
+            "graph_time",
+            "is_showing",
+            "set_showing"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 211
+        }
+      ],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "math"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "cairo",
+          "specifiers": [
+            "cairoContext"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "GLib",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "HeaterGraph"
+      ],
+      "totalLines": 223,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/keyboard.py": {
+      "filePath": "ks_includes/widgets/keyboard.py",
+      "contentHash": "fe3d43121437c9ba1012dc762f0b34fba63d6bfbc0638d5e08a3dd0222302d38",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Keyboard",
+          "methods": [
+            "__init__",
+            "reinit",
+            "detect_language",
+            "set_pallet",
+            "repeat",
+            "release",
+            "clear",
+            "update_entry",
+            "toggle_shift"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 258
+        }
+      ],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "Keyboard"
+      ],
+      "totalLines": 267,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/keypad.py": {
+      "filePath": "ks_includes/widgets/keypad.py",
+      "contentHash": "c99eaa37ef3658a568d354f090420ecd4641e324cecf04fd101cfd08005c599e",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Keypad",
+          "methods": [
+            "__init__",
+            "_build_numpad",
+            "add_extra_button",
+            "_handle_extra_action",
+            "_on_keypad_clicked",
+            "get_value",
+            "clear"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 112
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "Keypad"
+      ],
+      "totalLines": 119,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/lockscreen.py": {
+      "filePath": "ks_includes/widgets/lockscreen.py",
+      "contentHash": "a3a421ee13d5c977eece3cb1cd177d7968c3bcf8811183ca241c8a2280809465",
+      "functions": [],
+      "classes": [
+        {
+          "name": "LockScreen",
+          "methods": [
+            "__init__",
+            "set_autolock_timeout",
+            "reset_timeout",
+            "_auto_lock",
+            "lock",
+            "unlock",
+            "create_unlock_box",
+            "show_pass",
+            "relock",
+            "unlock_attempt",
+            "clear_lock"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 119
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "LockScreen"
+      ],
+      "totalLines": 128,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/objectmap.py": {
+      "filePath": "ks_includes/widgets/objectmap.py",
+      "contentHash": "1ede8c2d1ef4fa72cc4d9695ef1e2db026ba0e933e38d478703064366af9a131",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ObjectMap",
+          "methods": [
+            "__init__",
+            "x_graph_to_bed",
+            "y_graph_to_bed",
+            "event_cb",
+            "exclude_object",
+            "draw_graph",
+            "x_bed_to_graph",
+            "y_bed_to_graph"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 149
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "ObjectMap"
+      ],
+      "totalLines": 158,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/prompts.py": {
+      "filePath": "ks_includes/widgets/prompts.py",
+      "contentHash": "70b91c7eddf5b56a9f6243d8151c48c6cb070b76aa9a6c4bcc47282aeacd148c",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Prompt",
+          "methods": [
+            "__init__",
+            "_key_press_event",
+            "decode",
+            "set_button",
+            "set_footer_button",
+            "show",
+            "response",
+            "close",
+            "end"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 143
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "Gtk",
+            "Pango"
+          ]
+        }
+      ],
+      "exports": [
+        "Prompt"
+      ],
+      "totalLines": 152,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/screensaver.py": {
+      "filePath": "ks_includes/widgets/screensaver.py",
+      "contentHash": "553703e7fbcde4716870602c377e861dd7aef29dc03c434c617dea490f395166",
+      "functions": [],
+      "classes": [
+        {
+          "name": "ScreenSaver",
+          "methods": [
+            "__init__",
+            "is_showing",
+            "reset_timeout",
+            "show",
+            "close",
+            "delayed_wake",
+            "set_wake_delay"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 106
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "ScreenSaver"
+      ],
+      "totalLines": 115,
+      "hasStructuralAnalysis": true
+    },
+    "ks_includes/widgets/scroll.py": {
+      "filePath": "ks_includes/widgets/scroll.py",
+      "contentHash": "ae83654a918c163b8f2d91ba4c5a088d32dabb059c59b86dad4dae84b3947524",
+      "functions": [],
+      "classes": [
+        {
+          "name": "CustomScrolledWindow",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "Gtk"
+          ]
+        }
+      ],
+      "exports": [
+        "CustomScrolledWindow"
+      ],
+      "totalLines": 19,
+      "hasStructuralAnalysis": true
+    },
+    "mkdocs.yml": {
+      "filePath": "mkdocs.yml",
+      "contentHash": "b38b9ef152225a17b63b0ab297f9a5bfd165054840820d3a0b1b879c2b3c4145",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 91,
+      "hasStructuralAnalysis": true
+    },
+    "panels/__init__.py": {
+      "filePath": "panels/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "panels/adjusting_offset.py": {
+      "filePath": "panels/adjusting_offset.py",
+      "contentHash": "338c2d743399181f46838391d200f2fdec18a70d92c9071103269175dd2740d4",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "check_copy_mode",
+            "set_copy_mode",
+            "process_update",
+            "change_babystepping_z",
+            "change_babystepping_x",
+            "change_babystepping_y",
+            "change_bs_delta"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 193
+        }
+      ],
+      "imports": [
+        {
+          "source": "ast",
+          "specifiers": [
+            "ast"
+          ]
+        },
+        {
+          "source": "configparser",
+          "specifiers": [
+            "configparser"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 209,
+      "hasStructuralAnalysis": true
+    },
+    "panels/base_panel.py": {
+      "filePath": "panels/base_panel.py",
+      "contentHash": "d90fbd09b214fbcd9c251a1e13a4b9d26de4a629f1a933f12f7551a8459cf162",
+      "functions": [],
+      "classes": [
+        {
+          "name": "BasePanel",
+          "methods": [
+            "__init__",
+            "_reconfigure_main_grid",
+            "_build_main_grid",
+            "load_battery_icons",
+            "reload_icons",
+            "get_spoolman_icon_pixbuf",
+            "get_active_spoolman_colors",
+            "show_titlebar_items",
+            "clear_titlebar_items",
+            "add_spoolman_box",
+            "open_spool_panel",
+            "open_temp_panel",
+            "get_icon",
+            "activate",
+            "set_spoolman_refresh",
+            "get_printer_state",
+            "update_action_bar",
+            "add_content",
+            "update_spoolman_alert_visuals",
+            "update_spoolman_weight_label",
+            "fetch_spoolman",
+            "back",
+            "process_update",
+            "remove",
+            "set_control_sensitive",
+            "_get_shortcut_icon",
+            "_shortcut_clicked",
+            "update_shortcut",
+            "show_shortcut",
+            "update_shortcut_icon",
+            "show_printer_select",
+            "set_title",
+            "_read_printer_model",
+            "_get_model_name",
+            "_get_active_ipv4",
+            "_update_printer_info",
+            "update_time",
+            "get_battery_icon",
+            "battery_percentage",
+            "set_ks_printer_cfg",
+            "show_update_dialog",
+            "finish_updating",
+            "unblock_update_dialog",
+            "close_update_dialog"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 809
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "pathlib"
+          ]
+        },
+        {
+          "source": "socket",
+          "specifiers": [
+            "socket"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "log"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GdkPixbuf",
+            "Gio",
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "jinja2",
+          "specifiers": [
+            "Environment"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.svg_gradient",
+          "specifiers": [
+            "apply_filament_gradient",
+            "filament_colors_from_dict"
+          ]
+        }
+      ],
+      "exports": [
+        "BasePanel"
+      ],
+      "totalLines": 837,
+      "hasStructuralAnalysis": true
+    },
+    "panels/bed_level.py": {
+      "filePath": "panels/bed_level.py",
+      "contentHash": "8d5ac88ef848c6a29f285c5c738980947191e7e905558f3adfd47aba06ddcf19",
+      "functions": [
+        {
+          "name": "find_closest",
+          "params": [
+            "screws",
+            "point",
+            "max_distance"
+          ],
+          "exported": true,
+          "lineCount": 15
+        }
+      ],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "map_invert",
+            "map_rotation",
+            "home",
+            "go_to_position",
+            "disable_motors",
+            "process_busy",
+            "process_update",
+            "set_button_markup",
+            "_get_screws",
+            "screws_tilt_calculate"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 312
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "math"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "find_closest",
+        "Panel"
+      ],
+      "totalLines": 348,
+      "hasStructuralAnalysis": true
+    },
+    "panels/bed_mesh.py": {
+      "filePath": "panels/bed_mesh.py",
+      "contentHash": "6de7e673bf97b4b966925ab3b90595bef853f5d2a4c1473bff200b80d2ad956a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "activate_mesh",
+            "retrieve_bm",
+            "update_graph",
+            "add_profile",
+            "back",
+            "load_meshes",
+            "process_update",
+            "remove_create",
+            "remove_profile",
+            "_clear_profile",
+            "_get_position",
+            "show_create_profile",
+            "create_profile",
+            "calibrate_mesh",
+            "send_clear_mesh",
+            "send_load_mesh",
+            "send_save_mesh",
+            "send_remove_mesh"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 286
+        }
+      ],
+      "imports": [
+        {
+          "source": "contextlib",
+          "specifiers": [
+            "contextlib"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.bedmap",
+          "specifiers": [
+            "BedMap"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 300,
+      "hasStructuralAnalysis": true
+    },
+    "panels/camera.py": {
+      "filePath": "panels/camera.py",
+      "contentHash": "7c773c99df5567e572b6dd55efd8c9d9a1097139e9294291a9bc2ced38ecdfa2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "deactivate",
+            "process_update",
+            "play",
+            "log"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 112
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "mpv",
+          "specifiers": [
+            "mpv"
+          ]
+        },
+        {
+          "source": "contextlib",
+          "specifiers": [
+            "suppress"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "panels/console.py": {
+      "filePath": "panels/console.py",
+      "contentHash": "eb4d50a2f19f916f36d17a745702c813d3ba2a399c789c7b6caa66fc82615321",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "clear",
+            "add_gcode",
+            "gcode_response",
+            "process_update",
+            "set_autoscroll",
+            "toggle_active_class",
+            "_autoscroll",
+            "_send_command",
+            "activate"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 135
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 157,
+      "hasStructuralAnalysis": true
+    },
+    "panels/example.py": {
+      "filePath": "panels/example.py",
+      "contentHash": "ab64ab7f65bd5f970f4c52fa2d48dcfd40d178d9ea3480011d72db0252995d3d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "panels/exclude.py": {
+      "filePath": "panels/exclude.py",
+      "contentHash": "bc99532c2f126c9dcaba6cb10a33a57b577be4a0c57f4b72fda541888509dec2",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "add_object",
+            "exclude_object",
+            "exclude_current",
+            "process_update",
+            "activate",
+            "update_graph"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 115
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.objectmap",
+          "specifiers": [
+            "ObjectMap"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 127,
+      "hasStructuralAnalysis": true
+    },
+    "panels/extrude.py": {
+      "filePath": "panels/extrude.py",
+      "contentHash": "d1f6ea97d80c1296363027e346a6869f674a7c3a964d4884b876c8ab4b2dd462",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "enable_buttons",
+            "activate",
+            "process_update",
+            "change_distance",
+            "change_extruder",
+            "change_speed",
+            "check_min_temp",
+            "extrude",
+            "load_unload",
+            "enable_disable_fs",
+            "update_temp"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 377
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.autogrid",
+          "specifiers": [
+            "AutoGrid"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 392,
+      "hasStructuralAnalysis": true
+    },
+    "panels/fan.py": {
+      "filePath": "panels/fan.py",
+      "contentHash": "8a3be8430020b76d0e6fb5d815ab6ffc6aaed9caa1867ccd7f8ddf29a7d4f31d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "process_update",
+            "update_fan_speed",
+            "add_fan",
+            "load_fans",
+            "set_fan_speed",
+            "check_fan_speed"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 128
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 141,
+      "hasStructuralAnalysis": true
+    },
+    "panels/fine_tune.py": {
+      "filePath": "panels/fine_tune.py",
+      "contentHash": "73e93a7e99f6e7bbf0cc65acd7fe1f796b7f492e5966e1d3de2a73edbfda83d5",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "process_update",
+            "change_babystepping",
+            "change_extrusion",
+            "change_speed",
+            "change_percent_delta"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 192
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 205,
+      "hasStructuralAnalysis": true
+    },
+    "panels/gcode_macros.py": {
+      "filePath": "panels/gcode_macros.py",
+      "contentHash": "411a3c4aa3ae8c74368212173559fe89f6ccb5151eb29cf44d1910353b7b2a27",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "macro_visibility_changed",
+            "add_gcode_macro",
+            "show_keyboard",
+            "scroll_to_entry",
+            "on_icon_pressed",
+            "run_gcode_macro",
+            "change_sort",
+            "reload_macros",
+            "load_gcode_macros",
+            "back"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 211
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 223,
+      "hasStructuralAnalysis": true
+    },
+    "panels/gcodes.py": {
+      "filePath": "panels/gcodes.py",
+      "contentHash": "c1d783da5e152a11113ad32130e608a99cac52cdfd86d7030d13cd406e281123",
+      "functions": [
+        {
+          "name": "format_label",
+          "params": [
+            "widget"
+          ],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "switch_view_mode",
+            "activate",
+            "deactivate",
+            "create_item",
+            "show_path",
+            "image_load",
+            "_update_image",
+            "confirm_delete_file",
+            "confirm_delete_directory",
+            "back",
+            "change_dir",
+            "change_sort",
+            "set_sort",
+            "sort_names",
+            "sort_sizes",
+            "sort_dates",
+            "confirm_print",
+            "_add_print_image",
+            "confirm_print_response",
+            "get_info_str",
+            "get_file_info",
+            "get_file_info_extended",
+            "load_files",
+            "delete_from_list",
+            "add_item_from_callback",
+            "_callback",
+            "_refresh_files",
+            "set_loading",
+            "show_rename",
+            "_create_rename_box",
+            "hide_rename",
+            "rename",
+            "show_fullscreen_thumbnail",
+            "_show_fullscreen_dialog",
+            "close_fullscreen_thumbnail"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 640
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.flowboxchild_extended",
+          "specifiers": [
+            "PrintListItem"
+          ]
+        }
+      ],
+      "exports": [
+        "format_label",
+        "Panel"
+      ],
+      "totalLines": 665,
+      "hasStructuralAnalysis": true
+    },
+    "panels/input_shaper.py": {
+      "filePath": "panels/input_shaper.py",
+      "contentHash": "52a5e96c2e5980c06bd6147b95909964f82dc3aa60ee620e0b19149b780f713b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "on_popover_clicked",
+            "start_calibration",
+            "set_opt_value",
+            "save_config",
+            "activate",
+            "process_update"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 193
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 211,
+      "hasStructuralAnalysis": true
+    },
+    "panels/job_status.py": {
+      "filePath": "panels/job_status.py",
+      "contentHash": "8dd2669b6490d6bdc0f466657fdff572abda7080a9cf97758cc33f9039f83621",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "create_status_grid",
+            "create_extrusion_grid",
+            "create_move_grid",
+            "create_time_grid",
+            "switch_info",
+            "on_draw",
+            "activate",
+            "deactivate",
+            "create_buttons",
+            "save_offset",
+            "save_confirm",
+            "restart",
+            "restart_print",
+            "restart_confirm",
+            "resume",
+            "pause",
+            "cancel",
+            "cancel_confirm",
+            "close_panel",
+            "enable_button",
+            "disable_button",
+            "new_print",
+            "process_update",
+            "update_flow",
+            "update_time_left",
+            "estimate_time",
+            "update_progress",
+            "set_state",
+            "_add_timeout",
+            "show_buttons_for_state",
+            "_supports_eoffset",
+            "show_file_thumbnail",
+            "_set_thumbnail",
+            "show_fullscreen_thumbnail",
+            "_show_fullscreen_dialog",
+            "close_dialog",
+            "update_filename",
+            "animate_label",
+            "get_file_metadata",
+            "_update_file_metadata",
+            "set_last_time"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 1069
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "pi",
+            "sqrt",
+            "trunc"
+          ]
+        },
+        {
+          "source": "statistics",
+          "specifiers": [
+            "median"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 1087,
+      "hasStructuralAnalysis": true
+    },
+    "panels/led.py": {
+      "filePath": "panels/led.py",
+      "contentHash": "57d48d9bc2ce92f79630a1e0601ca5eacb1a30f53cf003f62fdee71e2b33759c",
+      "functions": [
+        {
+          "name": "rgb_to_hex",
+          "params": [
+            "color"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "rgbw_to_rgb",
+          "params": [
+            "color"
+          ],
+          "exported": true,
+          "lineCount": 8
+        }
+      ],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "color_available",
+            "activate",
+            "set_title",
+            "back",
+            "open_selector",
+            "led_selector",
+            "color_selector",
+            "update_preview_label",
+            "process_update",
+            "update_scales",
+            "update_color_data",
+            "apply_preset",
+            "apply_scales",
+            "set_led_color",
+            "parse_presets"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 178
+        },
+        {
+          "name": "ColorPreviewArea",
+          "methods": [
+            "__init__",
+            "set_color",
+            "on_draw"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 26
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "pi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "rgb_to_hex",
+        "rgbw_to_rgb",
+        "Panel",
+        "ColorPreviewArea"
+      ],
+      "totalLines": 238,
+      "hasStructuralAnalysis": true
+    },
+    "panels/limits.py": {
+      "filePath": "panels/limits.py",
+      "contentHash": "1dee0568c899a552ff8691918398a53d046f7cda2e9d0258e581305048637870",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "process_update",
+            "update_option",
+            "add_option",
+            "reset_value",
+            "set_opt_value"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 149
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 160,
+      "hasStructuralAnalysis": true
+    },
+    "panels/main_menu.py": {
+      "filePath": "panels/main_menu.py",
+      "contentHash": "98842ad1fe907e3b00588916e3e06f5309d4983d4b67fa42869c6289653255e5",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "update_graph_visibility",
+            "activate",
+            "deactivate",
+            "add_device",
+            "toggle_visibility",
+            "change_target_temp",
+            "verify_max_temp",
+            "pid_calibrate",
+            "create_left_panel",
+            "hide_numpad",
+            "process_update",
+            "show_numpad",
+            "update_graph",
+            "back"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 336
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.heatergraph",
+          "specifiers": [
+            "HeaterGraph"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.keypad",
+          "specifiers": [
+            "Keypad"
+          ]
+        },
+        {
+          "source": "panels.menu",
+          "specifiers": [
+            "MenuPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 350,
+      "hasStructuralAnalysis": true
+    },
+    "panels/menu.py": {
+      "filePath": "panels/menu.py",
+      "contentHash": "d5e91fe49e406cdb5c31f8de736f127d089e1c9254f4dd7b067fb57c9b4e4618",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "add_content",
+            "arrangeMenuItems",
+            "create_menu_items",
+            "evaluate_enable",
+            "_is_shortcut_item"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 121
+        }
+      ],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.autogrid",
+          "specifiers": [
+            "AutoGrid"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 134,
+      "hasStructuralAnalysis": true
+    },
+    "panels/move_advanced.py": {
+      "filePath": "panels/move_advanced.py",
+      "contentHash": "76f74a68f600780ae8c3922fc316439b5ae6df91e6e9fd5952ff12e1a3be23e5",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "build_grid",
+            "build_axis_buttons",
+            "build_endstop_panel",
+            "build_second_panel",
+            "build_keypad_panel",
+            "show_numpad",
+            "hide_numpad",
+            "submit_position",
+            "query_endstops",
+            "cb_query",
+            "process_update",
+            "back",
+            "deactivate"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 193
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.keypad",
+          "specifiers": [
+            "Keypad"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 206,
+      "hasStructuralAnalysis": true
+    },
+    "panels/move.py": {
+      "filePath": "panels/move.py",
+      "contentHash": "b29826d7394c0bd91dc9d30f123837d02ecdb578feb7a6714d726015cd1f270b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "reinit_panels",
+            "reinit_move",
+            "set_toolhead_label",
+            "process_update",
+            "change_distance",
+            "move",
+            "home",
+            "switch_toolhead"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 297
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGcodes",
+          "specifiers": [
+            "KlippyGcodes"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 310,
+      "hasStructuralAnalysis": true
+    },
+    "panels/network.py": {
+      "filePath": "panels/network.py",
+      "contentHash": "21438f67f7a22270a0a0652e1e4ebd9cea370e61a5aa4f6211acd9ea9a56ed54",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "popup_callback",
+            "load_networks",
+            "add_network",
+            "update_ip_label",
+            "iface_changed",
+            "remove_confirm_dialog",
+            "confirm_removal",
+            "add_new_network",
+            "get_dropdown_value",
+            "back",
+            "close_add_network",
+            "connect_network",
+            "remove_network_from_list",
+            "on_popup_shown",
+            "show_add_network",
+            "update_all_networks",
+            "update_network_info",
+            "get_signal_strength_icon",
+            "update_wired_network_info",
+            "reload_networks",
+            "activate",
+            "deactivate",
+            "toggle_wifi"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 572
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "sdbus_block.networkmanager",
+          "specifiers": [
+            "enums"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.sdbus_nm",
+          "specifiers": [
+            "SdbusNm"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 588,
+      "hasStructuralAnalysis": true
+    },
+    "panels/notifications.py": {
+      "filePath": "panels/notifications.py",
+      "contentHash": "9c5eb35839ed066da502395d5f9a884cf816ca6e4b73bb790cc6b63579ea37c9",
+      "functions": [
+        {
+          "name": "remove_newlines",
+          "params": [
+            "msg"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "add_notification",
+            "clear",
+            "refresh",
+            "process_update"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 63
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "remove_newlines",
+        "Panel"
+      ],
+      "totalLines": 83,
+      "hasStructuralAnalysis": true
+    },
+    "panels/offset_control.py": {
+      "filePath": "panels/offset_control.py",
+      "contentHash": "140cdb050018e9470d8c4fee623e29f004054b1f3f91f5cd837b7ae53be70e49",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "update_graph",
+            "back",
+            "process_update",
+            "remove_create",
+            "X_offset_adjustment",
+            "Y_offset_adjustment",
+            "Z_offset_adjustment",
+            "send_next_offset",
+            "send_save_offset",
+            "send_remove_offset",
+            "_record_current_offset",
+            "change_bs_delta"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 367
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.offsetmap",
+          "specifiers": [
+            "OffsetMap"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 379,
+      "hasStructuralAnalysis": true
+    },
+    "panels/pins.py": {
+      "filePath": "panels/pins.py",
+      "contentHash": "9f8c41fdde0922127c922c8c119fc58bd21eda9a6eafdd7808c485dc5c21bd45",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "load_pins",
+            "add_pin",
+            "set_output_pin",
+            "check_pin_value",
+            "process_update",
+            "update_pin_value"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 112
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.functions",
+          "specifiers": [
+            "parse_bool"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 124,
+      "hasStructuralAnalysis": true
+    },
+    "panels/power.py": {
+      "filePath": "panels/power.py",
+      "contentHash": "19a506167c57b143d8228545a784073e4281fa9529bf4d992718f62b42186974",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "add_device",
+            "load_power_devices",
+            "on_switch",
+            "process_update"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 81
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 92,
+      "hasStructuralAnalysis": true
+    },
+    "panels/pressure_advance.py": {
+      "filePath": "panels/pressure_advance.py",
+      "contentHash": "cb8cb2791a51054b89f81697af6683512163be1b428c1aac276e0413376d428b",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "add_option",
+            "reset_value",
+            "set_opt_value",
+            "process_update",
+            "update_option"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 140
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 153,
+      "hasStructuralAnalysis": true
+    },
+    "panels/printer_select.py": {
+      "filePath": "panels/printer_select.py",
+      "contentHash": "9f7b93b2e503d4827de234399205f77584e7f9296442cbb46705de6dd1d06461",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "connect_printer",
+            "activate",
+            "disconnected_callback"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 48
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.autogrid",
+          "specifiers": [
+            "AutoGrid"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "panels/retraction.py": {
+      "filePath": "panels/retraction.py",
+      "contentHash": "c49847f6e83333223b5b3363755a9ffea252378023037e19a8c1f15ec682532a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "process_update",
+            "update_option",
+            "add_option",
+            "reset_value",
+            "set_opt_value"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 150
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 161,
+      "hasStructuralAnalysis": true
+    },
+    "panels/settings.py": {
+      "filePath": "panels/settings.py",
+      "contentHash": "a083d59890a27c79d1de348a1d9d28bb5d543555d99c3bae26a10799b8234deb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 44
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "panels/shutdown.py": {
+      "filePath": "panels/shutdown.py",
+      "contentHash": "0e1fb6001b528b5cdeedae12f436847ccce6948f9342506c932f0329dca5885a",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "reboot_poweroff",
+            "reboot_poweroff_confirm",
+            "turn_off_power_devices"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 137
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.functions",
+          "specifiers": [
+            "run_systemctl"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 149,
+      "hasStructuralAnalysis": true
+    },
+    "panels/splash_screen.py": {
+      "filePath": "panels/splash_screen.py",
+      "contentHash": "31b92d958853edc8f830865e98caa2d4b0f2687a62013a907795f0ae35695d34",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "update_text",
+            "clear_action_bar",
+            "show_restart_buttons",
+            "add_power_button",
+            "activate",
+            "check_power_status",
+            "firmware_restart",
+            "restart_klipper",
+            "retry",
+            "reboot_poweroff",
+            "reboot_poweroff_confirm"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 169
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.functions",
+          "specifiers": [
+            "run_systemctl"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 181,
+      "hasStructuralAnalysis": true
+    },
+    "panels/spool_editor.py": {
+      "filePath": "panels/spool_editor.py",
+      "contentHash": "22d2a075ef1d44cfe84a665235645bbb5fd5251b196a42ddd3b77a6f2d77a7b7",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "set_extra",
+            "_build_grid",
+            "_build_first_panel",
+            "_build_measurement_details_box",
+            "_get_measurement_rows",
+            "_format_measurement_row_markup",
+            "_get_initial_weight",
+            "_get_empty_spool_weight",
+            "_get_full_filament_weight",
+            "_get_display_name",
+            "_format_last_used",
+            "_build_keypad_panel",
+            "_build_progress_bar",
+            "_build_second_panel",
+            "_build_info_panel",
+            "_format_entry_weight",
+            "_submit_entry",
+            "_get_update_payload",
+            "_update_spool_cb",
+            "_refresh_values",
+            "_restore_value",
+            "back",
+            "_show_numpad",
+            "_hide_numpad",
+            "deactivate"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 396
+        }
+      ],
+      "imports": [
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.keypad",
+          "specifiers": [
+            "Keypad"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 408,
+      "hasStructuralAnalysis": true
+    },
+    "panels/spoolman.py": {
+      "filePath": "panels/spoolman.py",
+      "contentHash": "93dfee546d8901c62061d3149b09e9d367247e4143631a9471b7877b80db0e15",
+      "functions": [
+        {
+          "name": "format_date",
+          "params": [
+            "date"
+          ],
+          "exported": true,
+          "lineCount": 17
+        }
+      ],
+      "classes": [
+        {
+          "name": "SpoolmanVendor",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [
+            "id",
+            "name",
+            "registered"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "SpoolmanFilament",
+          "methods": [
+            "__init__"
+          ],
+          "properties": [
+            "article_number",
+            "color_hex",
+            "multi_color_hexes",
+            "multi_color_direction",
+            "comment",
+            "density",
+            "diameter",
+            "id",
+            "material",
+            "name",
+            "price",
+            "registered",
+            "settings_bed_temp",
+            "settings_extruder_temp",
+            "spool_weight",
+            "vendor",
+            "weight"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "SpoolmanSpool",
+          "methods": [
+            "__init__",
+            "name",
+            "_filament_colors",
+            "icon"
+          ],
+          "properties": [
+            "archived",
+            "id",
+            "remaining_length",
+            "remaining_weight",
+            "used_length",
+            "used_weight",
+            "lot_nr",
+            "filament",
+            "first_used",
+            "last_used",
+            "registered",
+            "_icon",
+            "theme_path",
+            "_spool_icon"
+          ],
+          "exported": true,
+          "lineCount": 59
+        },
+        {
+          "name": "Panel",
+          "methods": [
+            "spool_compare_id",
+            "spool_compare_date",
+            "_on_material_filter_clear",
+            "_on_material_filter_changed",
+            "__init__",
+            "_open_spool_detail",
+            "_filter_spools",
+            "_set_cell_background",
+            "_set_cell_id",
+            "_set_cell_icon",
+            "_set_cell_spool",
+            "_set_cell_edit",
+            "_set_cell_toggle",
+            "_get_filament_formated",
+            "_set_active_spool",
+            "change_sort",
+            "process_update",
+            "update_active_spool",
+            "refresh",
+            "load_spools",
+            "_load_spools_cb",
+            "get_active_spool",
+            "_scroll_to_active",
+            "clear_active_spool",
+            "_clear_active_spool_cb",
+            "set_active_spool",
+            "_set_active_spool_cb",
+            "activate"
+          ],
+          "properties": [
+            "_prev_active_id"
+          ],
+          "exported": true,
+          "lineCount": 409
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os.path",
+          "specifiers": [
+            "os.path"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "pathlib"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "GdkPixbuf",
+            "GLib",
+            "GObject",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.svg_gradient",
+          "specifiers": [
+            "apply_filament_gradient",
+            "filament_colors_from_dict"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.combo",
+          "specifiers": [
+            "ComboBoxPlus"
+          ]
+        }
+      ],
+      "exports": [
+        "format_date",
+        "SpoolmanVendor",
+        "SpoolmanFilament",
+        "SpoolmanSpool",
+        "Panel"
+      ],
+      "totalLines": 551,
+      "hasStructuralAnalysis": true
+    },
+    "panels/system.py": {
+      "filePath": "panels/system.py",
+      "contentHash": "4cd39e8c6242076b1c62f5679b711f8606eb9c928dc7c63639cccb8a77f07416",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "back",
+            "activate",
+            "_on_roots_received",
+            "_update_disk_usage",
+            "_update_disk_display",
+            "_ui_rebuild_disks",
+            "create_layout",
+            "set_mem_multiplier",
+            "add_label_to_grid",
+            "populate_info",
+            "process_update"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 304
+        }
+      ],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 316,
+      "hasStructuralAnalysis": true
+    },
+    "panels/temperature.py": {
+      "filePath": "panels/temperature.py",
+      "contentHash": "ef40de82207359de6b903e96a4268d95352cc108ba033bb473fc08c5c2c5297d",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "create_right_panel",
+            "switch_preheat_adjust",
+            "preheat",
+            "delta_adjust",
+            "change_temp_delta",
+            "change_target_temp_incremental",
+            "update_graph_visibility",
+            "activate",
+            "set_extra",
+            "set_selection",
+            "deactivate",
+            "select_heater",
+            "set_temperature",
+            "validate",
+            "preheat_gcode",
+            "add_device",
+            "name_pressed",
+            "name_long_press_cancelled",
+            "name_long_press",
+            "toggle_visibility",
+            "change_target_temp",
+            "verify_max_temp",
+            "pid_calibrate",
+            "create_left_panel",
+            "hide_numpad",
+            "popover_closed",
+            "popover_popup",
+            "popover_populate_menu",
+            "process_update",
+            "show_numpad",
+            "update_graph"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 617
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "contextlib",
+          "specifiers": [
+            "suppress"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "GLib",
+            "Gtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "find_widget"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.heatergraph",
+          "specifiers": [
+            "HeaterGraph"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.keypad",
+          "specifiers": [
+            "Keypad"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 633,
+      "hasStructuralAnalysis": true
+    },
+    "panels/updater.py": {
+      "filePath": "panels/updater.py",
+      "contentHash": "7abf7a75b8dff1e8f0fb52e9ff7428fdca0f3cb07dcdd89d7eb0f29171a62cd7",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "activate",
+            "create_info_grid",
+            "clear_scroll",
+            "refresh_updates",
+            "get_updates",
+            "restart",
+            "show_update_info",
+            "update_confirm",
+            "reset_confirm",
+            "reset_repo",
+            "update_program",
+            "update_program_info",
+            "_already_updated",
+            "_needs_update"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 349
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gettext",
+          "specifiers": [
+            "ngettext"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 361,
+      "hasStructuralAnalysis": true
+    },
+    "panels/zcalibrate.py": {
+      "filePath": "panels/zcalibrate.py",
+      "contentHash": "aff1b31f65af30876b4c6bff776195e3a6f8a6503525d8d5156975858da85cb8",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Panel",
+          "methods": [
+            "__init__",
+            "initialize_mesh_params",
+            "initialize_probe_params",
+            "setup_ui",
+            "on_dropdown_change",
+            "set_commands",
+            "rebuild_commands",
+            "_csv_to_array",
+            "start_calibration",
+            "_move_to_position",
+            "_get_calibration_location",
+            "_get_safe_z",
+            "_calculate_position",
+            "activate",
+            "process_update",
+            "update_position",
+            "change_distance",
+            "move",
+            "accept",
+            "buttons_calibrating",
+            "buttons_not_calibrating"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 363
+        }
+      ],
+      "imports": [
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "ks_includes.screen_panel",
+          "specifiers": [
+            "ScreenPanel"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.combo",
+          "specifiers": [
+            "ComboBoxPlus"
+          ]
+        }
+      ],
+      "exports": [
+        "Panel"
+      ],
+      "totalLines": 375,
+      "hasStructuralAnalysis": true
+    },
+    "pyproject.toml": {
+      "filePath": "pyproject.toml",
+      "contentHash": "09d2a07bb7a3d926466d6e47b3011ac3f9bb3def87fb926e56771e43e4f01890",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 33,
+      "hasStructuralAnalysis": true
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "c57936464eb37d2a83c8db185f224e9867869e1222b2ae67b3488457c27b8252",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "screen.py": {
+      "filePath": "screen.py",
+      "contentHash": "ac6275724f4388e378e7dc37b310209fcbab50a524d9520b83bdd31f035d43d2",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 35
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppState",
+          "methods": [],
+          "properties": [
+            "printer_name",
+            "printer_is_local",
+            "connected",
+            "connecting",
+            "updating",
+            "initialized",
+            "reinit_count",
+            "klippy_retry_count"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "KlipperScreen",
+          "methods": [
+            "__init__",
+            "update_cursor",
+            "state_execute",
+            "initial_connection",
+            "close_connection",
+            "connect_printer",
+            "ws_subscribe",
+            "_load_panel",
+            "show_panel",
+            "set_titlebar_items",
+            "set_panel_title",
+            "attach_panel",
+            "log_notification",
+            "notification_log_clear",
+            "show_popup_message",
+            "close_popup_message",
+            "show_error_modal",
+            "error_modal_response",
+            "restart_ks",
+            "setup_gtk_settings",
+            "load_base_styles",
+            "load_custom_theme",
+            "customize_graph_colors",
+            "update_style_provider",
+            "change_theme",
+            "reload_icon_theme",
+            "_go_to_submenu",
+            "_remove_all_panels",
+            "_remove_current_panel",
+            "_menu_go_back",
+            "check_dpms_state",
+            "wake_screen",
+            "inhibit_idle",
+            "uninhibit_idle",
+            "set_dpms",
+            "set_dpms_timeout",
+            "set_autolock_timeout",
+            "set_screensaver_wake_delay",
+            "set_screenblanking_printing_timeout",
+            "set_screenblanking_timeout",
+            "show_printer_select",
+            "socket_error",
+            "socket_connected",
+            "socket_disconnected",
+            "reconnect",
+            "state_disconnected",
+            "state_error",
+            "state_paused",
+            "state_printing",
+            "read_poweroff",
+            "poweroff_warning",
+            "power_ks",
+            "_start_interrupted_print",
+            "_resume_interrupted",
+            "state_ready",
+            "state_startup",
+            "state_shutdown",
+            "check_active_commands",
+            "update_shortcut",
+            "change_language",
+            "reload_panels",
+            "change_nozzle_size",
+            "charge_filament",
+            "_handle_empty_filament",
+            "_switch_to_backup",
+            "_cleanup_filament_timer",
+            "_socket_callback",
+            "get_active_spool",
+            "set_active_spool_details",
+            "_apply_spool_data",
+            "process_action",
+            "parse_ks_action",
+            "process_update",
+            "_filament_change_action",
+            "_filament_change_action_response",
+            "confirm_save",
+            "save",
+            "_confirm_send_action",
+            "_confirm_send_action_response",
+            "_send_action",
+            "enable_widget",
+            "printer_initializing",
+            "search_power_devices",
+            "power_devices",
+            "_init_printer",
+            "connect_to_moonraker",
+            "init_moonraker_components",
+            "set_power_devices",
+            "set_cameras",
+            "set_printer_info",
+            "set_configfile",
+            "set_objects",
+            "query_objects",
+            "set_commands",
+            "set_system_info",
+            "set_server_config",
+            "init_klipper",
+            "_init_klipper_retry",
+            "_finish_init",
+            "init_tempstore",
+            "set_tempstore",
+            "show_keyboard",
+            "_get_keyboard",
+            "_show_matchbox_keyboard",
+            "remove_keyboard",
+            "_key_press_event",
+            "update_size"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 1696
+        },
+        {
+          "name": "KlipperScreenApplication",
+          "methods": [
+            "__init__",
+            "do_activate",
+            "_on_destroy"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "imports": [
+        {
+          "source": "argparse",
+          "specifiers": [
+            "argparse"
+          ]
+        },
+        {
+          "source": "ast",
+          "specifiers": [
+            "ast"
+          ]
+        },
+        {
+          "source": "configparser",
+          "specifiers": [
+            "configparser"
+          ]
+        },
+        {
+          "source": "gc",
+          "specifiers": [
+            "gc"
+          ]
+        },
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "logging",
+          "specifiers": [
+            "logging"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "pathlib"
+          ]
+        },
+        {
+          "source": "subprocess",
+          "specifiers": [
+            "subprocess"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "traceback",
+          "specifiers": [
+            "traceback"
+          ]
+        },
+        {
+          "source": "dataclasses",
+          "specifiers": [
+            "dataclass"
+          ]
+        },
+        {
+          "source": "gi",
+          "specifiers": [
+            "gi"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime"
+          ]
+        },
+        {
+          "source": "importlib",
+          "specifiers": [
+            "import_module"
+          ]
+        },
+        {
+          "source": "signal",
+          "specifiers": [
+            "SIGTERM"
+          ]
+        },
+        {
+          "source": "gi.repository",
+          "specifiers": [
+            "Gdk",
+            "GLib",
+            "Gtk",
+            "Pango"
+          ]
+        },
+        {
+          "source": "jinja2",
+          "specifiers": [
+            "Environment"
+          ]
+        },
+        {
+          "source": "ks_includes",
+          "specifiers": [
+            "functions"
+          ]
+        },
+        {
+          "source": "ks_includes.config",
+          "specifiers": [
+            "KlipperScreenConfig"
+          ]
+        },
+        {
+          "source": "ks_includes.files",
+          "specifiers": [
+            "KlippyFiles"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyGtk",
+          "specifiers": [
+            "KlippyGtk"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyRest",
+          "specifiers": [
+            "KlippyRest"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyUDS",
+          "specifiers": [
+            "KlippyUDS"
+          ]
+        },
+        {
+          "source": "ks_includes.KlippyWebsocket",
+          "specifiers": [
+            "KlippyWebsocket"
+          ]
+        },
+        {
+          "source": "ks_includes.notification_handler",
+          "specifiers": [
+            "NotificationHandler"
+          ]
+        },
+        {
+          "source": "ks_includes.printer",
+          "specifiers": [
+            "Printer"
+          ]
+        },
+        {
+          "source": "ks_includes.spoolman_api",
+          "specifiers": [
+            "SpoolmanAPI"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.keyboard",
+          "specifiers": [
+            "Keyboard"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.lockscreen",
+          "specifiers": [
+            "LockScreen"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.prompts",
+          "specifiers": [
+            "Prompt"
+          ]
+        },
+        {
+          "source": "ks_includes.widgets.screensaver",
+          "specifiers": [
+            "ScreenSaver"
+          ]
+        },
+        {
+          "source": "panels.base_panel",
+          "specifiers": [
+            "BasePanel"
+          ]
+        }
+      ],
+      "exports": [
+        "AppState",
+        "KlipperScreen",
+        "KlipperScreenApplication",
+        "main"
+      ],
+      "totalLines": 1815,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/build_docs.sh": {
+      "filePath": "scripts/build_docs.sh",
+      "contentHash": "a7f3e40b4f3a7a003275783fd723de20e1644ff6e21267c87f89dccc47240656",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/check_code.sh": {
+      "filePath": "scripts/check_code.sh",
+      "contentHash": "4fa36fbc7349ca76a94ec1ad7a6ce64f7af4d8452d224ec0074ac66b3040ec6b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/dev-requirements.txt": {
+      "filePath": "scripts/dev-requirements.txt",
+      "contentHash": "a424ad70157738ff6e86186404af531b1f318a8ab645b48ff1e2e7c08c11da10",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 4,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/KlipperScreen-install.sh": {
+      "filePath": "scripts/KlipperScreen-install.sh",
+      "contentHash": "448630b1fb713a27862661a2b32649f29e8e6f0c398aa2b40fca009d32c6adfe",
+      "functions": [
+        {
+          "name": "echo_text",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "echo_error",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "echo_ok",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "install_graphical_backend",
+          "params": [],
+          "exported": false,
+          "lineCount": 36
+        },
+        {
+          "name": "install_packages",
+          "params": [],
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "check_requirements",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "create_virtualenv",
+          "params": [],
+          "exported": false,
+          "lineCount": 47
+        },
+        {
+          "name": "install_systemd_service",
+          "params": [],
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "create_policy",
+          "params": [],
+          "exported": false,
+          "lineCount": 61
+        },
+        {
+          "name": "create_policy_legacy",
+          "params": [],
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "update_x11",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "fix_fbturbo",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "add_desktop_file",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "start_KlipperScreen",
+          "params": [],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "install_network_manager",
+          "params": [],
+          "exported": false,
+          "lineCount": 25
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 362,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/KlipperScreen-requirements.txt": {
+      "filePath": "scripts/KlipperScreen-requirements.txt",
+      "contentHash": "065010d245e6a5c03814df196549eaa967d43117a04a13dd1ce3e99ff5ddfba7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/KlipperScreen-start.sh": {
+      "filePath": "scripts/KlipperScreen-start.sh",
+      "contentHash": "bd7910f42891c8458260404190c95229de3f28f519fcd7532a83f2f4e10e6a6c",
+      "functions": [
+        {
+          "name": "start_x11",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "start_cage",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "start_weston",
+          "params": [],
+          "exported": false,
+          "lineCount": 42
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 84,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/KlipperScreen.desktop": {
+      "filePath": "scripts/KlipperScreen.desktop",
+      "contentHash": "554f825e099af4db5dacb4d3ab45eda9f790a636a986067867fd898054ebb6e5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/KlipperScreen.service": {
+      "filePath": "scripts/KlipperScreen.service",
+      "contentHash": "fc1af66d7e8fa1008aa1198050da4e994dd29e401130d5e054d48cae301e47e6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 37,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/sample-android-adb.sh": {
+      "filePath": "scripts/sample-android-adb.sh",
+      "contentHash": "ab3a1ef65146f1249886bd0f270fd2f85fb33d2a377c52f162d197459a17225c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/sample-launch-remote-xserver.sh": {
+      "filePath": "scripts/sample-launch-remote-xserver.sh",
+      "contentHash": "8eb4bef3a7d4dcd85ef224876f4d96062411dde29028eedb863c6e9db02554eb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 56,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/system-dependencies.json": {
+      "filePath": "scripts/system-dependencies.json",
+      "contentHash": "ca7f6559605c95bc9ff929efb9666a8035d4e1d15d317629ea492450047084ee",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/Uninstall.sh": {
+      "filePath": "scripts/Uninstall.sh",
+      "contentHash": "ef951eb7c2eea2ac48812a54bac031573e0b0449671d5bc46e69f25a5f69f693",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/update_translation_files.sh": {
+      "filePath": "scripts/update_translation_files.sh",
+      "contentHash": "143d6a299e66f89a92a603143575236a9128c941ee8f56b0d61f17a5d0815d0a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/xsdl_wrapper.sh": {
+      "filePath": "scripts/xsdl_wrapper.sh",
+      "contentHash": "bf130bb7864d1bc535dd09dbacb2e4c18cf2ded5b75599c8b68817b44bb1b222",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "styles/base.conf": {
+      "filePath": "styles/base.conf",
+      "contentHash": "8cae54dd2fa783f5a60a2c63ecabe1b363557b1c5482c10238fa4beb5e17757b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "styles/base.css": {
+      "filePath": "styles/base.css",
+      "contentHash": "83feede321e9bdf539ac89ad344831bb987ec48ecfc955b15231ad2946f875ea",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 736,
+      "hasStructuralAnalysis": false
+    },
+    "styles/colorized/style.conf": {
+      "filePath": "styles/colorized/style.conf",
+      "contentHash": "137147e48aec9ec19ea61c48cc2935a60ce0b0d5a041dabe0d86808f823af35c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "styles/colorized/style.css": {
+      "filePath": "styles/colorized/style.css",
+      "contentHash": "13fbe6b231365ea69489c9b256cc43ba9d03e709bdb0c57dc400fa9cea8b3f10",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 296,
+      "hasStructuralAnalysis": false
+    },
+    "styles/material-dark/style.conf": {
+      "filePath": "styles/material-dark/style.conf",
+      "contentHash": "9356f57744883dadbbaf86e0e420bfdc1b6f9fc81cd563ce303e3ceee4ca4c2b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "styles/material-dark/style.css": {
+      "filePath": "styles/material-dark/style.css",
+      "contentHash": "140ec75d4e136948ad8d36999b6b421bd661ea8ae4b08b5dde75aedd8e293b1a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 265,
+      "hasStructuralAnalysis": false
+    },
+    "styles/material-darker/style.conf": {
+      "filePath": "styles/material-darker/style.conf",
+      "contentHash": "9356f57744883dadbbaf86e0e420bfdc1b6f9fc81cd563ce303e3ceee4ca4c2b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "styles/material-darker/style.css": {
+      "filePath": "styles/material-darker/style.css",
+      "contentHash": "36f3c7816fe0b307f214bb7e350df463377d03dc2df4f9e400041dbdb196f0a5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 260,
+      "hasStructuralAnalysis": false
+    },
+    "styles/material-light/style.conf": {
+      "filePath": "styles/material-light/style.conf",
+      "contentHash": "9356f57744883dadbbaf86e0e420bfdc1b6f9fc81cd563ce303e3ceee4ca4c2b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "styles/material-light/style.css": {
+      "filePath": "styles/material-light/style.css",
+      "contentHash": "0008aa262b91513d2080551a7ad4903260376ca115a1c516954b4e9d3f8998aa",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 333,
+      "hasStructuralAnalysis": false
+    },
+    "styles/printers/readme.md": {
+      "filePath": "styles/printers/readme.md",
+      "contentHash": "fa2c8e9408aee2280b98dedd77d3f682d258e94b04a4f6a5d4c983795eb23243",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    },
+    "styles/z-bolt/style.conf": {
+      "filePath": "styles/z-bolt/style.conf",
+      "contentHash": "4a8fbeebfb4d6aa39cc047158c979f609c368ad3fe21a6c56b6dd9084a557eec",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 21,
+      "hasStructuralAnalysis": false
+    },
+    "styles/z-bolt/style.css": {
+      "filePath": "styles/z-bolt/style.css",
+      "contentHash": "e794b2d7fa9dbec3a752a8eb75fe6af96a22e6b90663fc7e1f7b881b8d1f60d9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 220,
+      "hasStructuralAnalysis": false
+    }
+  }
+}

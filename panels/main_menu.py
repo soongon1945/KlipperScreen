@@ -12,6 +12,16 @@ from panels.menu import Panel as MenuPanel
 
 
 class Panel(MenuPanel):
+    def _get_tool_label(self, device):
+        if not device.startswith("extruder"):
+            return self.prettify(device)
+        if device == "extruder":
+            return "T1"
+        suffix = device[8:]
+        if suffix.isdigit():
+            return f"T{int(suffix) + 1}"
+        return device
+
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title, items)
         self.left_panel = None
@@ -96,6 +106,7 @@ class Panel(MenuPanel):
             return False
         logging.info(f"Adding device: {device}")
         if device.startswith("extruder"):
+            devname = self._get_tool_label(device)
             if self._printer.extrudercount > 1:
                 image = f"extruder-{device[8:]}" if device[8:] else "extruder-0"
             else:

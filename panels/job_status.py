@@ -192,9 +192,8 @@ class Panel(ScreenPanel):
             # Keep internal tool selection zero-based while presenting the
             # physical nozzles as 1 and 2 on the print status screen.
             self.buttons["extruder"][extruder] = self._gtk.Button(
-                f"extruder-{i}", "", None, self.bts, Gtk.PositionType.LEFT, 1
+                f"extruder-{i}", f"Extruder{i} -", None, self.bts, Gtk.PositionType.LEFT, 1
             )
-            self.buttons["extruder"][extruder].set_label(self.labels[extruder].get_text())
             self.buttons["extruder"][extruder].connect(
                 "clicked", self.menu_item_clicked, {"panel": "temperature", "extra": extruder}
             )
@@ -599,7 +598,10 @@ class Panel(ScreenPanel):
                     digits=0,
                 )
                 if x in self.buttons["extruder"]:
-                    self.buttons["extruder"][x].set_label(self.labels[x].get_text())
+                    display_number = self._printer.get_tool_number(x) + 1
+                    self.buttons["extruder"][x].set_label(
+                        f"Extruder{display_number} {self.labels[x].get_text()}"
+                    )
                 elif x in self.buttons["heater"]:
                     self.buttons["heater"][x].set_label(self.labels[x].get_text())
 

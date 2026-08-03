@@ -99,7 +99,11 @@ class Panel(MenuPanel):
             if self._printer.extrudercount > 1:
                 # Klipper tool names are zero-based, but the operator-facing
                 # nozzle icons are numbered from 1 (extruder-1, extruder-2).
-                image = f"extruder-{self._printer.get_tool_number(device) + 1}"
+                display_number = self._printer.get_tool_number(device) + 1
+                image = f"extruder-{display_number}"
+                # Change only the visible alias; device remains the original
+                # Klipper object key used for status updates and commands.
+                devname = f"Extruder{display_number}"
             else:
                 image = "extruder"
             class_name = f"graph_label_{device}"

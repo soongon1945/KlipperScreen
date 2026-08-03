@@ -293,9 +293,10 @@ class Panel(ScreenPanel):
             speed = self._config.get_config()["main"].getint(config_key, self.max_z_velocity)
         speed = 60 * max(1, speed)
         # A move request is explicit user intent; home before moving so an
-        # uninitialized axis cannot receive a relative move.
+        # uninitialized axis cannot receive a relative move. Homing aliases
+        # were removed from KlippyGcodes, so send the current command directly.
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.api.gcode_script(KlippyGcodes.HOME)
+            self._screen._ws.api.gcode_script("G28")
         script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
         self._screen._send_action(widget, "printer.gcode.script", {"script": script})
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
@@ -311,7 +312,7 @@ class Panel(ScreenPanel):
         self._screen.show_panel("menu", disname, items=menuitems)
 
     def switch_toolhead(self, widget):
-        self._screen._ws.api.gcode_script(KlippyGcodes.HOME_XY)
+        self._screen._ws.api.gcode_script("G28 X Y")
         current = self._printer.get_stat("toolhead", "extruder")
         is_t1 = current and current.startswith("extruder1")
         script = {"script": "T0" if is_t1 else "T1"}

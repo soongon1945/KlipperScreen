@@ -301,7 +301,9 @@ class Panel(ScreenPanel):
             self.labels[tool].get_style_context().remove_class("button_active")
         self.labels[extruder].get_style_context().add_class("button_active")
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.api.gcode_script(KlippyGcodes.HOME)
+            # KlippyGcodes no longer defines homing aliases; the explicit
+            # command preserves the existing home-before-tool-change behavior.
+            self._screen._ws.api.gcode_script("G28")
         self._screen._send_action(
             widget,
             "printer.gcode.script",

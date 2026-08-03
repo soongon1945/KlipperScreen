@@ -1002,7 +1002,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
                 remove_all=True,
                 items=self._config.get_menu_items("__main"),
             )
-            self.base_panel_show_all()
+            # show_panel() now restores the panel content and titlebar; the
+            # legacy base_panel_show_all() helper was removed upstream.
             self._ws.api.gcode_script("PRINT_END")
             return
         logging.info(f"Starting print: {filename}")

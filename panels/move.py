@@ -239,8 +239,14 @@ class Panel(ScreenPanel):
             return
         current = self._printer.get_stat("toolhead", "extruder")
         if current and current.startswith("extruder"):
+            # UI label uses one-based numbering (T1/T2) while Klipper
+            # tool commands still use zero-based names (extruder/extruder1).
             t_num = current[8:] or "0"
-            self.buttons["switch_toolhead"].set_label(f"T{t_num}")
+            try:
+                display_num = str(int(t_num) + 1)
+            except ValueError:
+                display_num = t_num
+            self.buttons["switch_toolhead"].set_label(f"T{display_num}")
 
     def process_update(self, action, data):
         if action != "notify_status_update":

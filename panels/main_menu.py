@@ -97,7 +97,9 @@ class Panel(MenuPanel):
         logging.info(f"Adding device: {device}")
         if device.startswith("extruder"):
             if self._printer.extrudercount > 1:
-                image = f"extruder-{device[8:]}" if device[8:] else "extruder-0"
+                # Klipper tool names are zero-based, but the operator-facing
+                # nozzle icons are numbered from 1 (extruder-1, extruder-2).
+                image = f"extruder-{self._printer.get_tool_number(device) + 1}"
             else:
                 image = "extruder"
             class_name = f"graph_label_{device}"

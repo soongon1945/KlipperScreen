@@ -336,9 +336,10 @@ class BasePanel(ScreenPanel):
     def get_icon(self, device, img_size):
         if device.startswith("extruder"):
             if self._printer.extrudercount > 1:
-                if device == "extruder":
-                    device = "extruder0"
-                return self._gtk.Image(f"extruder-{device[8:]}", img_size, img_size)
+                # The titlebar uses operator-facing nozzle numbers (1/2),
+                # independent of Klipper's zero-based extruder object names.
+                number = self._printer.get_tool_number(device) + 1
+                return self._gtk.Image(f"extruder-{number}", img_size, img_size)
             return self._gtk.Image("extruder", img_size, img_size)
         elif device.startswith("heater_bed"):
             return self._gtk.Image("bed", img_size, img_size)

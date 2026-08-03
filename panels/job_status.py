@@ -187,8 +187,10 @@ class Panel(ScreenPanel):
         self.buttons.update(buttons)
 
         self.buttons["extruder"] = {}
-        for i, extruder in enumerate(self._printer.get_tools()):
+        for i, extruder in enumerate(self._printer.get_tools(), start=1):
             self.labels[extruder] = Gtk.Label(label="-")
+            # Keep internal tool selection zero-based while presenting the
+            # physical nozzles as 1 and 2 on the print status screen.
             self.buttons["extruder"][extruder] = self._gtk.Button(
                 f"extruder-{i}", "", None, self.bts, Gtk.PositionType.LEFT, 1
             )

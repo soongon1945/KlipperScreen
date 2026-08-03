@@ -19,6 +19,11 @@ class Panel(ScreenPanel):
 
     def __init__(self, screen, title, **kwargs):
         title = title or _("Temperature")
+        if hasattr(self, "long_press"):
+            # Panels are reinitialized in place. Release gesture wrappers while
+            # their old buttons still exist so GTK does not disconnect handlers
+            # a second time after ScreenPanel replaces the old widget tree.
+            self.long_press.clear()
         super().__init__(screen, title)
         self.left_panel = None
         self.devices = {}

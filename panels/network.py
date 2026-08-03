@@ -150,16 +150,25 @@ class Panel(ScreenPanel):
         for net in self.sdbus_nm.get_networks():
             if "BSSID" not in net:
                 continue
-            self.add_network(net["BSSID"])
+            self.add_network(net["BSSID"], net)
         GLib.timeout_add_seconds(10, self._gtk.Button_busy, self.reload_button, False)
         self.content.show_all()
         return False
 
-    def add_network(self, bssid):
+    def add_network(self, bssid, net=None):
         if bssid in self.network_rows:
             return
 
-        net = next(net for net in self.sdbus_nm.get_networks() if bssid == net["BSSID"])
+        if net is None:
+            net = next(
+                (item for item in self.sdbus_nm.get_networks() if bssid == item["BSSID"]),
+                None,
+            )
+        if net is None:
+            # The AP disappeared after its BSSID was queued for display. A
+            # later refresh will add it again if it is still in range.
+            logging.debug("Skipping vanished access point %s", bssid)
+            return
         ssid = net["SSID"]
 
         connect = self._gtk.Button("load", None, "color3", self.bts)
@@ -480,7 +489,7 @@ class Panel(ScreenPanel):
             if not bssid:
                 continue
             if bssid not in self.network_rows:
-                self.add_network(bssid)
+                self.add_network(bssid, net)
             self.update_network_info(net)
 
         for i, net in enumerate(nets):

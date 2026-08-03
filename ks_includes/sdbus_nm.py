@@ -210,20 +210,32 @@ class SdbusNm:
     def get_networks(self):
         networks = []
         if self.wlan_device:
-            all_aps = [AccessPoint(result) for result in self.wlan_device.access_points]
-            networks.extend(
-                {
-                    "SSID": ap.ssid.decode("utf-8", errors="ignore"),
-                    "known": self.is_known(ap.ssid.decode("utf-8", errors="ignore")),
-                    "security": get_encryption(ap.rsn_flags or ap.wpa_flags or ap.flags),
-                    "frequency": WifiChannels(ap.frequency)[0],
-                    "channel": WifiChannels(ap.frequency)[1],
-                    "signal_level": ap.strength,
-                    "BSSID": ap.hw_address,
-                }
-                for ap in all_aps
-                if ap.ssid
-            )
+            for path in self.wlan_device.access_points:
+                ap = AccessPoint(path)
+                try:
+                    ssid_bytes = ap.ssid
+                    if not ssid_bytes:
+                        continue
+                    ssid = ssid_bytes.decode("utf-8", errors="ignore")
+                    frequency = ap.frequency
+                    band, channel = WifiChannels(frequency)
+                    networks.append(
+                        {
+                            "SSID": ssid,
+                            "known": self.is_known(ssid),
+                            "security": get_encryption(
+                                ap.rsn_flags or ap.wpa_flags or ap.flags
+                            ),
+                            "frequency": band,
+                            "channel": channel,
+                            "signal_level": ap.strength,
+                            "BSSID": ap.hw_address,
+                        }
+                    )
+                except (sdbus.DbusUnknownMethodError, sdbus.DbusUnknownObjectError):
+                    # NetworkManager may remove an AP between returning its
+                    # object path and our property reads during a rescan.
+                    logging.debug("Skipping stale access point %s", path)
             return sorted(networks, key=lambda i: i["signal_level"], reverse=True)
         return networks
 
@@ -236,7 +248,13 @@ class SdbusNm:
         return AccessPoint(self.wlan_device.active_access_point)
 
     def get_connected_bssid(self):
-        return self.get_connected_ap().hw_address if self.get_connected_ap() is not None else None
+        try:
+            access_point = self.get_connected_ap()
+            return access_point.hw_address if access_point is not None else None
+        except (sdbus.DbusUnknownMethodError, sdbus.DbusUnknownObjectError):
+            # A disconnect can invalidate the active AP path before the device
+            # property changes to "/"; treat that short window as disconnected.
+            return None
 
     def get_security_type(self, ssid):
         return next(

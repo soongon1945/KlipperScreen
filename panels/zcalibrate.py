@@ -169,17 +169,26 @@ class Panel(ScreenPanel):
     def set_commands(self):
         commands = Gtk.ListStore(str)
 
-        if "PROBE_CALIBRATE" in self._printer.available_commands:
-            commands.append({"PROBE_CALIBRATE"})
-        if "Z_ENDSTOP_CALIBRATE" in self._printer.available_commands:
-            commands.append({"Z_ENDSTOP_CALIBRATE"})
-        if "BED_MESH_CALIBRATE" in self._printer.available_commands:
-            commands.append({"BED_MESH_CALIBRATE METHOD=manual"})
-        if "DELTA_CALIBRATE" in self._printer.available_commands:
-            commands.append({"DELTA_CALIBRATE"})
-            commands.append({"DELTA_CALIBRATE METHOD=manual"})
-        if "AXIS_TWIST_COMPENSATION_CALIBRATE" in self._printer.available_commands:
-            commands.append({"AXIS_TWIST_COMPENSATION_CALIBRATE"})
+        if self._printer.config_section_exists("stepper_z") \
+                and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+            if "Z_ENDSTOP_CALIBRATE" in self._printer.available_commands:
+                commands.append({"Z_ENDSTOP_CALIBRATE"})
+        probe_config = self._printer.get_config_section("probe")
+        if "zmax_pin" in probe_config.keys() and "ZMAX_PROBE_CALIBRATE" in self._printer.available_commands:
+            commands.append({"ZMAX_PROBE_CALIBRATE PROBE_SPEED=10 SAVE=1"})
+        if self._printer.config_section_exists("stepper_z") \
+                and self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
+            if "PROBE_CALIBRATE" in self._printer.available_commands:
+                commands.append({"PROBE_CALIBRATE"})
+            if "Z_ENDSTOP_CALIBRATE" in self._printer.available_commands:
+                commands.append({"Z_ENDSTOP_CALIBRATE"})
+            if "BED_MESH_CALIBRATE" in self._printer.available_commands:
+                commands.append({"BED_MESH_CALIBRATE METHOD=manual"})
+            if "DELTA_CALIBRATE" in self._printer.available_commands:
+                commands.append({"DELTA_CALIBRATE"})
+                commands.append({"DELTA_CALIBRATE METHOD=manual"})
+            if "AXIS_TWIST_COMPENSATION_CALIBRATE" in self._printer.available_commands:
+                commands.append({"AXIS_TWIST_COMPENSATION_CALIBRATE"})
 
         # Custom commands
         if self.ks_printer_cfg is not None:
@@ -219,9 +228,25 @@ class Panel(ScreenPanel):
         self._screen._ws.api.gcode_script("SET_GCODE_OFFSET Z=0")
         if self._printer.config_section_exists("bed_mesh"):
             self._screen._ws.api.gcode_script("BED_MESH_CLEAR")
-        if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.api.gcode_script("G28")
-        self._move_to_position(*self._get_calibration_location())
+        #if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
+        #    self._screen._ws.api.gcode_script("G28")
+        #self._move_to_position(*self._get_calibration_location())
+        self._screen._ws.api.gcode_script("G28")
+        self._screen._ws.klippy.gcode_script("G0 Z10 F300")
+        self._screen._ws.klippy.gcode_script("G0 X0 Y0 F1000")
+        self.bmc_points = self._printer.get_stat('bed_mesh', 'bmc_points')
+        if "Z_ENDSTOP_CALIBRATE" in command:
+            x_offset = y_offset = None
+            if self.probe:
+                if "x_offset" in self.probe:
+                    x_offset = float(self.probe['x_offset'])
+                if "y_offset" in self.probe:
+                    y_offset = float(self.probe['y_offset'])
+            if self.bmc_points[0][0] is not None and self.bmc_points[0][1] is not None:
+                if self._printer.config_section_exists("extruder1"):
+                    self._screen._ws.klippy.gcode_script(f'G0 X{self.bmc_points[0][0]} Y{self.bmc_points[0][1]} F1000')
+                else:
+                    self._screen._ws.klippy.gcode_script(f'G0 X{self.bmc_points[0][0] - x_offset} Y{self.bmc_points[0][1] - y_offset} F1000')
         self._screen._ws.api.gcode_script(command)
 
     def _move_to_position(self, x, y):

@@ -210,6 +210,7 @@ class KlipperScreenConfig:
                     "theme",
                     "screen_blanking_printing",
                     "font_size",
+                    "nozzle_size",
                     "print_estimate_method",
                     "screen_blanking",
                     "screen_on_devices",
@@ -418,6 +419,20 @@ class KlipperScreenConfig:
                         {"name": _("Large"), "value": "large"},
                         {"name": _("Extra Large"), "value": "extralarge"},
                         {"name": _("Maximum"), "value": "max"},
+                    ],
+                }
+            },
+            {
+                "nozzle_size": {
+                    "section": "main",
+                    "name": _("Nozzle Size"),
+                    "type": "dropdown",
+                    "value": "0.4",
+                    "callback": screen.change_nozzle_size,
+                    "options": [
+                        {"name": _("0.4mm") + " " + _("(default)"), "value": "0.4"},
+                        {"name": _("0.2mm"), "value": "0.2"},
+                        {"name": _("0.8mm"), "value": "0.8"}
                     ],
                 }
             },

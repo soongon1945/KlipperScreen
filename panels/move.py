@@ -110,6 +110,8 @@ class Panel(ScreenPanel):
         if has_dual_carriage and has_t1:
             extra_button = self.buttons["switch_toolhead"]
             self.set_toolhead_label()
+            extra_button1 = self.buttons["motors_off"]
+            grid.attach(extra_button1, 4, 0, 1, 1)
         grid.attach(extra_button, 2, 0, 1, 1)
 
         distgrid = Gtk.Grid()
@@ -303,7 +305,9 @@ class Panel(ScreenPanel):
         self._screen.show_panel("menu", disname, items=menuitems)
 
     def switch_toolhead(self, widget):
+        self._screen._ws.api.gcode_script(KlippyGcodes.HOME_XY)
         current = self._printer.get_stat("toolhead", "extruder")
         is_t1 = current and current.startswith("extruder1")
         script = {"script": "T0" if is_t1 else "T1"}
         self._screen._send_action(widget, "printer.gcode.script", script)
+

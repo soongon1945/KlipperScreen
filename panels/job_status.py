@@ -16,16 +16,6 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    def _get_tool_label(self, extruder):
-        if not extruder.startswith("extruder"):
-            return extruder
-        if extruder == "extruder":
-            return "T1"
-        suffix = extruder[8:]
-        if suffix.isdigit():
-            return f"T{int(suffix) + 1}"
-        return extruder
-
     def __init__(self, screen, title):
         title = title or _("Job Status")
         super().__init__(screen, title)
@@ -607,9 +597,7 @@ class Panel(ScreenPanel):
                     digits=0,
                 )
                 if x in self.buttons["extruder"]:
-                    self.buttons["extruder"][x].set_label(
-                        f"{self._get_tool_label(x)} {self.labels[x].get_text()}"
-                    )
+                    self.buttons["extruder"][x].set_label(self.labels[x].get_text())
                 elif x in self.buttons["heater"]:
                     self.buttons["heater"][x].set_label(self.labels[x].get_text())
 

@@ -156,8 +156,8 @@ class Panel(ScreenPanel):
         self.labels["profiles"].show_all()
 
     def back(self):
-        self._screen._ws.klippy.gcode_script("M104 T0 S0")
-        self._screen._ws.klippy.gcode_script("M140 S0")
+        self._screen._ws.api.gcode_script("M104 T0 S0")
+        self._screen._ws.api.gcode_script("M140 S0")
         if self.show_create is True:
             self.remove_create()
             return True
@@ -267,12 +267,12 @@ class Panel(ScreenPanel):
         #    self._screen._ws.api.gcode_script("G28")
         self._screen._ws.api.gcode_script("G28")
         self._screen.show_popup_message(_("Heating. Calibration will begin when the temperature reaches"), level=1)
-        self._screen._ws.klippy.gcode_script("M104 T0 S140")
-        self._screen._ws.klippy.gcode_script("M190 S65")
+        self._screen._ws.api.gcode_script("M104 T0 S140")
+        self._screen._ws.api.gcode_script("M190 S65")
         if self._printer.config_section_exists("stepper_z") \
                 and self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
-            self._screen._ws.klippy.gcode_script("PROBE_ON")
-        self._screen._ws.klippy.gcode_script("M109 T0 S140")
+            self._screen._ws.api.gcode_script("PROBE_ON")
+        self._screen._ws.api.gcode_script("M109 T0 S140")
 
         if "Z_TILT_ADJUST" in self._printer.available_commands and not bool(
             self._printer.get_stat("z_tilt", "applied")

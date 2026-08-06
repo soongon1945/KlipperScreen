@@ -548,8 +548,9 @@ class Panel(ScreenPanel):
         logging.debug("Canceling print")
         self.set_state("cancelling")
         self.disable_button("pause", "resume", "cancel")
+        # Moonraker executes the configured CANCEL_PRINT macro, which owns all
+        # end-of-print cleanup; a second PRINT_END duplicates that cleanup.
         self._screen._ws.api.print_cancel()
-        self._screen._ws.api.gcode_script("PRINT_END")
 
     def close_panel(self, widget=None):
         if self.can_close:

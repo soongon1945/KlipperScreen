@@ -71,6 +71,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self._cur_panels = []
 
         self.poweroff_filename = ""
+        self._dismissed_poweroff_filenames = set()
         self.poweroff_data_path = os.path.expanduser(
             "~/printer_data/config/PowerOffData.cfg"
         )
@@ -961,7 +962,11 @@ class KlipperScreen(Gtk.ApplicationWindow):
                     for name, val in varfile.items('Variables'):
                         allvars[name] = ast.literal_eval(val)
                 filename = allvars.get("filename")
-                if allvars.get("was_interrupted") is True and isinstance(filename, str):
+                if (
+                    allvars.get("was_interrupted") is True
+                    and isinstance(filename, str)
+                    and filename not in self._dismissed_poweroff_filenames
+                ):
                     self.poweroff_filename = filename
                     return bool(filename)
             except (OSError, ValueError, SyntaxError, configparser.Error) as err:
@@ -973,7 +978,38 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
         return False
 
+    def clear_poweroff_state(self, filename):
+        # After user explicitly cancels power-loss recovery, stale was_interrupted
+        # flags can keep the UI in a reopen loop. Keep local UI responsive by
+        # clearing this marker when available.
+        try:
+            if not os.path.exists(self.poweroff_data_path):
+                return
+            varfile = configparser.ConfigParser(interpolation=None)
+            varfile.read(self.poweroff_data_path)
+            if not varfile.has_section("Variables"):
+                return
+            varfile.set("Variables", "was_interrupted", "False")
+            if "filename" not in varfile["Variables"]:
+                return
+            if varfile.get("Variables", "filename", fallback="") == filename:
+                # Keep unrelated state, but remove stale file name for this run.
+                varfile.set("Variables", "filename", "''")
+            with open(self.poweroff_data_path, "w") as f:
+                varfile.write(f)
+                f.flush()
+        except (OSError, ValueError, SyntaxError, configparser.Error) as err:
+            logging.warning(
+                "Unable to clear power-loss state in %s: %s",
+                self.poweroff_data_path,
+                err,
+            )
+
     def poweroff_warning(self, filename):
+        # If the current file has been dismissed by user action in this session,
+        # do not re-open the same modal and risk blocking touch input.
+        if filename in self._dismissed_poweroff_filenames:
+            return
         warning = _("Restore power off file") + ": "
         buttons = [
             {"name": _("Print"), "response": Gtk.ResponseType.OK},
@@ -997,14 +1033,13 @@ class KlipperScreen(Gtk.ApplicationWindow):
     def power_ks(self, widget, response_id, filename):
         self.gtk.remove_dialog(widget)
         if response_id == Gtk.ResponseType.CANCEL:
-            self.show_panel(
-                "main_menu",
-                remove_all=True,
-                items=self._config.get_menu_items("__main"),
-            )
-            # show_panel() now restores the panel content and titlebar; the
-            # legacy base_panel_show_all() helper was removed upstream.
-            self._ws.api.gcode_script("PRINT_END")
+            if isinstance(filename, str):
+                self._dismissed_poweroff_filenames.add(filename)
+                self.clear_poweroff_state(filename)
+                self.poweroff_filename = ""
+            # End recovery path first, then restore to main menu after the
+            # printer processes PRINT_END to avoid stale panel transitions.
+            self._ws.api.gcode_script("PRINT_END", self._poweroff_cancel_done)
             return
         logging.info(f"Starting print: {filename}")
         # Each recovery stage depends on the previous command.  Callback
@@ -1012,6 +1047,15 @@ class KlipperScreen(Gtk.ApplicationWindow):
         # printer.print.start on a busy Moonraker connection.
         self._ws.api.gcode_script(
             "ALLOW_INTERRUPT", self._start_interrupted_print, filename
+        )
+
+    def _poweroff_cancel_done(self, response, method, params):
+        if "error" in response:
+            self.show_popup_message(str(response["error"]), level=3)
+        self.show_panel(
+            "main_menu",
+            remove_all=True,
+            items=self._config.get_menu_items("__main"),
         )
 
     def _start_interrupted_print(self, response, method, params, filename):

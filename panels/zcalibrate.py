@@ -227,8 +227,7 @@ class Panel(ScreenPanel):
             self._screen.show_popup_message(_("Aborting previous probe calibration, start again"))
             return
 
-        self.buttons["start"].set_sensitive(False)
-        self.dropdown.set_sensitive(False)
+        self.buttons_homing()
 
         self._screen._ws.api.gcode_script("SET_GCODE_OFFSET Z=0")
         if self._printer.config_section_exists("bed_mesh"):
@@ -253,8 +252,6 @@ class Panel(ScreenPanel):
                 else:
                     self._screen._ws.api.gcode_script(f'G0 X{self.bmc_points[0][0] - x_offset} Y{self.bmc_points[0][1] - y_offset} F1000')
         self._screen._ws.api.gcode_script(command)
-        if "ZMAX_PROBE_CALIBRATE" in command:
-            self._waiting_for_zmax_confirm = True
 
     def _move_to_position(self, x, y):
         if not x or not y:
@@ -393,20 +390,41 @@ class Panel(ScreenPanel):
         logging.info("Accepting Z position")
         # ZMAX calibration leaves the carriage at the upper endstop. Home only
         # after its result is saved; other calibration modes must keep position.
-        script = "ACCEPT\nG28" if self._is_zmax_selected() else "ACCEPT"
-        self._screen._ws.api.gcode_script(script)
+        if self._is_zmax_selected():
+            self.buttons_homing()
+            self._screen._ws.api.gcode_script(
+                "ACCEPT\nG28", self._on_homing_complete
+            )
+        else:
+            self._screen._ws.api.gcode_script("ACCEPT")
         self._waiting_for_zmax_confirm = False
 
     def abort(self, widget):
         # The same ZMAX recovery is required after cancellation, but a normal
         # manual-probe abort must not unexpectedly home the whole machine.
-        script = "ABORT\nG28" if self._is_zmax_selected() else "ABORT"
+        is_zmax = self._is_zmax_selected()
+        script = "ABORT\nG28" if is_zmax else "ABORT"
         self._screen._confirm_send_action(
             widget,
             _("Are you sure you want to stop the calibration?"),
             "printer.gcode.script",
             {"script": script},
+            self.buttons_homing if is_zmax else None,
+            self._on_homing_complete if is_zmax else None,
         )
+
+    def _on_homing_complete(self, response, method, params):
+        self._waiting_for_zmax_confirm = False
+        self.buttons_not_calibrating()
+
+    def buttons_homing(self):
+        # G28 moves every homed axis. Keep all calibration actions insensitive
+        # until its request completes so touchscreen taps cannot enqueue TESTZ,
+        # ACCEPT, or ABORT against a moving carriage.
+        self.buttons["start"].set_sensitive(False)
+        self.dropdown.set_sensitive(False)
+        for name in ("zpos", "zneg", "complete", "cancel"):
+            self.buttons[name].set_sensitive(False)
 
     def buttons_calibrating(self):
         self.buttons["start"].get_style_context().remove_class("color3")

@@ -1407,7 +1407,9 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self._ws.api.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
             self._ws.api.gcode_script("SAVE_CONFIG")
 
-    def _confirm_send_action(self, widget, text, method, params=None):
+    def _confirm_send_action(
+        self, widget, text, method, params=None, on_confirm=None, callback=None
+    ):
         buttons = [
             {"name": _("Accept"), "response": Gtk.ResponseType.OK, "style": "dialog-info"},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": "dialog-error"},
@@ -1434,13 +1436,30 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if self.confirm is not None:
             self.gtk.remove_dialog(self.confirm)
         self.confirm = self.gtk.Dialog(
-            "KlipperScreen", buttons, label, self._confirm_send_action_response, method, params
+            "KlipperScreen",
+            buttons,
+            label,
+            self._confirm_send_action_response,
+            method,
+            params,
+            on_confirm,
+            callback,
         )
 
-    def _confirm_send_action_response(self, dialog, response_id, method, params):
+    def _confirm_send_action_response(
+        self, dialog, response_id, method, params, on_confirm, callback
+    ):
         self.gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
-            self._send_action(None, method, params)
+            if on_confirm is not None:
+                on_confirm()
+            if callback is None:
+                self._send_action(None, method, params)
+            else:
+                # Some safety-sensitive actions must keep their controls locked
+                # until Moonraker confirms the complete G-code script finished.
+                logging.info(f"{method}: {params}")
+                self._ws.send_method(method, params, callback)
 
     def _send_action(self, widget, method, params):
         logging.info(f"{method}: {params}")

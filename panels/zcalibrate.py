@@ -89,13 +89,11 @@ class Panel(ScreenPanel):
             "start": self._gtk.Button("resume", _("Start"), "color3"),
             "complete": self._gtk.Button("complete", _("Accept"), "color3"),
             "cancel": self._gtk.Button("cancel", _("Abort"), "color2"),
-            "save": self._gtk.Button("complete", _("Save"), "color3"),
         }
 
         self.buttons["zpos"].connect("clicked", self.move, "+")
         self.buttons["zneg"].connect("clicked", self.move, "-")
         self.buttons["complete"].connect("clicked", self.accept)
-        self.buttons["save"].connect("clicked", self.save_calibration_config)
         # Abort may leave nozzle position in a probing state; home once user confirms
         # cancellation so subsequent operations return to a known base state.
         script = {"script": "ABORT\nG28"}
@@ -115,12 +113,6 @@ class Panel(ScreenPanel):
         self.dropdown.pack_start(renderer_text, True)
         self.dropdown.add_attribute(renderer_text, "text", 0)
         self.dropdown.set_active(0)
-        active_iter = self.dropdown.get_active_iter()
-        if active_iter is not None:
-            self._refresh_save_visibility(self.dropdown.get_model()[active_iter][0])
-        else:
-            self.buttons["save"].set_visible(False)
-            self.buttons["save"].set_no_show_all(True)
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -155,7 +147,6 @@ class Panel(ScreenPanel):
             grid.attach(pos, 1, 0, 1, 1)
             grid.attach(self.buttons["complete"], 1, 1, 1, 1)
             grid.attach(self.buttons["cancel"], 1, 2, 1, 1)
-            grid.attach(self.buttons["save"], 1, 3, 1, 1)
             grid.attach(distances, 0, 3, 2, 1)
         else:
             zpos_row, zneg_row = (
@@ -169,7 +160,6 @@ class Panel(ScreenPanel):
             grid.attach(pos, 1, 1, 1, 1)
             grid.attach(self.buttons["complete"], 2, 0, 1, 1)
             grid.attach(self.buttons["cancel"], 2, 1, 1, 1)
-            grid.attach(self.buttons["save"], 2, 2, 1, 1)
             grid.attach(distances, 0, 2, 3, 1)
 
         self.content.add(grid)
@@ -180,7 +170,6 @@ class Panel(ScreenPanel):
         if len(model) == 0 or iterable is None:
             return
         logging.debug(f"Selected {model[iterable][0]}")
-        self._refresh_save_visibility(model[iterable][0])
 
     def set_commands(self):
         commands = Gtk.ListStore(str)
@@ -216,25 +205,12 @@ class Panel(ScreenPanel):
         logging.info(f"Available commands for calibration: {[row[0] for row in commands]}")
         return commands
 
-    def _is_z_endstop_mode(self, command):
-        return command == "Z_ENDSTOP_CALIBRATE"
-
-    def _refresh_save_visibility(self, command):
-        show_save = self._is_z_endstop_mode(command)
-        # Save should only be exposed in Z endstop mode to avoid accidental
-        # configuration persistence in unrelated calibration workflows.
-        self.buttons["save"].set_visible(show_save)
-        self.buttons["save"].set_no_show_all(not show_save)
-
     def rebuild_commands(self):
         if len(self.dropdown.get_model()) > 0:
             return
         new_model = self.set_commands()
         self.dropdown.set_model(new_model)
         self.dropdown.set_active(0)
-        active_iter = self.dropdown.get_active_iter()
-        if active_iter is not None:
-            self._refresh_save_visibility(self.dropdown.get_model()[active_iter][0])
 
     @staticmethod
     def _csv_to_array(string):
@@ -288,7 +264,6 @@ class Panel(ScreenPanel):
         self._screen._ws.api.gcode_script(command)
         if "ZMAX_PROBE_CALIBRATE" in command:
             self._waiting_for_zmax_confirm = True
-        self._refresh_save_visibility(command)
 
     def _move_to_position(self, x, y):
         if not x or not y:
@@ -419,20 +394,6 @@ class Panel(ScreenPanel):
         # Confirm z max calibration result, then immediately home to sync host/tool states.
         self._screen._ws.api.gcode_script("ACCEPT\nG28")
         self._waiting_for_zmax_confirm = False
-
-    def save_calibration_config(self, widget):
-        model = self.dropdown.get_model()
-        iterable = self.dropdown.get_active_iter()
-        if len(model) == 0 or iterable is None:
-            self._screen.show_popup_message(_("No calibration command selected"), level=2)
-            return
-        if not self._is_z_endstop_mode(model[iterable][0]):
-            self._screen.show_popup_message(_("Save is only available for Z endstop calibration"), level=2)
-            return
-        if "SAVE_CONFIG" in self._printer.available_commands:
-            self._screen._ws.api.gcode_script("SAVE_CONFIG")
-        else:
-            self._screen.show_popup_message(_("SAVE_CONFIG command is unavailable"), level=2)
 
     def buttons_calibrating(self):
         self.buttons["start"].get_style_context().remove_class("color3")

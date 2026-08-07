@@ -94,16 +94,7 @@ class Panel(ScreenPanel):
         self.buttons["zpos"].connect("clicked", self.move, "+")
         self.buttons["zneg"].connect("clicked", self.move, "-")
         self.buttons["complete"].connect("clicked", self.accept)
-        # Abort may leave nozzle position in a probing state; home once user confirms
-        # cancellation so subsequent operations return to a known base state.
-        script = {"script": "ABORT\nG28"}
-        self.buttons["cancel"].connect(
-            "clicked",
-            self._screen._confirm_send_action,
-            ("Are you sure you want to stop the calibration?"),
-            "printer.gcode.script",
-            script,
-        )
+        self.buttons["cancel"].connect("clicked", self.abort)
         self.buttons["start"].connect("clicked", self.start_calibration)
 
         self.dropdown = ComboBoxPlus(model=self.set_commands())
@@ -389,11 +380,33 @@ class Panel(ScreenPanel):
     def move(self, widget, direction):
         self._screen._ws.api.gcode_script(f"TESTZ Z={direction}{self.distance}")
 
+    def _is_zmax_selected(self):
+        model = self.dropdown.get_model()
+        iterable = self.dropdown.get_active_iter()
+        return (
+            len(model) > 0
+            and iterable is not None
+            and "ZMAX_PROBE_CALIBRATE" in model[iterable][0]
+        )
+
     def accept(self, widget):
         logging.info("Accepting Z position")
-        # Confirm z max calibration result, then immediately home to sync host/tool states.
-        self._screen._ws.api.gcode_script("ACCEPT\nG28")
+        # ZMAX calibration leaves the carriage at the upper endstop. Home only
+        # after its result is saved; other calibration modes must keep position.
+        script = "ACCEPT\nG28" if self._is_zmax_selected() else "ACCEPT"
+        self._screen._ws.api.gcode_script(script)
         self._waiting_for_zmax_confirm = False
+
+    def abort(self, widget):
+        # The same ZMAX recovery is required after cancellation, but a normal
+        # manual-probe abort must not unexpectedly home the whole machine.
+        script = "ABORT\nG28" if self._is_zmax_selected() else "ABORT"
+        self._screen._confirm_send_action(
+            widget,
+            _("Are you sure you want to stop the calibration?"),
+            "printer.gcode.script",
+            {"script": script},
+        )
 
     def buttons_calibrating(self):
         self.buttons["start"].get_style_context().remove_class("color3")

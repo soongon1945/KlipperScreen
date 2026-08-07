@@ -345,7 +345,7 @@ class Panel(ScreenPanel):
                 else:
                     self.buttons_not_calibrating()
             elif self._waiting_for_zmax_confirm:
-                self.buttons_calibrating()
+                self.buttons_zmax_confirming()
             if len(self.dropdown.get_model()) == 0 and self._printer.available_commands:
                 self.rebuild_commands()
         elif action == "notify_gcode_response":
@@ -355,7 +355,7 @@ class Panel(ScreenPanel):
             elif "z max position is" in data.lower():
                 self._screen.show_popup_message(data)
                 self._waiting_for_zmax_confirm = True
-                self.buttons_calibrating()
+                self.buttons_zmax_confirming()
                 logging.info(data)
             elif "fail" in data.lower() and "use testz" in data.lower():
                 self._screen.show_popup_message(_("Failed, adjust position first"))
@@ -425,6 +425,19 @@ class Panel(ScreenPanel):
         self.dropdown.set_sensitive(False)
         for name in ("zpos", "zneg", "complete", "cancel"):
             self.buttons[name].set_sensitive(False)
+
+    def buttons_zmax_confirming(self):
+        # Klipper's ZMAX confirmation registers only ACCEPT and ABORT. It does
+        # not expose TESTZ because moving after the upper switch triggers would
+        # be unmonitored and could invalidate the measured maximum position.
+        self.buttons["start"].set_sensitive(False)
+        self.dropdown.set_sensitive(False)
+        self.buttons["zpos"].set_sensitive(False)
+        self.buttons["zneg"].set_sensitive(False)
+        self.buttons["complete"].set_sensitive(True)
+        self.buttons["complete"].get_style_context().add_class("color3")
+        self.buttons["cancel"].set_sensitive(True)
+        self.buttons["cancel"].get_style_context().add_class("color2")
 
     def buttons_calibrating(self):
         self.buttons["start"].get_style_context().remove_class("color3")

@@ -222,6 +222,15 @@ class Panel(ScreenPanel):
             return
         command = model[iterable][0]
 
+        # If a previous calibration is still running, Klipper rejects a new
+        # manual-probe command. Abort first so operators can restart without
+        # leaving the probe state stuck and without restarting Klipper.
+        if self._printer.get_stat("manual_probe", "is_active"):
+            logging.info("Manual probe already active; aborting before restart")
+            self._screen._ws.api.gcode_script("ABORT")
+            self._screen.show_popup_message(_("Aborting previous probe calibration, start again"))
+            return
+
         self.buttons["start"].set_sensitive(False)
         self.dropdown.set_sensitive(False)
 

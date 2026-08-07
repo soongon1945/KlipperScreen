@@ -17,6 +17,9 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         title = title or _("Z Calibrate")
         super().__init__(screen, title)
+        # ZMAX_PROBE_CALIBRATE uses ACCEPT/ABORT confirmation without
+        # registering as a manual_probe in status, so we track this mode.
+        self._waiting_for_zmax_confirm = False
         self.initialize_mesh_params()
         self.initialize_probe_params()
         self.setup_ui()
@@ -257,6 +260,8 @@ class Panel(ScreenPanel):
                 else:
                     self._screen._ws.api.gcode_script(f'G0 X{self.bmc_points[0][0] - x_offset} Y{self.bmc_points[0][1] - y_offset} F1000')
         self._screen._ws.api.gcode_script(command)
+        if "ZMAX_PROBE_CALIBRATE" in command:
+            self._waiting_for_zmax_confirm = True
 
     def _move_to_position(self, x, y):
         if not x or not y:
@@ -349,11 +354,18 @@ class Panel(ScreenPanel):
                     self.buttons_calibrating()
                 else:
                     self.buttons_not_calibrating()
+            elif self._waiting_for_zmax_confirm:
+                self.buttons_calibrating()
             if len(self.dropdown.get_model()) == 0 and self._printer.available_commands:
                 self.rebuild_commands()
         elif action == "notify_gcode_response":
             if "out of range" in data.lower():
                 self._screen.show_popup_message(data)
+                logging.info(data)
+            elif "z max position is" in data.lower():
+                self._screen.show_popup_message(data)
+                self._waiting_for_zmax_confirm = True
+                self.buttons_calibrating()
                 logging.info(data)
             elif "fail" in data.lower() and "use testz" in data.lower():
                 self._screen.show_popup_message(_("Failed, adjust position first"))
@@ -378,6 +390,7 @@ class Panel(ScreenPanel):
     def accept(self, widget):
         logging.info("Accepting Z position")
         self._screen._ws.api.gcode_script("ACCEPT")
+        self._waiting_for_zmax_confirm = False
 
     def buttons_calibrating(self):
         self.buttons["start"].get_style_context().remove_class("color3")

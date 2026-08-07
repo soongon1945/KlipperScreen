@@ -21,6 +21,7 @@ class Panel(ScreenPanel):
         self.profiles = {}
         self.current_point = -1
         self.preheat_started = False
+        self.save_in_progress = False
         offset_min = self._printer.get_stat("toolhead", "axis_minimum")
         offset_max = self._printer.get_stat("toolhead", "axis_maximum")
         if (
@@ -176,6 +177,11 @@ class Panel(ScreenPanel):
         self.labels['map'].queue_draw()
 
     def back(self):
+        # Skip redundant heater shutdown commands while a SAVE_CONFIG sequence is
+        # in progress; that sequence already turns heaters off and triggers a
+        # reconnect, so extra commands can fail and only create noisy logs.
+        if self.save_in_progress:
+            return False
         if self.preheat_started:
             self._screen._ws.api.gcode_script("M104 T0 S0")
             self._screen._ws.api.gcode_script("M104 T1 S0")
@@ -353,7 +359,16 @@ T0
             return
         # The apply command only stages configfile values.  SAVE_CONFIG is
         # required to persist the calibrated nozzle geometry across restarts.
-        self._screen._ws.api.gcode_script(f"{apply_command}\nSAVE_CONFIG")
+        self.save_in_progress = True
+        script = [
+            "M104 T0 S0",
+            "M104 T1 S0",
+        ]
+        if self._printer.config_section_exists("heater_bed"):
+            script.append("M140 S0")
+        script.append(apply_command)
+        script.append("SAVE_CONFIG")
+        self._screen._ws.api.gcode_script("\n".join(script))
 
     def send_remove_offset(self, widget):
         self.current_point = -1

@@ -94,7 +94,9 @@ class Panel(ScreenPanel):
         self.buttons["zpos"].connect("clicked", self.move, "+")
         self.buttons["zneg"].connect("clicked", self.move, "-")
         self.buttons["complete"].connect("clicked", self.accept)
-        script = {"script": "ABORT"}
+        # Abort may leave nozzle position in a probing state; home once user confirms
+        # cancellation so subsequent operations return to a known base state.
+        script = {"script": "ABORT\nG28"}
         self.buttons["cancel"].connect(
             "clicked",
             self._screen._confirm_send_action,
@@ -389,7 +391,8 @@ class Panel(ScreenPanel):
 
     def accept(self, widget):
         logging.info("Accepting Z position")
-        self._screen._ws.api.gcode_script("ACCEPT")
+        # Confirm z max calibration result, then immediately home to sync host/tool states.
+        self._screen._ws.api.gcode_script("ACCEPT\nG28")
         self._waiting_for_zmax_confirm = False
 
     def buttons_calibrating(self):

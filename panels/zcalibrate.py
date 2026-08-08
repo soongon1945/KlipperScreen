@@ -20,6 +20,9 @@ class Panel(ScreenPanel):
         # ZMAX_PROBE_CALIBRATE uses ACCEPT/ABORT confirmation without
         # registering as a manual_probe in status, so we track this mode.
         self._waiting_for_zmax_confirm = False
+        # Track the currently selected calibration command explicitly so mode
+        # decisions do not depend on transient ComboBox state after mode switches.
+        self._selected_command = None
         self.initialize_mesh_params()
         self.initialize_probe_params()
         self.setup_ui()
@@ -104,6 +107,9 @@ class Panel(ScreenPanel):
         self.dropdown.pack_start(renderer_text, True)
         self.dropdown.add_attribute(renderer_text, "text", 0)
         self.dropdown.set_active(0)
+        active_iter = self.dropdown.get_active_iter()
+        if active_iter is not None:
+            self._selected_command = self.dropdown.get_model()[active_iter][0]
 
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
@@ -160,7 +166,11 @@ class Panel(ScreenPanel):
         iterable = dropdown.get_active_iter()
         if len(model) == 0 or iterable is None:
             return
-        logging.debug(f"Selected {model[iterable][0]}")
+        selected = model[iterable][0]
+        self._selected_command = selected
+        if self._waiting_for_zmax_confirm and "ZMAX_PROBE_CALIBRATE" not in selected:
+            self._waiting_for_zmax_confirm = False
+        logging.debug(f"Selected {selected}")
 
     def set_commands(self):
         commands = Gtk.ListStore(str)
@@ -216,7 +226,9 @@ class Panel(ScreenPanel):
         if iterable is None:
             self._screen.show_popup_message("Unknown error with dropdown")
             return
-        command = model[iterable][0]
+        command = self._selected_command
+        if command is None:
+            command = model[iterable][0]
 
         # If a previous calibration is still running, Klipper rejects a new
         # manual-probe command. Abort first so operators can restart without
@@ -378,13 +390,7 @@ class Panel(ScreenPanel):
         self._screen._ws.api.gcode_script(f"TESTZ Z={direction}{self.distance}")
 
     def _is_zmax_selected(self):
-        model = self.dropdown.get_model()
-        iterable = self.dropdown.get_active_iter()
-        return (
-            len(model) > 0
-            and iterable is not None
-            and "ZMAX_PROBE_CALIBRATE" in model[iterable][0]
-        )
+        return self._selected_command is not None and "ZMAX_PROBE_CALIBRATE" in self._selected_command
 
     def accept(self, widget):
         logging.info("Accepting Z position")

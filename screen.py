@@ -443,6 +443,11 @@ class KlipperScreen(Gtk.ApplicationWindow):
             ):
                 try:
                     self.panels[panel_name] = self._load_panel(panel).Panel(self, title, **kwargs)
+                    if panel_name in self.panels_reinit:
+                        # This instance is already initialized.  Leaving its
+                        # stale reconnect marker makes attach_panel() reload
+                        # every panel and return the operator to the home page.
+                        self.panels_reinit.remove(panel_name)
                 except Exception as e:
                     self.show_error_modal(
                         f"Unable to load panel {panel}", f"{e}\n\n{traceback.format_exc()}"

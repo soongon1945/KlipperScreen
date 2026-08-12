@@ -1184,63 +1184,70 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.check_filament[index] = detected if enabled else True
 
         self.current_extruder = self.printer.get_stat("toolhead", "extruder")
-        has_temp_t0 = t0_target > 0
-        has_temp_t1 = t1_target > 0 and has_extruder1
+        active_sensor = {
+            "extruder": 0,
+            "extruder1": 1,
+        }.get(self.current_extruder)
+        if active_sensor is None:
+            logging.warning(
+                "Filament failover skipped: unknown active extruder %r",
+                self.current_extruder,
+            )
+            self.check_filament_cnt = 0
+            return True
 
-        if has_temp_t0 and has_temp_t1:
-            if not self.check_filament[0] or not self.check_filament[1]:
-                self.check_filament_cnt += 1
-            else:
-                self.check_filament_cnt = 0
-        elif has_temp_t0:
-            if not self.check_filament[0]:
-                self.check_filament_cnt += 1
-            else:
-                self.check_filament_cnt = 0
-        elif has_temp_t1:
-            if not self.check_filament[1]:
-                self.check_filament_cnt += 1
-            else:
-                self.check_filament_cnt = 0
+        # A single-tool G-code may keep both heaters targeted.  Heater targets
+        # therefore cannot identify the printing tool; only debounce runout on
+        # toolhead.extruder so an empty inactive spool cannot stop the print.
+        if not self.check_filament[active_sensor]:
+            self.check_filament_cnt += 1
+        else:
+            self.check_filament_cnt = 0
 
         if self.check_filament_cnt == 4:
-            self._handle_empty_filament(has_temp_t0, has_temp_t1, t0_target, t1_target)
+            self._handle_empty_filament(t0_target, t1_target)
 
         return True
 
-    def _handle_empty_filament(self, has_temp_t0, has_temp_t1, t0_target, t1_target):
-        if has_temp_t0 and has_temp_t1:
-            self.check_filament_cnt = 7
-            self.filament_none = True
-            self._ws.api.print_pause()
-        elif has_temp_t0 and not has_temp_t1:
-            if (
-                self.printer.config_section_exists("extruder1")
-                and not self.check_filament[0]
-                and self.check_filament[1]
-                and self.current_extruder == "extruder"
-            ):
-                self._switch_to_backup(5, "T0", "T1", t0_target, "E1", "E2")
-            else:
-                self.check_filament_cnt = 7
-                self.filament_none = True
-                self._ws.api.print_pause()
-        elif has_temp_t1 and not has_temp_t0:
-            if (
-                self.printer.config_section_exists("extruder")
-                and not self.check_filament[1]
-                and self.check_filament[0]
-                and self.current_extruder == "extruder1"
-            ):
-                self._switch_to_backup(6, "T1", "T0", t1_target, "E2", "E1")
-            else:
-                self.check_filament_cnt = 7
-                self.filament_none = True
-                self._ws.api.print_pause()
+    def _handle_empty_filament(self, t0_target, t1_target):
+        if self.current_extruder == "extruder":
+            active_has_filament = self.check_filament[0]
+            backup_has_filament = self.check_filament[1]
+            switch_args = (5, "T0", "T1", t0_target, "E1", "E2")
+        elif self.current_extruder == "extruder1":
+            active_has_filament = self.check_filament[1]
+            backup_has_filament = self.check_filament[0]
+            switch_args = (6, "T1", "T0", t1_target, "E2", "E1")
         else:
-            self.check_filament_cnt = 7
-            self.filament_none = True
-            self._ws.api.print_pause()
+            logging.warning(
+                "Filament failover stopped: unknown active extruder %r",
+                self.current_extruder,
+            )
+            self.check_filament_cnt = 0
+            return
+
+        if active_has_filament:
+            self.check_filament_cnt = 0
+            return
+        if backup_has_filament and switch_args[3] > 100:
+            logging.info(
+                "Active %s is empty; switching to loaded backup %s at %.1f C",
+                switch_args[1],
+                switch_args[2],
+                switch_args[3],
+            )
+            self._switch_to_backup(*switch_args)
+            return
+
+        # With no loaded backup (or no safe printing target), stay paused and
+        # ask for filament instead of cancelling a job the operator can recover.
+        logging.info(
+            "Active %s is empty and no usable backup is available; pausing print",
+            switch_args[1],
+        )
+        self.check_filament_cnt = 7
+        self.filament_none = True
+        self._ws.api.print_pause()
 
     def _switch_to_backup(self, cnt, from_ext, to_ext, temp, from_msg, to_msg):
         self.check_filament_cnt = cnt

@@ -52,7 +52,7 @@ class Panel(ScreenPanel):
         if widget is not None:
             self.set_fan_speed(None, None, fan)
 
-    def add_fan(self, fan):
+    def add_fan(self, fan, used_labels):
 
         logging.info(f"Adding fan: {fan}")
         changeable = any(fan.startswith(x) or fan == x for x in CHANGEABLE_FANS)
@@ -84,6 +84,13 @@ class Panel(ScreenPanel):
                     fan_name = _("Fan")
                 else:
                     fan_name = base[:3].upper() + ":"
+            if fan_name in used_labels:
+                base_label = fan_name.rstrip(":")
+                dup_idx = 2
+                while f"{base_label}{dup_idx}:" in used_labels:
+                    dup_idx += 1
+                fan_name = f"{base_label}{dup_idx}:"
+            used_labels.add(fan_name)
         name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
 
         fan_col = Gtk.Box(spacing=5)
@@ -136,12 +143,13 @@ class Panel(ScreenPanel):
 
     def load_fans(self):
         fans = self._printer.get_fans()
+        used_labels = set()
         for fan in fans:
             # Support for hiding devices by name
             name = fan.split()[1] if len(fan.split()) > 1 else fan
             if name.startswith("_"):
                 continue
-            self.add_fan(fan)
+            self.add_fan(fan, used_labels)
 
     def set_fan_speed(self, widget, event, fan):
         value = self.devices[fan]["scale"].get_value()

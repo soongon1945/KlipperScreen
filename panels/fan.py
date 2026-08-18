@@ -66,24 +66,35 @@ class Panel(ScreenPanel):
         )
         fan_name = _("Part Fan") if fan == "fan" else fan.split()[1]
         fan_cfg = self._printer.get_config_section(fan)
+        cfg_alias = None
         if isinstance(fan_cfg, dict) and fan != "fan":
             cfg_alias = fan_cfg.get("friendly_name")
             if cfg_alias:
-                fan_name = str(cfg_alias).strip()
+                cfg_alias = str(cfg_alias).strip()
         if fan != "fan":
-            base = fan_name
-            i = 1
-            while i < len(base) and base[i].isdigit():
-                i += 1
-            if i > 1 and base[0].isalpha():
-                fan_name = f"{base[:i].upper()}:"
-            else:
-                base = base.split("_")[0].strip()
-                base = re.sub(r"[^A-Za-z0-9]+", "", base)
-                if not base:
-                    fan_name = _("Fan")
+            if cfg_alias:
+                # friendly_name is the operator-facing name; keep it as-is
+                # because the short-label mapping below cannot represent
+                # non-ASCII or multi-word aliases.
+                fan_name = cfg_alias
+            elif fan.startswith("fan_generic"):
+                # Only generic fans need compact labels (E1:, E2:, ...);
+                # heater/controller fans keep their full config name since
+                # this panel has enough room and short codes like MOT: are
+                # harder to read than the original name.
+                base = fan_name
+                i = 1
+                while i < len(base) and base[i].isdigit():
+                    i += 1
+                if i > 1 and base[0].isalpha():
+                    fan_name = f"{base[:i].upper()}:"
                 else:
-                    fan_name = base[:3].upper() + ":"
+                    base = base.split("_")[0].strip()
+                    base = re.sub(r"[^A-Za-z0-9]+", "", base)
+                    if not base:
+                        fan_name = _("Fan") + ":"
+                    else:
+                        fan_name = base[:3].upper() + ":"
             if fan_name in used_labels:
                 base_label = fan_name.rstrip(":")
                 dup_idx = 2
@@ -91,7 +102,7 @@ class Panel(ScreenPanel):
                     dup_idx += 1
                 fan_name = f"{base_label}{dup_idx}:"
             used_labels.add(fan_name)
-        name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
+        name.set_markup(f"\n<big><b>{GLib.markup_escape_text(fan_name)}</b></big>\n")
 
         fan_col = Gtk.Box(spacing=5)
         stop_btn = self._gtk.Button("cancel", None, "color1")

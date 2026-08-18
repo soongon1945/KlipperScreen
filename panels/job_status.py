@@ -214,6 +214,7 @@ class Panel(ScreenPanel):
                     self.buttons["extruder"][self.current_extruder], n, 0, 1, 1
                 )
                 n += 1
+        temp_row = 1 if n > 0 else 0
         self.buttons["heater"] = {}
         for dev in self._printer.get_heaters():
             if n >= nlimit:
@@ -233,8 +234,8 @@ class Panel(ScreenPanel):
                 "clicked", self.menu_item_clicked, {"panel": "temperature", "extra": dev}
             )
             self.buttons["heater"][dev].set_halign(Gtk.Align.START)
-            self.labels["temp_grid"].attach(self.buttons["heater"][dev], n, 0, 1, 1)
-            n += 1
+            self.labels["temp_grid"].attach(self.buttons["heater"][dev], 0, temp_row, 1, 1)
+            temp_row += 1
         extra_item = not self._show_heater_power
         if self.ks_printer_cfg is not None:
             titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
@@ -260,9 +261,9 @@ class Panel(ScreenPanel):
                             )
                             self.buttons["heater"][device].set_halign(Gtk.Align.START)
                             self.labels["temp_grid"].attach(
-                                self.buttons["heater"][device], n, 0, 1, 1
+                                self.buttons["heater"][device], 0, temp_row, 1, 1
                             )
-                            n += 1
+                            temp_row += 1
                             break
 
         szfe = Gtk.Grid(column_homogeneous=True)

@@ -1048,7 +1048,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
             return
         logging.info(f"Starting print: {filename}")
         # Each recovery stage depends on the previous command.  Callback
-        # chaining prevents ALLOW_INTERRUPT or RESUME_INTERRUPTED from racing
+        # chaining prevents ALLOW_INTERRUPT and RESUME_INTERRUPTED from racing
         # printer.print.start on a busy Moonraker connection.
         self._ws.api.gcode_script(
             "ALLOW_INTERRUPT", self._start_interrupted_print, filename
@@ -1067,13 +1067,17 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if "error" in response:
             self.show_popup_message(str(response["error"]), level=3)
             return
+        self._ws.api.gcode_script("RESUME_INTERRUPTED", self._start_resumed_print, filename)
+
+    def _start_resumed_print(self, response, method, params, filename):
+        if "error" in response:
+            self.show_popup_message(str(response["error"]), level=3)
+            return
         self._ws.api.print_start(filename, self._resume_interrupted)
 
     def _resume_interrupted(self, response, method, params):
         if "error" in response:
             self.show_popup_message(str(response["error"]), level=3)
-            return
-        self._ws.api.gcode_script("RESUME_INTERRUPTED")
 
 
     def state_ready(self, wait=True):

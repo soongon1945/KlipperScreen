@@ -106,6 +106,7 @@ class Panel(ScreenPanel):
         self.labels["height_lbl"] = Gtk.Label(_("Height:"))
         self.labels["layer_lbl"] = Gtk.Label(_("Layer:"))
 
+        used_fan_labels = set()
         for fan in self._printer.get_fans():
             # fan_types = ["controller_fan", "fan_generic", "heater_fan"]
             if fan == "fan":
@@ -114,6 +115,13 @@ class Panel(ScreenPanel):
                 short_name = " ".join(fan.split(" ")[1:])
                 if short_name.startswith("_"):
                     continue
+                fan_cfg = self._printer.get_config_section(fan)
+                if isinstance(fan_cfg, dict):
+                    cfg_alias = fan_cfg.get("friendly_name")
+                    if cfg_alias:
+                        safe_alias = re.sub(r"[^A-Za-z0-9]+", "", str(cfg_alias).strip())
+                        if safe_alias:
+                            short_name = safe_alias
                 # Keep per-extruder fan IDs (E1_*, E2_*) compact.
                 # Fallback to a short alpha prefix for non-indexed fans
                 # to avoid labels collapsing to one char when multiple
@@ -131,6 +139,14 @@ class Panel(ScreenPanel):
                     name = f"{short_name[:3].upper()}:"
             else:
                 continue
+            # De-duplicate compact labels in uncommon naming scenarios.
+            if name in used_fan_labels:
+                dup_idx = 2
+                base = name.rstrip(":")
+                while f"{base}{dup_idx}:" in used_fan_labels:
+                    dup_idx += 1
+                name = f"{base}{dup_idx}:"
+            used_fan_labels.add(name)
             self.fans[fan] = {"name": name, "speed": "-"}
 
         self.labels["file"] = Gtk.Label(label="Filename", hexpand=True)

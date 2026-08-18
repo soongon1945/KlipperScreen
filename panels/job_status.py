@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+import re
 
 import gi
 
@@ -113,17 +114,21 @@ class Panel(ScreenPanel):
                 short_name = " ".join(fan.split(" ")[1:])
                 if short_name.startswith("_"):
                     continue
-                # Keep the first letter plus any digits right after it so
-                # per-extruder fans (E1_Nozzle_fan / E2_Nozzle_fan) stay
-                # distinguishable; using only the first character collapsed
-                # both fans to "E:" and made the print screen fan readout
-                # ambiguous.
-                digits = ""
-                for char in short_name[1:]:
-                    if not char.isdigit():
-                        break
-                    digits += char
-                name = f"{short_name[:1].upper()}{digits}:"
+                # Keep per-extruder fan IDs (E1_*, E2_*) compact.
+                # Fallback to a short alpha prefix for non-indexed fans
+                # to avoid labels collapsing to one char when multiple
+                # non-extruder fans are present.
+                i = 1
+                while i < len(short_name) and short_name[i].isdigit():
+                    i += 1
+                if i > 1 and short_name[0].isalpha():
+                    name = f"{short_name[:i].upper()}:"
+                else:
+                    short_name = short_name.split("_")[0].strip()
+                    short_name = re.sub(r"[^A-Za-z0-9]+", "", short_name)
+                    if not short_name:
+                        continue
+                    name = f"{short_name[:3].upper()}:"
             else:
                 continue
             self.fans[fan] = {"name": name, "speed": "-"}

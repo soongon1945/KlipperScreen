@@ -1,4 +1,5 @@
 import logging
+import re
 
 import gi
 
@@ -69,6 +70,20 @@ class Panel(ScreenPanel):
             cfg_alias = fan_cfg.get("friendly_name")
             if cfg_alias:
                 fan_name = str(cfg_alias).strip()
+        if fan != "fan":
+            base = fan_name
+            i = 1
+            while i < len(base) and base[i].isdigit():
+                i += 1
+            if i > 1 and base[0].isalpha():
+                fan_name = f"{base[:i].upper()}:"
+            else:
+                base = base.split("_")[0].strip()
+                base = re.sub(r"[^A-Za-z0-9]+", "", base)
+                if not base:
+                    fan_name = _("Fan")
+                else:
+                    fan_name = base[:3].upper() + ":"
         name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
 
         fan_col = Gtk.Box(spacing=5)

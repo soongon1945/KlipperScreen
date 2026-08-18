@@ -1160,3 +1160,15 @@ msgstr "无法删除默认配置"
 
 msgid "The filament is used up"
 msgstr "耗材已用完"
+
+msgid "Nozzle Size"
+msgstr "喷嘴直径"
+
+msgid "0.4mm"
+msgstr "0.4mm"
+
+msgid "0.2mm"
+msgstr "0.2mm"
+
+msgid "0.8mm"
+msgstr "0.8mm"

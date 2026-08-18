@@ -110,9 +110,20 @@ class Panel(ScreenPanel):
             if fan == "fan":
                 name = " "
             elif fan.startswith("fan_generic"):
-                name = " ".join(fan.split(" ")[1:])[:1].upper() + ":"
-                if name.startswith("_"):
+                short_name = " ".join(fan.split(" ")[1:])
+                if short_name.startswith("_"):
                     continue
+                # Keep the first letter plus any digits right after it so
+                # per-extruder fans (E1_Nozzle_fan / E2_Nozzle_fan) stay
+                # distinguishable; using only the first character collapsed
+                # both fans to "E:" and made the print screen fan readout
+                # ambiguous.
+                digits = ""
+                for char in short_name[1:]:
+                    if not char.isdigit():
+                        break
+                    digits += char
+                name = f"{short_name[:1].upper()}{digits}:"
             else:
                 continue
             self.fans[fan] = {"name": name, "speed": "-"}
@@ -728,10 +739,12 @@ class Panel(ScreenPanel):
                 )
         fan_label = ""
         for fan in self.fans:
-            self.fans[fan]["speed"] = f"{self._printer.get_fan_speed(fan) * 100:3.0f}%"
-            fan_label += f" {self.fans[fan]['name']}{self.fans[fan]['speed']}"
+            # No padding and no leading space: two per-extruder fans plus
+            # speeds must fit the button, worst case "E1:100% E2:100%".
+            self.fans[fan]["speed"] = f"{self._printer.get_fan_speed(fan) * 100:.0f}%"
+            fan_label += f"{self.fans[fan]['name']}{self.fans[fan]['speed']} "
         if fan_label:
-            self.buttons["fan"].set_label(fan_label[:12])
+            self.buttons["fan"].set_label(fan_label.strip()[:15])
         if "print_stats" in data:
             if "state" in data["print_stats"]:
                 self.set_state(

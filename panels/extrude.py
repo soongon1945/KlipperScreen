@@ -156,9 +156,16 @@ class Panel(ScreenPanel):
             if s > 8:
                 break
             name = x.split(" ", 1)[1].strip()
+            display_name = name
+            # The raw config name (e.g. "filament_E1sensor") leaks English
+            # onto an otherwise localized screen; show a translated label
+            # when the sensor follows the common per-extruder naming.
+            match = re.search(r"[Ee](\d+)", name)
+            if match:
+                display_name = f"{_('Filament')} E{match.group(1)}"
             self.labels[x] = {
                 "label": Gtk.Label(
-                    label=self.prettify(name),
+                    label=display_name,
                     hexpand=True,
                     halign=Gtk.Align.CENTER,
                     ellipsize=Pango.EllipsizeMode.START,

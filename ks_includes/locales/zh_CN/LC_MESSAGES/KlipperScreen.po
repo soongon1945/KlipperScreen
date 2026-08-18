@@ -1172,3 +1172,6 @@ msgstr "0.2mm"
 
 msgid "0.8mm"
 msgstr "0.8mm"
+
+msgid "Moonraker is not connected"
+msgstr "Moonraker 未连接"

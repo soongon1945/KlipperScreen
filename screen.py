@@ -1050,9 +1050,14 @@ class KlipperScreen(Gtk.ApplicationWindow):
         # Each recovery stage depends on the previous command.  Callback
         # chaining prevents ALLOW_INTERRUPT and RESUME_INTERRUPTED from racing
         # printer.print.start on a busy Moonraker connection.
-        self._ws.api.gcode_script(
+        sent = self._ws.api.gcode_script(
             "ALLOW_INTERRUPT", self._start_interrupted_print, filename
         )
+        if not sent:
+            # The popup is already closed; without the websocket the
+            # callback chain never fires and the resume would silently do
+            # nothing, leaving the printer looking frozen.
+            self.show_popup_message(_("Moonraker is not connected"), level=2)
 
     def _poweroff_cancel_done(self, response, method, params):
         if "error" in response:

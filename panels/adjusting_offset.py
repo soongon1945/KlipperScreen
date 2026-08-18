@@ -32,7 +32,10 @@ class Panel(ScreenPanel):
         bsgrid = Gtk.Grid()
         for j, i in enumerate(self.bs_deltas):
             self.labels[f"bdelta{i}"] = self._gtk.Button(label=i)
-            self.labels[f"bdelta{i}"].connect("clicked", self.change_bs_delta, float(i))
+            # Pass the raw string: label keys are built from it, and a float
+            # like 1.0 produces "bdelta1.0" which does not exist (KeyError on
+            # every click of the "1" step button).
+            self.labels[f"bdelta{i}"].connect("clicked", self.change_bs_delta, i)
             ctx = self.labels[f"bdelta{i}"].get_style_context()
             if j == 0:
                 ctx.add_class("distbutton_top")

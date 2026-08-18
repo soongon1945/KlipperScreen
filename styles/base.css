@@ -339,6 +339,20 @@ trough {
     font-weight: 600;
 }
 
+/* Used by the babystep offset panels (adjusting_offset, offset_control);
+   without these rules the selected step size has no visible highlight. */
+.distbutton_active {
+    background-color: @active;
+    font-weight: 600;
+}
+
+.distbutton,
+.distbutton_top,
+.distbutton_bottom {
+    margin: 0;
+    min-height: 2.9em;
+}
+
 .horizontal_togglebuttons {
     border-style: solid;
     border-color: @lines;

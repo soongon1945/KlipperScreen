@@ -58,6 +58,7 @@ class Panel(ScreenPanel):
         self.time_grid = None
         self.extrusion_grid = None
         self.idex = False
+        self.temp_grid_cols = 1
 
         data = [
             "pos_x",
@@ -216,25 +217,20 @@ class Panel(ScreenPanel):
                 n += 1
         self.buttons["heater"] = {}
         for dev in self._printer.get_heaters():
-            if n >= nlimit:
-                break
-            if dev == "heater_bed":
-                self.buttons["heater"][dev] = self._gtk.Button(
-                    "bed", "", None, self.bts, Gtk.PositionType.LEFT, 1
-                )
-            else:
-                self.buttons["heater"][dev] = self._gtk.Button(
-                    "heater", "", None, self.bts, Gtk.PositionType.LEFT, 1
-                )
+            # Both the heated bed and auxiliary heaters (e.g. the chamber
+            # heater) are placed on their own row below the extruders instead
+            # of sharing the line with Extruder1/Extruder2; the attach is
+            # deferred until the number of columns used by row 0 is known.
+            self.buttons["heater"][dev] = self._gtk.Button(
+                "bed" if dev == "heater_bed" else "heater",
+                "", None, self.bts, Gtk.PositionType.LEFT, 1
+            )
             self.labels[dev] = Gtk.Label(label="-")
-
             self.buttons["heater"][dev].set_label(self.labels[dev].get_text())
             self.buttons["heater"][dev].connect(
                 "clicked", self.menu_item_clicked, {"panel": "temperature", "extra": dev}
             )
             self.buttons["heater"][dev].set_halign(Gtk.Align.START)
-            self.labels["temp_grid"].attach(self.buttons["heater"][dev], n, 0, 1, 1)
-            n += 1
         extra_item = not self._show_heater_power
         if self.ks_printer_cfg is not None:
             titlebar_items = self.ks_printer_cfg.get("titlebar_items", "")
@@ -264,6 +260,23 @@ class Panel(ScreenPanel):
                             )
                             n += 1
                             break
+
+        row1_heaters = [
+            dev for dev in self._printer.get_heaters() if dev in self.buttons["heater"]
+        ]
+        if row1_heaters:
+            # Row 1 holds the bed followed by auxiliary heaters (chamber); the
+            # first button spans the columns left over by the rest so the row
+            # always covers the full width used by the extruder row above.
+            self.temp_grid_cols = max(n, 1)
+            first_width = max(self.temp_grid_cols - (len(row1_heaters) - 1), 1)
+            col = 0
+            for i, dev in enumerate(row1_heaters):
+                width = first_width if i == 0 else 1
+                self.labels["temp_grid"].attach(
+                    self.buttons["heater"][dev], col, 1, width, 1
+                )
+                col += width
 
         szfe = Gtk.Grid(column_homogeneous=True)
         szfe.attach(self.buttons["speed"], 0, 0, 3, 1)
@@ -620,11 +633,29 @@ class Panel(ScreenPanel):
             ):
                 self.current_extruder = data["toolhead"]["extruder"]
                 if not self.idex:
+                    # remove_column(0) would also shift/shrink the heater
+                    # buttons spanning from column 0 on row 1, so detach them
+                    # first and put them back after the column has been rebuilt.
+                    row1_heaters = [
+                        dev
+                        for dev in self._printer.get_heaters()
+                        if dev in self.buttons["heater"]
+                    ]
+                    for dev in row1_heaters:
+                        self.labels["temp_grid"].remove(self.buttons["heater"][dev])
                     self.labels["temp_grid"].remove_column(0)
                     self.labels["temp_grid"].insert_column(0)
                     self.labels["temp_grid"].attach(
                         self.buttons["extruder"][self.current_extruder], 0, 0, 1, 1
                     )
+                    first_width = max(self.temp_grid_cols - (len(row1_heaters) - 1), 1)
+                    col = 0
+                    for i, dev in enumerate(row1_heaters):
+                        width = first_width if i == 0 else 1
+                        self.labels["temp_grid"].attach(
+                            self.buttons["heater"][dev], col, 1, width, 1
+                        )
+                        col += width
                 self._screen.show_all()
             if "max_accel" in data["toolhead"]:
                 self.labels["max_accel"].set_label(

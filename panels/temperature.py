@@ -331,11 +331,12 @@ class Panel(ScreenPanel):
         if temperature is None:
             return False
         logging.info(f"Adding device: {device}")
+        display_name = devname
         if device.startswith("extruder"):
-            if self._printer.extrudercount > 1:
-                image = f"extruder-{device[8:]}" if device[8:] else "extruder-0"
-            else:
-                image = "extruder"
+            # UI numbers extruders starting at 1: extruder -> Extruder1/extruder-1
+            extruder_index = int(device[8:]) if device[8:] else 0
+            image = f"extruder-{extruder_index + 1}"
+            display_name = f"extruder{extruder_index + 1}"
             class_name = f"graph_label_{device}"
             dev_type = "extruder"
         elif device == "heater_bed":
@@ -364,7 +365,7 @@ class Panel(ScreenPanel):
         rgb = self._gtk.get_temp_color(dev_type)
 
         name = self._gtk.Button(
-            image, _(self.prettify(devname)), None, self.bts, Gtk.PositionType.LEFT, 1
+            image, _(self.prettify(display_name)), None, self.bts, Gtk.PositionType.LEFT, 1
         )
         name.set_alignment(0, 0.5)
         name.get_style_context().add_class(class_name)

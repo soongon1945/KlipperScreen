@@ -71,8 +71,9 @@ class Panel(ScreenPanel):
                 self.labels[extruder] = self._gtk.Button("extruder", "")
             else:
                 n = self._printer.get_tool_number(extruder)
-                # Display tool numbers as 1-based (T1/T2) while Klipper G-code stays 0-based.
-                self.labels[extruder] = self._gtk.Button(f"extruder-{n}", f"T{n + 1}")
+                # Display tool numbers as 1-based (T1/T2) and use matching
+                # 1-based icons while Klipper G-code stays 0-based.
+                self.labels[extruder] = self._gtk.Button(f"extruder-{n + 1}", f"T{n + 1}")
                 self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")
@@ -163,7 +164,7 @@ class Panel(ScreenPanel):
             # when the sensor follows the common per-extruder naming.
             match = re.search(r"[Ee](\d+)", name)
             if match:
-                display_name = f"{_('Filament')} E{match.group(1)}"
+                display_name = _("Filament detector E%s") % match.group(1)
             self.labels[x] = {
                 "label": Gtk.Label(
                     label=display_name,
@@ -260,7 +261,7 @@ class Panel(ScreenPanel):
             self.labels[self.current_extruder].get_style_context().add_class("button_active")
             if "current_extruder" in self.labels:
                 n = self._printer.get_tool_number(self.current_extruder)
-                self.labels["current_extruder"].set_image(self._gtk.Image(f"extruder-{n}"))
+                self.labels["current_extruder"].set_image(self._gtk.Image(f"extruder-{n + 1}"))
 
         for x in self._printer.get_filament_sensors():
             if x in data and x in self.labels:

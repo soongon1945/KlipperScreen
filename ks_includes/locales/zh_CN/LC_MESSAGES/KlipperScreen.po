@@ -515,6 +515,9 @@ msgstr "层高"
 msgid "Filament"
 msgstr "耗材"
 
+msgid "Filament detector E%s"
+msgstr "E%s耗材检测"
+
 msgid "Estimated Time"
 msgstr "预估剩余时间"
 

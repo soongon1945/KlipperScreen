@@ -668,8 +668,11 @@ class Panel(ScreenPanel):
                     )
 
         if "display_status" in data and "message" in data["display_status"]:
-            if data["display_status"]["message"]:
-                self.labels["lcdmessage"].set_label(f"{data['display_status']['message']}")
+            message = data["display_status"]["message"]
+            if message:
+                # Localize common backend state messages; leave custom M117 text
+                # untouched so user G-code messages still pass through.
+                self.labels["lcdmessage"].set_label(self.localize_display_message(message))
                 self.labels["lcdmessage"].show()
             else:
                 self.labels["lcdmessage"].hide()
@@ -964,6 +967,18 @@ class Panel(ScreenPanel):
         self._screen.screensaver.close()
         if timeout != 0:
             GLib.timeout_add_seconds(timeout, self.close_panel)
+
+    def localize_display_message(self, message):
+        # Common status strings pushed by Moonraker/Mainsail through
+        # display_status.message; exact match only, custom M117 text is preserved.
+        translations = {
+            "Printing...": _("Printing..."),
+            "Paused": _("Paused"),
+            "Complete": _("Complete"),
+            "Cancelled": _("Cancelled"),
+            "Error": _("Error"),
+        }
+        return translations.get(message, message)
 
     def show_buttons_for_state(self):
         self.buttons["button_grid"].remove_row(0)

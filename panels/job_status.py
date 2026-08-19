@@ -318,7 +318,10 @@ class Panel(ScreenPanel):
         if self._printer.get_fans():
             szfe.attach(self.buttons["fan"], 2, 1, 2, 1)
 
-        info = Gtk.Grid(row_homogeneous=True)
+        # No row_homogeneous: temp_grid spans two button rows internally, so
+        # forcing equal rows doubles every row height and pushes the bottom
+        # button bar off-screen on 1024x600 panels while making row gaps uneven.
+        info = Gtk.Grid()
         info.get_style_context().add_class("printing-info")
         info.attach(self.labels["temp_grid"], 0, 0, 1, 1)
         info.attach(szfe, 0, 1, 1, 2)

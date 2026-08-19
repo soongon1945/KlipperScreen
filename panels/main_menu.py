@@ -103,14 +103,14 @@ class Panel(MenuPanel):
                 image = f"extruder-{display_number}"
                 # Change only the visible alias; device remains the original
                 # Klipper object key used for status updates and commands.
-                devname = f"Extruder{display_number}"
+                devname = _("Extruder%d") % display_number
             else:
                 image = "extruder"
             class_name = f"graph_label_{device}"
             dev_type = "extruder"
         elif device == "heater_bed":
             image = "bed"
-            devname = "Heater Bed"
+            devname = _("Heater Bed")
             class_name = "graph_label_heater_bed"
             dev_type = "bed"
         elif device.startswith("heater_generic"):
@@ -141,7 +141,7 @@ class Panel(MenuPanel):
             self.labels["da"].add_object(device, "powers", rgb, True, False)
 
         name = self._gtk.Button(
-            image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1
+            image, _(self.prettify(devname)), None, self.bts, Gtk.PositionType.LEFT, 1
         )
         name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, 0.5)

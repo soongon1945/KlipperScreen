@@ -340,7 +340,7 @@ class Panel(ScreenPanel):
             dev_type = "extruder"
         elif device == "heater_bed":
             image = "bed"
-            devname = "Heater Bed"
+            devname = _("Heater Bed")
             class_name = "graph_label_heater_bed"
             dev_type = "bed"
         elif device.startswith("heater_generic"):
@@ -364,7 +364,7 @@ class Panel(ScreenPanel):
         rgb = self._gtk.get_temp_color(dev_type)
 
         name = self._gtk.Button(
-            image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1
+            image, _(self.prettify(devname)), None, self.bts, Gtk.PositionType.LEFT, 1
         )
         name.set_alignment(0, 0.5)
         name.get_style_context().add_class(class_name)

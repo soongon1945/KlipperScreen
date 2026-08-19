@@ -434,6 +434,21 @@ msgstr "回抽"
 msgid "Extruders"
 msgstr "挤出机"
 
+msgid "Extruder%d"
+msgstr "喷头%d"
+
+msgid "Extruder1"
+msgstr "喷头1"
+
+msgid "Extruder2"
+msgstr "喷头2"
+
+msgid "Heater Bed"
+msgstr "热床"
+
+msgid "Heater Cavity"
+msgstr "腔体"
+
 msgid "Distance (mm)"
 msgstr "挤出长度（mm）"
 

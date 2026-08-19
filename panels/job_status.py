@@ -622,6 +622,17 @@ class Panel(ScreenPanel):
         self.update_progress(0.0)
         self.set_state("printing")
 
+    def get_heater_display_name(self, dev):
+        # Friendly names for the heater row, mirroring Klipper heater ids:
+        # "heater_bed", "heater_cavity", "heater_generic <name>".
+        if dev == "heater_bed":
+            return "Heater Bed"
+        if dev.startswith("heater_generic"):
+            return dev.split(" ", 1)[-1].replace("_", " ").title()
+        if dev.startswith("heater_"):
+            return dev.replace("heater_", "Heater ").title()
+        return dev
+
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             if "action:cancel" in data:
@@ -652,7 +663,9 @@ class Panel(ScreenPanel):
                         f"Extruder{display_number} {self.labels[x].get_text()}"
                     )
                 elif x in self.buttons["heater"]:
-                    self.buttons["heater"][x].set_label(self.labels[x].get_text())
+                    self.buttons["heater"][x].set_label(
+                        f"{self.get_heater_display_name(x)} {self.labels[x].get_text()}"
+                    )
 
         if "display_status" in data and "message" in data["display_status"]:
             if data["display_status"]["message"]:

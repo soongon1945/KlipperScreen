@@ -250,6 +250,9 @@ class Printer:
                 "spoolman": self.spoolman,
             },
             "printer": {
+                # Expose the evaluated state so menu enable templates can hide
+                # operator-facing items (e.g. Macros) while a print is running.
+                "state": self.state,
                 "pause_resume": {"is_paused": self.state == "paused"},
                 "extruders": {"count": self.extrudercount},
                 "temperature_devices": {"count": self.tempdevcount},

@@ -71,7 +71,8 @@ class Panel(ScreenPanel):
                 self.labels[extruder] = self._gtk.Button("extruder", "")
             else:
                 n = self._printer.get_tool_number(extruder)
-                self.labels[extruder] = self._gtk.Button(f"extruder-{n}", f"T{n}")
+                # Display tool numbers as 1-based (T1/T2) while Klipper G-code stays 0-based.
+                self.labels[extruder] = self._gtk.Button(f"extruder-{n}", f"T{n + 1}")
                 self.labels[extruder].connect("clicked", self.change_extruder, extruder)
             if extruder == self.current_extruder:
                 self.labels[extruder].get_style_context().add_class("button_active")

@@ -338,9 +338,11 @@ class KlipperScreenConfig:
                     "name": _("Icon Theme"),
                     "type": "dropdown",
                     "tooltip": _("Changes how the interface looks"),
-                    "value": "z-bolt",
+                    "value": "material-light",
                     "callback": screen.change_theme,
-                    "options": [{"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}],
+                    "options": [
+                        {"name": "Material-light" + " " + _("(default)"), "value": "material-light"}
+                    ],
                 }
             },
             {
@@ -411,11 +413,11 @@ class KlipperScreenConfig:
                     "name": _("Font Size"),
                     "type": "dropdown",
                     "tooltip": _("Inversely affects the icon size"),
-                    "value": "medium",
+                    "value": "small",
                     "callback": screen.restart_ks,
                     "options": [
-                        {"name": _("Small"), "value": "small"},
-                        {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
+                        {"name": _("Small") + " " + _("(default)"), "value": "small"},
+                        {"name": _("Medium"), "value": "medium"},
                         {"name": _("Large"), "value": "large"},
                         {"name": _("Extra Large"), "value": "extralarge"},
                         {"name": _("Maximum"), "value": "max"},
@@ -607,7 +609,10 @@ class KlipperScreenConfig:
         themes = [
             d
             for d in os.listdir(t_path)
-            if (not os.path.isfile(os.path.join(t_path, d)) and d not in ("z-bolt", "printers"))
+            if (
+                not os.path.isfile(os.path.join(t_path, d))
+                and d not in ("z-bolt", "printers", "material-light")
+            )
         ]
         themes.sort()
 

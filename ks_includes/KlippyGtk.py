@@ -48,7 +48,7 @@ class KlippyGtk:
         self.themedir = os.path.join(
             pathlib.Path(__file__).parent.resolve().parent, "styles", screen.theme, "images"
         )
-        self.font_size_type = screen._config.get_main_config().get("font_size", "medium")
+        self.font_size_type = screen._config.get_main_config().get("font_size", "small")
         self.width = screen.width
         self.height = screen.height
         self.color_list = {}  # This is set by screen.py init_style()

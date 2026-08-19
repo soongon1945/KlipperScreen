@@ -157,7 +157,8 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.aspect_ratio = self.width / self.height
         self.vertical_mode = self.aspect_ratio < 1.0
         logging.info(f"Screen resolution: {self.width}x{self.height}")
-        self.theme = self._config.get_main_config().get("theme")
+        # Default to the light theme when none is configured.
+        self.theme = self._config.get_main_config().get("theme", "material-light")
         self.show_cursor = self._config.get_main_config().getboolean("show_cursor", fallback=False)
         self.setup_gtk_settings()
         self.style_provider = Gtk.CssProvider()
@@ -675,7 +676,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def change_theme(self, theme_name=None):
         if not theme_name:
-            theme_name = self._config.get_main_config().get("theme")
+            theme_name = self._config.get_main_config().get("theme", "material-light")
         self.gtk.update_themedir(theme_name)
         theme_css, theme_options = self.load_custom_theme(theme_name)
         self.style_options.update(theme_options)

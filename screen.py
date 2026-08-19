@@ -80,6 +80,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.check_filament_time = None
         self.check_filament = [True, True]
         self.check_filament_cnt = 0
+        self.failover_target = 0
 
         self.server_info = None
         self.files = None
@@ -947,13 +948,10 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.check_filament_time = GLib.timeout_add_seconds(3, self.charge_filament)
         if self.filament_none:
             self.filament_none = False
-            script = {"script": "M117 Printing..."}
             self._filament_change_action(
                 None,
                 _("The filament is used up")
                 + "\n\n" + _("Do you need to replace the filament now?"),
-                "printer.gcode.script",
-                script
             )
         else:
             self.show_panel("job_status", remove_all=True)
@@ -1171,11 +1169,16 @@ class KlipperScreen(Gtk.ApplicationWindow):
             else 0
         )
 
-        if self.check_filament_cnt == 5 and t1_current >= t1_target and t1_target > 100:
+        # Gate auto-resume on the temperature the backup head was actually told
+        # to reach by _switch_to_backup (failover_target), not on the backup
+        # tool's own slicer target.  Single-tool G-code keeps the backup target
+        # at 0, so checking t1_target/t0_target would leave a heated-up backup
+        # stuck paused forever.
+        if self.check_filament_cnt == 5 and t1_current >= self.failover_target > 100:
             self.check_filament_cnt = 0
             self._ws.api.gcode_script("M104 T0 S0")
             self._ws.api.gcode_script("RESUME")
-        if self.check_filament_cnt == 6 and t0_current >= t0_target and t0_target > 100:
+        if self.check_filament_cnt == 6 and t0_current >= self.failover_target > 100:
             self.check_filament_cnt = 0
             self._ws.api.gcode_script("M104 T1 S0")
             self._ws.api.gcode_script("RESUME")
@@ -1249,6 +1252,10 @@ class KlipperScreen(Gtk.ApplicationWindow):
         if active_has_filament:
             self.check_filament_cnt = 0
             return
+        # switch_args[3] is the M109 target for the backup head.  It must be a
+        # real printing temperature (>100) so the resume poll can later match
+        # t_current >= failover_target; a cold target would deadlock the print
+        # paused, waiting for a temperature the backup never reaches.
         if backup_has_filament and switch_args[3] > 100:
             logging.info(
                 "Active %s is empty; switching to loaded backup %s at %.1f C",
@@ -1271,6 +1278,10 @@ class KlipperScreen(Gtk.ApplicationWindow):
 
     def _switch_to_backup(self, cnt, from_ext, to_ext, temp, from_msg, to_msg):
         self.check_filament_cnt = cnt
+        # Remember the actual M109 target so charge_filament can auto-resume
+        # once the backup reaches it, even for single-tool G-code that never
+        # sets a backup-tool slicer target.
+        self.failover_target = temp
         self._ws.api.print_pause()
         self._ws.api.gcode_script(from_ext)
         self._ws.api.gcode_script(to_ext)
@@ -1281,6 +1292,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.filament_none = False
         self.check_filament = [True, True]
         self.check_filament_cnt = 0
+        self.failover_target = 0
         if self.check_filament_time is not None:
             GLib.source_remove(self.check_filament_time)
             self.check_filament_time = None
@@ -1334,7 +1346,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         ):
             self.panels[self._cur_panels[-1]].process_update(*args)
 
-    def _filament_change_action(self, widget, text, method, params=None):
+    def _filament_change_action(self, widget, text):
         buttons = [
             {"name": _("Unload"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Load"), "response": Gtk.ResponseType.OK},
@@ -1364,16 +1376,14 @@ class KlipperScreen(Gtk.ApplicationWindow):
             buttons,
             label,
             self._filament_change_action_response,
-            method,
-            params,
         )
 
-    def _filament_change_action_response(self, dialog, response_id, method, params):
+    def _filament_change_action_response(self, dialog, response_id):
         if response_id == Gtk.ResponseType.APPLY:
-            self.show_popup_message("Start unload filament!.")
+            self.show_popup_message("Start unload filament!")
             self._ws.api.gcode_script(f"UNLOAD_FILAMENT SPEED={2 * 60}")
         elif response_id == Gtk.ResponseType.OK:
-            self.show_popup_message("Start load filament!.")
+            self.show_popup_message("Start load filament!")
             self._ws.api.gcode_script(f"LOAD_FILAMENT SPEED={2 * 60}")
         elif response_id == Gtk.ResponseType.YES:
             self.gtk.remove_dialog(dialog)

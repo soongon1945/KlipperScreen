@@ -1052,7 +1052,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         # blocks on M190/M109 bed/nozzle heating, and until print.start actually
         # begins print_stats is still "standby", so without this the UI would sit
         # on the main menu and look frozen during the whole preparation window.
-        self.show_panel("job_status", remove_all=True)
+        self.show_panel("job_status", remove_all=True, is_resuming_poweroff=True)
         # Each recovery stage depends on the previous command.  Callback
         # chaining prevents ALLOW_INTERRUPT and RESUME_INTERRUPTED from racing
         # printer.print.start on a busy Moonraker connection.

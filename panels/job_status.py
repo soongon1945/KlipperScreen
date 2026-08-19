@@ -17,9 +17,10 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class Panel(ScreenPanel):
-    def __init__(self, screen, title):
+    def __init__(self, screen, title, is_resuming_poweroff=False):
         title = title or _("Job Status")
         super().__init__(screen, title)
+        self.is_resuming_poweroff = is_resuming_poweroff
         self.thumb_dialog = None
         self.grid = Gtk.Grid(column_homogeneous=True)
         self.pos_z = 0.0
@@ -149,7 +150,11 @@ class Panel(ScreenPanel):
             used_fan_labels.add(name)
             self.fans[fan] = {"name": name, "speed": "-"}
 
-        self.labels["file"] = Gtk.Label(label="Filename", hexpand=True)
+        if self.is_resuming_poweroff:
+            default_filename = _("Resuming power-loss print, please wait")
+        else:
+            default_filename = "Filename"
+        self.labels["file"] = Gtk.Label(label=default_filename, hexpand=True)
         self.labels["file"].get_style_context().add_class("printing-filename")
         self.labels["lcdmessage"] = Gtk.Label(no_show_all=True)
         self.labels["lcdmessage"].get_style_context().add_class("printing-status")

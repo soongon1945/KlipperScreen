@@ -166,6 +166,9 @@ msgstr "打印中"
 msgid "Printing..."
 msgstr "打印中..."
 
+msgid "Resuming power-loss print, please wait"
+msgstr "断电续打恢复中，请等待"
+
 msgid "Timeout for screen black-out or power-off during printing"
 msgstr "打印中自动息屏的时间"
 

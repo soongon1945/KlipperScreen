@@ -81,6 +81,9 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.check_filament = [True, True]
         self.check_filament_cnt = 0
         self.failover_target = 0
+        # Set when a debounced "no filament" verdict has been confirmed
+        # against a freshly pulled subscription snapshot (see charge_filament).
+        self.runout_verified = False
 
         self.server_info = None
         self.files = None
@@ -1228,6 +1231,20 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.check_filament_cnt = 0
 
         if self.check_filament_cnt == 4:
+            if not self.runout_verified:
+                # The subscription cache can be stuck on a startup-race
+                # snapshot: taken between klippy:ready and the sensor's first
+                # debounced sample it carries filament_detected=False, and
+                # because the pin never changes afterwards no correcting
+                # update arrives (2026-08-20 klippy.log: eight false
+                # "filament used up" pauses on the K400 while the klippy-side
+                # sensors reported no change all day).  Re-apply the full
+                # subscription to pull a fresh snapshot and re-run the
+                # debounce; a genuine runout pauses one debounce cycle later.
+                self.runout_verified = True
+                self.check_filament_cnt = 0
+                self.ws_subscribe()
+                return True
             self._handle_empty_filament(t0_target, t1_target)
 
         return True
@@ -1292,6 +1309,7 @@ class KlipperScreen(Gtk.ApplicationWindow):
         self.filament_none = False
         self.check_filament = [True, True]
         self.check_filament_cnt = 0
+        self.runout_verified = False
         self.failover_target = 0
         if self.check_filament_time is not None:
             GLib.source_remove(self.check_filament_time)
@@ -1389,9 +1407,11 @@ class KlipperScreen(Gtk.ApplicationWindow):
             self.gtk.remove_dialog(dialog)
             self._ws.api.gcode_script("RESUME")
             self.check_filament_cnt = 0
+            self.runout_verified = False
         elif response_id == Gtk.ResponseType.CANCEL:
             self.gtk.remove_dialog(dialog)
             self.check_filament_cnt = 0
+            self.runout_verified = False
 
     def confirm_save(self, widget):
         buttons = [

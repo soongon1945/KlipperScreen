@@ -350,6 +350,17 @@ T0
             self.labels["next"].set_sensitive(False)
 
     def send_save_offset(self, widget):
+        if self.save_in_progress:
+            # The first Finish press already sent the apply + SAVE_CONFIG
+            # script and klippy is restarting; a second copy racing that
+            # restart produced the 2026-08-20 "Internal error on
+            # command:SAVE_CONFIG" shutdown (klippy.log backups
+            # printer-20260820_101037/101039.cfg).  activate() clears the
+            # flag when the panel is shown again after the screen reconnects.
+            self._screen.show_popup_message(
+                _("Configuration is being saved, please wait"), level=1
+            )
+            return
         self._record_current_offset(
             self._printer.get_stat("gcode_move", "offset_position")
         )
@@ -372,6 +383,21 @@ T0
         script.append(apply_command)
         script.append("SAVE_CONFIG")
         self._screen._ws.api.gcode_script("\n".join(script))
+        # klippy restarts and the websocket reconnects several seconds later;
+        # lock the workflow buttons and say so, otherwise the silent wait
+        # looks like an ignored press and invites a duplicate.
+        self.labels["finish"].set_sensitive(False)
+        self.labels["next"].set_sensitive(False)
+        self._screen.show_popup_message(
+            _("Saving configuration, printer will restart"), level=1
+        )
+
+    def activate(self):
+        # Re-entering the panel means the SAVE_CONFIG restart finished (or
+        # never started); re-arm the Finish workflow.
+        self.save_in_progress = False
+        self.labels["finish"].set_sensitive(True)
+        self.labels["next"].set_sensitive(True)
 
     def send_remove_offset(self, widget):
         self.current_point = -1
